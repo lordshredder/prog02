@@ -80,6 +80,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="C:/Users/Nico.000/Documents/prog02/Ueb01/Person.cpp">
+			<Option target="Ueb01"/>
+		</Unit>
+		<Unit filename="C:/Users/Nico.000/Documents/prog02/Ueb01/Person.h">
+			<Option target="Ueb01"/>
+		</Unit>
 		<Unit filename="C:/Users/Nico.000/Documents/prog02/Ueb01/main.cpp">
 			<Option target="Ueb01"/>
 		</Unit>

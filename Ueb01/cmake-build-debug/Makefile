@@ -122,6 +122,33 @@ Ueb01/fast:
 	$(MAKE) -f CMakeFiles\Ueb01.dir\build.make CMakeFiles/Ueb01.dir/build
 .PHONY : Ueb01/fast
 
+Person.obj: Person.cpp.obj
+
+.PHONY : Person.obj
+
+# target to build an object file
+Person.cpp.obj:
+	$(MAKE) -f CMakeFiles\Ueb01.dir\build.make CMakeFiles/Ueb01.dir/Person.cpp.obj
+.PHONY : Person.cpp.obj
+
+Person.i: Person.cpp.i
+
+.PHONY : Person.i
+
+# target to preprocess a source file
+Person.cpp.i:
+	$(MAKE) -f CMakeFiles\Ueb01.dir\build.make CMakeFiles/Ueb01.dir/Person.cpp.i
+.PHONY : Person.cpp.i
+
+Person.s: Person.cpp.s
+
+.PHONY : Person.s
+
+# target to generate assembly for a file
+Person.cpp.s:
+	$(MAKE) -f CMakeFiles\Ueb01.dir\build.make CMakeFiles/Ueb01.dir/Person.cpp.s
+.PHONY : Person.cpp.s
+
 main.obj: main.cpp.obj
 
 .PHONY : main.obj
@@ -158,6 +185,9 @@ help:
 	@echo ... Ueb01
 	@echo ... edit_cache
 	@echo ... rebuild_cache
+	@echo ... Person.obj
+	@echo ... Person.i
+	@echo ... Person.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
