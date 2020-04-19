@@ -38,19 +38,19 @@ cmake_force:
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = "C:\Program Files\JetBrains\CLion 2020.1\bin\cmake\win\bin\cmake.exe"
+CMAKE_COMMAND = "C:\Program Files\JetBrains\CLion 2019.3.5\bin\cmake\win\bin\cmake.exe"
 
 # The command to remove a file.
-RM = "C:\Program Files\JetBrains\CLion 2020.1\bin\cmake\win\bin\cmake.exe" -E remove -f
+RM = "C:\Program Files\JetBrains\CLion 2019.3.5\bin\cmake\win\bin\cmake.exe" -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\Nico.000\Documents\prog02\Ueb01
+CMAKE_SOURCE_DIR = E:\Git\Prog02\Ueb01
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\Nico.000\Documents\prog02\Ueb01\cmake-build-debug
+CMAKE_BINARY_DIR = E:\Git\Prog02\Ueb01\cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -58,7 +58,7 @@ CMAKE_BINARY_DIR = C:\Users\Nico.000\Documents\prog02\Ueb01\cmake-build-debug
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	"C:\Program Files\JetBrains\CLion 2020.1\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available."
+	"C:\Program Files\JetBrains\CLion 2019.3.5\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available."
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -69,7 +69,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	"C:\Program Files\JetBrains\CLion 2020.1\bin\cmake\win\bin\cmake.exe" -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	"C:\Program Files\JetBrains\CLion 2019.3.5\bin\cmake\win\bin\cmake.exe" -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -79,9 +79,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Nico.000\Documents\prog02\Ueb01\cmake-build-debug\CMakeFiles C:\Users\Nico.000\Documents\prog02\Ueb01\cmake-build-debug\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start E:\Git\Prog02\Ueb01\cmake-build-debug\CMakeFiles E:\Git\Prog02\Ueb01\cmake-build-debug\CMakeFiles\progress.marks
 	$(MAKE) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Nico.000\Documents\prog02\Ueb01\cmake-build-debug\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start E:\Git\Prog02\Ueb01\cmake-build-debug\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -122,6 +122,33 @@ Ueb01/fast:
 	$(MAKE) -f CMakeFiles\Ueb01.dir\build.make CMakeFiles/Ueb01.dir/build
 .PHONY : Ueb01/fast
 
+Person.obj: Person.cpp.obj
+
+.PHONY : Person.obj
+
+# target to build an object file
+Person.cpp.obj:
+	$(MAKE) -f CMakeFiles\Ueb01.dir\build.make CMakeFiles/Ueb01.dir/Person.cpp.obj
+.PHONY : Person.cpp.obj
+
+Person.i: Person.cpp.i
+
+.PHONY : Person.i
+
+# target to preprocess a source file
+Person.cpp.i:
+	$(MAKE) -f CMakeFiles\Ueb01.dir\build.make CMakeFiles/Ueb01.dir/Person.cpp.i
+.PHONY : Person.cpp.i
+
+Person.s: Person.cpp.s
+
+.PHONY : Person.s
+
+# target to generate assembly for a file
+Person.cpp.s:
+	$(MAKE) -f CMakeFiles\Ueb01.dir\build.make CMakeFiles/Ueb01.dir/Person.cpp.s
+.PHONY : Person.cpp.s
+
 main.obj: main.cpp.obj
 
 .PHONY : main.obj
@@ -158,6 +185,9 @@ help:
 	@echo ... Ueb01
 	@echo ... edit_cache
 	@echo ... rebuild_cache
+	@echo ... Person.obj
+	@echo ... Person.i
+	@echo ... Person.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
