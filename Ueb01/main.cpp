@@ -12,6 +12,7 @@ int main() {
     struct Person test;
     test._name = "toll";
     forschleife();
+    // don't write anything here
     // gonna write something here
     return 0;
 }
