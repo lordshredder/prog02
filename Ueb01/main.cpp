@@ -8,10 +8,12 @@ int main() {
     for (int i = 0; i <3; ++i) {
         //changing stuff here
         // edited from github for testing
+        // another edit?
     }
     struct Person test;
     test._name = "toll";
     forschleife();
+    // don't write anything here
     return 0;
 }
 
