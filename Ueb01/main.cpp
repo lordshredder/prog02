@@ -8,7 +8,8 @@ int main() {
     for (int i = 0; i <3; ++i) {
         //changing stuff here
     }
-
+    struct Person test;
+    test._name = "toll";
     forschleife();
     return 0;
 }
@@ -18,3 +19,5 @@ void forschleife() {
 
     }
 }
+
+
