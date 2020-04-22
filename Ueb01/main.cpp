@@ -1,26 +1,24 @@
 #include <iostream>
 #include "Person.h"
+#include "MockInput.h"
+#include "PersonStorage.h"
 
-void forschleife();
+using std::cout;
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
-    for (int i = 0; i <3; ++i) {
-        //changing stuff here
-        // edited from github for testing
+    cout << "Hello, World!" << std::endl;
+    int arraySize = 10;
+    Person personen[arraySize];
+    MockInput::CreateRandomMockInput(personen, arraySize);
+    for (int i = 0; i < 10; ++i) {
+        cout << personen[i].getName() << "\t\t\t" << personen[i].getVorname() << "\n";
     }
-    struct Person test;
-    test._name = "toll";
-    forschleife();
-    // don't write anything here
-    // gonna write something here
+    cout << "Sorting the Array..." << std::endl;
+    PersonStorage::sortPerson(personen, arraySize);
+    for (int i = 0; i < 10; ++i) {
+        cout << personen[i].getName() << "\t\t\t" << personen[i].getVorname() << "\n";
+    }
     return 0;
-}
-
-void forschleife() {
-    for (int j = 0; j < 8; ++j) {
-
-    }
 }
 
 

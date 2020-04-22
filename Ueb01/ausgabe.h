@@ -4,7 +4,8 @@
 
 #ifndef UEB01_AUSGABE_H
 #define UEB01_AUSGABE_H
+#include <iostream>
 
-void ausgeben(struct person *personarray[], int z)
+void ausgeben(struct person *personArray, int z);
 
 #endif //UEB01_AUSGABE_H

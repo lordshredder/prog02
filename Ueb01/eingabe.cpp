@@ -1,9 +1,9 @@
 #include <iostream>
 #include "Person.h"
 #include "eingabe.h"
-using namespace std
+using namespace std;
 
-int steuereEingabe(struct Person personarray[], SIZE)
+int steuereEingabe(struct Person personarray[], int size)
 {
     char weiter = 0;
     int zaehler = 0;
@@ -13,14 +13,14 @@ int steuereEingabe(struct Person personarray[], SIZE)
     {
         if (weiter != 'n')
         {
-            lesePerson(&person);
-            zaehler++
+            //lesePerson(&person);
+            zaehler++;
 
-            cout << "\nNochmal? nein=n, sonst beliebiges Zeichen\n");
+            cout << "\nNochmal? nein=n, sonst beliebiges Zeichen\n";
             while (getchar() != '\n');
 
         }
         cin >> weiter;
-    } while (weiter != 'n' || zaehler <= SIZE);
+    } while (weiter != 'n' || zaehler <= size);
     return zaehler;
 }

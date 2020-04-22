@@ -4,8 +4,9 @@
 
 #ifndef UEB01_EINGABE_H
 #define UEB01_EINGABE_H
+#include <iostream>
 
-int steuereEingabe(struct Person personarray[], SIZE)
+int steuereEingabe(struct Person personarray[], int size);
 
 
 #endif //UEB01_EINGABE_H
