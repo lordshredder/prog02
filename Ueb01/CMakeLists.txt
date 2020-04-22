@@ -3,4 +3,4 @@ project(Ueb01)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(Ueb01 main.cpp Person.cpp Person.h)
+add_executable(Ueb01 main.cpp Person.cpp Person.h PersonStorage.cpp PersonStorage.h)
