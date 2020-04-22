@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+
+# Cmake
+/Ueb01/cmake-build-debug
+/Ueb01/CMakeLists.txt
