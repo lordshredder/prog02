@@ -2,22 +2,21 @@
 #include "Person.h"
 #include "MockInput.h"
 #include "PersonStorage.h"
+#include "InputHandler.h"
+#include "OutputHandler.h"
 
 using std::cout;
 
 int main() {
-    cout << "Hello, World!" << std::endl;
+
     int arraySize = 10;
     Person personen[arraySize];
     MockInput::CreateRandomMockInput(personen, arraySize);
-    for (int i = 0; i < 10; ++i) {
-        cout << personen[i].getName() << "\t\t\t" << personen[i].getVorname() << "\n";
-    }
-    cout << "Sorting the Array..." << std::endl;
-    PersonStorage::sortPerson(personen, arraySize);
-    for (int i = 0; i < 10; ++i) {
-        cout << personen[i].getName() << "\t\t\t" << personen[i].getVorname() << "\n";
-    }
+    printAllPeople(personen, arraySize);
+    cout << "\n\nSorting the Array..." << std::endl;
+    sortPerson(personen, arraySize);
+    printAllPeople(personen, arraySize);
+
     return 0;
 }
 

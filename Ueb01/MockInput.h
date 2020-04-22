@@ -12,5 +12,5 @@ public:
     static void CreateRandomMockInput(Person *personArray, int arrayLength);
 private:
     static std::string RandomString(std::mt19937 *generator);
-    static int RandomBirthday();
+    static Birthdate RandomBirthday(std::mt19937 *generator);
 };

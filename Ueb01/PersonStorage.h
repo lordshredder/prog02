@@ -2,15 +2,8 @@
 
 #include "Person.h"
 
-class PersonStorage {
+    void sortPerson(Person *personArray, int arrayLength);
+    void swapPerson(Person *personArray, int positionOne, int positionTwo);
 
-public:
-    PersonStorage() = delete;
-    static void readPerson(Person *person);
-    static void sortPerson(Person *personArray, int arrayLength);
-
-private:
-    static void swapPerson(Person *personArray, int positionOne, int positionTwo);
-};
 
 

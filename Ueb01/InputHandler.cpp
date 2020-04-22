@@ -1,9 +1,9 @@
 #include <iostream>
 #include "Person.h"
-#include "eingabe.h"
+#include "InputHandler.h"
 using namespace std;
 
-int steuereEingabe(struct Person personarray[], int size)
+int InputHandler::ControlInput(struct Person personArray[], int size)
 {
     char weiter = 0;
     int zaehler = 0;
