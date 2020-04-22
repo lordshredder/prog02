@@ -80,12 +80,6 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="E:/Git/Prog02/Ueb01/MockInput.cpp">
-			<Option target="Ueb01"/>
-		</Unit>
-		<Unit filename="E:/Git/Prog02/Ueb01/MockInput.h">
-			<Option target="Ueb01"/>
-		</Unit>
 		<Unit filename="E:/Git/Prog02/Ueb01/Person.cpp">
 			<Option target="Ueb01"/>
 		</Unit>
@@ -96,6 +90,12 @@
 			<Option target="Ueb01"/>
 		</Unit>
 		<Unit filename="E:/Git/Prog02/Ueb01/PersonStorage.h">
+			<Option target="Ueb01"/>
+		</Unit>
+		<Unit filename="E:/Git/Prog02/Ueb01/Tests/MockInput.cpp">
+			<Option target="Ueb01"/>
+		</Unit>
+		<Unit filename="E:/Git/Prog02/Ueb01/Tests/MockInput.h">
 			<Option target="Ueb01"/>
 		</Unit>
 		<Unit filename="E:/Git/Prog02/Ueb01/main.cpp">

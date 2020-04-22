@@ -1,7 +1,3 @@
-//
-// Created by Pai on 22/04/2020.
-//
-
 #include "PersonStorage.h"
 
 void PersonStorage::readPerson(Person *person) {

@@ -95,25 +95,25 @@ CMakeFiles/Ueb01.dir/PersonStorage.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Ueb01.dir/PersonStorage.cpp.s"
 	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S E:\Git\Prog02\Ueb01\PersonStorage.cpp -o CMakeFiles\Ueb01.dir\PersonStorage.cpp.s
 
-CMakeFiles/Ueb01.dir/MockInput.cpp.obj: CMakeFiles/Ueb01.dir/flags.make
-CMakeFiles/Ueb01.dir/MockInput.cpp.obj: ../MockInput.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=E:\Git\Prog02\Ueb01\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Ueb01.dir/MockInput.cpp.obj"
-	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Ueb01.dir\MockInput.cpp.obj -c E:\Git\Prog02\Ueb01\MockInput.cpp
+CMakeFiles/Ueb01.dir/Tests/MockInput.cpp.obj: CMakeFiles/Ueb01.dir/flags.make
+CMakeFiles/Ueb01.dir/Tests/MockInput.cpp.obj: ../Tests/MockInput.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=E:\Git\Prog02\Ueb01\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Ueb01.dir/Tests/MockInput.cpp.obj"
+	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Ueb01.dir\Tests\MockInput.cpp.obj -c E:\Git\Prog02\Ueb01\Tests\MockInput.cpp
 
-CMakeFiles/Ueb01.dir/MockInput.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Ueb01.dir/MockInput.cpp.i"
-	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E E:\Git\Prog02\Ueb01\MockInput.cpp > CMakeFiles\Ueb01.dir\MockInput.cpp.i
+CMakeFiles/Ueb01.dir/Tests/MockInput.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Ueb01.dir/Tests/MockInput.cpp.i"
+	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E E:\Git\Prog02\Ueb01\Tests\MockInput.cpp > CMakeFiles\Ueb01.dir\Tests\MockInput.cpp.i
 
-CMakeFiles/Ueb01.dir/MockInput.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Ueb01.dir/MockInput.cpp.s"
-	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S E:\Git\Prog02\Ueb01\MockInput.cpp -o CMakeFiles\Ueb01.dir\MockInput.cpp.s
+CMakeFiles/Ueb01.dir/Tests/MockInput.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Ueb01.dir/Tests/MockInput.cpp.s"
+	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S E:\Git\Prog02\Ueb01\Tests\MockInput.cpp -o CMakeFiles\Ueb01.dir\Tests\MockInput.cpp.s
 
 # Object files for target Ueb01
 Ueb01_OBJECTS = \
 "CMakeFiles/Ueb01.dir/main.cpp.obj" \
 "CMakeFiles/Ueb01.dir/Person.cpp.obj" \
 "CMakeFiles/Ueb01.dir/PersonStorage.cpp.obj" \
-"CMakeFiles/Ueb01.dir/MockInput.cpp.obj"
+"CMakeFiles/Ueb01.dir/Tests/MockInput.cpp.obj"
 
 # External object files for target Ueb01
 Ueb01_EXTERNAL_OBJECTS =
@@ -121,7 +121,7 @@ Ueb01_EXTERNAL_OBJECTS =
 Ueb01.exe: CMakeFiles/Ueb01.dir/main.cpp.obj
 Ueb01.exe: CMakeFiles/Ueb01.dir/Person.cpp.obj
 Ueb01.exe: CMakeFiles/Ueb01.dir/PersonStorage.cpp.obj
-Ueb01.exe: CMakeFiles/Ueb01.dir/MockInput.cpp.obj
+Ueb01.exe: CMakeFiles/Ueb01.dir/Tests/MockInput.cpp.obj
 Ueb01.exe: CMakeFiles/Ueb01.dir/build.make
 Ueb01.exe: CMakeFiles/Ueb01.dir/linklibs.rsp
 Ueb01.exe: CMakeFiles/Ueb01.dir/objects1.rsp

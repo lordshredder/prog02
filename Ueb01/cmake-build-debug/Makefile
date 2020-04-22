@@ -122,33 +122,6 @@ Ueb01/fast:
 	$(MAKE) -f CMakeFiles\Ueb01.dir\build.make CMakeFiles/Ueb01.dir/build
 .PHONY : Ueb01/fast
 
-MockInput.obj: MockInput.cpp.obj
-
-.PHONY : MockInput.obj
-
-# target to build an object file
-MockInput.cpp.obj:
-	$(MAKE) -f CMakeFiles\Ueb01.dir\build.make CMakeFiles/Ueb01.dir/MockInput.cpp.obj
-.PHONY : MockInput.cpp.obj
-
-MockInput.i: MockInput.cpp.i
-
-.PHONY : MockInput.i
-
-# target to preprocess a source file
-MockInput.cpp.i:
-	$(MAKE) -f CMakeFiles\Ueb01.dir\build.make CMakeFiles/Ueb01.dir/MockInput.cpp.i
-.PHONY : MockInput.cpp.i
-
-MockInput.s: MockInput.cpp.s
-
-.PHONY : MockInput.s
-
-# target to generate assembly for a file
-MockInput.cpp.s:
-	$(MAKE) -f CMakeFiles\Ueb01.dir\build.make CMakeFiles/Ueb01.dir/MockInput.cpp.s
-.PHONY : MockInput.cpp.s
-
 Person.obj: Person.cpp.obj
 
 .PHONY : Person.obj
@@ -203,6 +176,33 @@ PersonStorage.cpp.s:
 	$(MAKE) -f CMakeFiles\Ueb01.dir\build.make CMakeFiles/Ueb01.dir/PersonStorage.cpp.s
 .PHONY : PersonStorage.cpp.s
 
+Tests/MockInput.obj: Tests/MockInput.cpp.obj
+
+.PHONY : Tests/MockInput.obj
+
+# target to build an object file
+Tests/MockInput.cpp.obj:
+	$(MAKE) -f CMakeFiles\Ueb01.dir\build.make CMakeFiles/Ueb01.dir/Tests/MockInput.cpp.obj
+.PHONY : Tests/MockInput.cpp.obj
+
+Tests/MockInput.i: Tests/MockInput.cpp.i
+
+.PHONY : Tests/MockInput.i
+
+# target to preprocess a source file
+Tests/MockInput.cpp.i:
+	$(MAKE) -f CMakeFiles\Ueb01.dir\build.make CMakeFiles/Ueb01.dir/Tests/MockInput.cpp.i
+.PHONY : Tests/MockInput.cpp.i
+
+Tests/MockInput.s: Tests/MockInput.cpp.s
+
+.PHONY : Tests/MockInput.s
+
+# target to generate assembly for a file
+Tests/MockInput.cpp.s:
+	$(MAKE) -f CMakeFiles\Ueb01.dir\build.make CMakeFiles/Ueb01.dir/Tests/MockInput.cpp.s
+.PHONY : Tests/MockInput.cpp.s
+
 main.obj: main.cpp.obj
 
 .PHONY : main.obj
@@ -239,15 +239,15 @@ help:
 	@echo ... Ueb01
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... MockInput.obj
-	@echo ... MockInput.i
-	@echo ... MockInput.s
 	@echo ... Person.obj
 	@echo ... Person.i
 	@echo ... Person.s
 	@echo ... PersonStorage.obj
 	@echo ... PersonStorage.i
 	@echo ... PersonStorage.s
+	@echo ... Tests/MockInput.obj
+	@echo ... Tests/MockInput.i
+	@echo ... Tests/MockInput.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
