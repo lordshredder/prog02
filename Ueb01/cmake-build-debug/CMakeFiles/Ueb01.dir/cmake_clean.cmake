@@ -1,5 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/Ueb01.dir/Person.cpp.obj"
+  "CMakeFiles/Ueb01.dir/ausgabe.cpp.obj"
+  "CMakeFiles/Ueb01.dir/eingabe.cpp.obj"
   "CMakeFiles/Ueb01.dir/main.cpp.obj"
   "Ueb01.exe"
   "Ueb01.exe.manifest"

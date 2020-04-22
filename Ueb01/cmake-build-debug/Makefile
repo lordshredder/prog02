@@ -149,6 +149,60 @@ Person.cpp.s:
 	$(MAKE) -f CMakeFiles\Ueb01.dir\build.make CMakeFiles/Ueb01.dir/Person.cpp.s
 .PHONY : Person.cpp.s
 
+ausgabe.obj: ausgabe.cpp.obj
+
+.PHONY : ausgabe.obj
+
+# target to build an object file
+ausgabe.cpp.obj:
+	$(MAKE) -f CMakeFiles\Ueb01.dir\build.make CMakeFiles/Ueb01.dir/ausgabe.cpp.obj
+.PHONY : ausgabe.cpp.obj
+
+ausgabe.i: ausgabe.cpp.i
+
+.PHONY : ausgabe.i
+
+# target to preprocess a source file
+ausgabe.cpp.i:
+	$(MAKE) -f CMakeFiles\Ueb01.dir\build.make CMakeFiles/Ueb01.dir/ausgabe.cpp.i
+.PHONY : ausgabe.cpp.i
+
+ausgabe.s: ausgabe.cpp.s
+
+.PHONY : ausgabe.s
+
+# target to generate assembly for a file
+ausgabe.cpp.s:
+	$(MAKE) -f CMakeFiles\Ueb01.dir\build.make CMakeFiles/Ueb01.dir/ausgabe.cpp.s
+.PHONY : ausgabe.cpp.s
+
+eingabe.obj: eingabe.cpp.obj
+
+.PHONY : eingabe.obj
+
+# target to build an object file
+eingabe.cpp.obj:
+	$(MAKE) -f CMakeFiles\Ueb01.dir\build.make CMakeFiles/Ueb01.dir/eingabe.cpp.obj
+.PHONY : eingabe.cpp.obj
+
+eingabe.i: eingabe.cpp.i
+
+.PHONY : eingabe.i
+
+# target to preprocess a source file
+eingabe.cpp.i:
+	$(MAKE) -f CMakeFiles\Ueb01.dir\build.make CMakeFiles/Ueb01.dir/eingabe.cpp.i
+.PHONY : eingabe.cpp.i
+
+eingabe.s: eingabe.cpp.s
+
+.PHONY : eingabe.s
+
+# target to generate assembly for a file
+eingabe.cpp.s:
+	$(MAKE) -f CMakeFiles\Ueb01.dir\build.make CMakeFiles/Ueb01.dir/eingabe.cpp.s
+.PHONY : eingabe.cpp.s
+
 main.obj: main.cpp.obj
 
 .PHONY : main.obj
@@ -188,6 +242,12 @@ help:
 	@echo ... Person.obj
 	@echo ... Person.i
 	@echo ... Person.s
+	@echo ... ausgabe.obj
+	@echo ... ausgabe.i
+	@echo ... ausgabe.s
+	@echo ... eingabe.obj
+	@echo ... eingabe.i
+	@echo ... eingabe.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
