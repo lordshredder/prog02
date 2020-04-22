@@ -11,9 +11,12 @@
 class PersonStorage {
 
 public:
-    void lesePerson(Person *person);
-    void sortierePersonen(Person[] *personArray, int arrayLength);
+    static void readPerson(Person *person);
+    static void sortPerson(Person *personArray, int arrayLength);
 
+private:
+    bool vergleichePersonen();
+    static void swapPerson(Person *personArray, int positionOne, int positionTwo);
 };
 
 
