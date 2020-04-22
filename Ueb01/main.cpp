@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Person.h"
-#include "Tests/MockInput.h"
+#include "MockInput.h"
 #include "PersonStorage.h"
 
 using std::cout;
