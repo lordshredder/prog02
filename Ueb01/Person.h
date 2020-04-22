@@ -1,9 +1,4 @@
-//
-// Created by Pai on 19/04/2020.
-//
-
-#ifndef UEB01_PERSON_H
-#define UEB01_PERSON_H
+#pragma once
 #include <string>
 
 using std::string;
@@ -24,6 +19,3 @@ private:
     int _geburtsdatum {0};
 
 };
-
-
-#endif //UEB01_PERSON_H
