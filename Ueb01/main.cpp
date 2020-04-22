@@ -7,9 +7,13 @@ int main() {
     std::cout << "Hello, World!" << std::endl;
     for (int i = 0; i <3; ++i) {
         //changing stuff here
+        // edited from github for testing
     }
-
+    struct Person test;
+    test._name = "toll";
     forschleife();
+    // don't write anything here
+    // gonna write something here
     return 0;
 }
 
@@ -19,4 +23,4 @@ void forschleife() {
     }
 }
 
-int
+
