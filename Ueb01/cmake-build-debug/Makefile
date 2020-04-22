@@ -122,6 +122,33 @@ Ueb01/fast:
 	$(MAKE) -f CMakeFiles\Ueb01.dir\build.make CMakeFiles/Ueb01.dir/build
 .PHONY : Ueb01/fast
 
+MockInput.obj: MockInput.cpp.obj
+
+.PHONY : MockInput.obj
+
+# target to build an object file
+MockInput.cpp.obj:
+	$(MAKE) -f CMakeFiles\Ueb01.dir\build.make CMakeFiles/Ueb01.dir/MockInput.cpp.obj
+.PHONY : MockInput.cpp.obj
+
+MockInput.i: MockInput.cpp.i
+
+.PHONY : MockInput.i
+
+# target to preprocess a source file
+MockInput.cpp.i:
+	$(MAKE) -f CMakeFiles\Ueb01.dir\build.make CMakeFiles/Ueb01.dir/MockInput.cpp.i
+.PHONY : MockInput.cpp.i
+
+MockInput.s: MockInput.cpp.s
+
+.PHONY : MockInput.s
+
+# target to generate assembly for a file
+MockInput.cpp.s:
+	$(MAKE) -f CMakeFiles\Ueb01.dir\build.make CMakeFiles/Ueb01.dir/MockInput.cpp.s
+.PHONY : MockInput.cpp.s
+
 Person.obj: Person.cpp.obj
 
 .PHONY : Person.obj
@@ -149,32 +176,32 @@ Person.cpp.s:
 	$(MAKE) -f CMakeFiles\Ueb01.dir\build.make CMakeFiles/Ueb01.dir/Person.cpp.s
 .PHONY : Person.cpp.s
 
-UserStorage.obj: UserStorage.cpp.obj
+PersonStorage.obj: PersonStorage.cpp.obj
 
-.PHONY : UserStorage.obj
+.PHONY : PersonStorage.obj
 
 # target to build an object file
-UserStorage.cpp.obj:
-	$(MAKE) -f CMakeFiles\Ueb01.dir\build.make CMakeFiles/Ueb01.dir/UserStorage.cpp.obj
-.PHONY : UserStorage.cpp.obj
+PersonStorage.cpp.obj:
+	$(MAKE) -f CMakeFiles\Ueb01.dir\build.make CMakeFiles/Ueb01.dir/PersonStorage.cpp.obj
+.PHONY : PersonStorage.cpp.obj
 
-UserStorage.i: UserStorage.cpp.i
+PersonStorage.i: PersonStorage.cpp.i
 
-.PHONY : UserStorage.i
+.PHONY : PersonStorage.i
 
 # target to preprocess a source file
-UserStorage.cpp.i:
-	$(MAKE) -f CMakeFiles\Ueb01.dir\build.make CMakeFiles/Ueb01.dir/UserStorage.cpp.i
-.PHONY : UserStorage.cpp.i
+PersonStorage.cpp.i:
+	$(MAKE) -f CMakeFiles\Ueb01.dir\build.make CMakeFiles/Ueb01.dir/PersonStorage.cpp.i
+.PHONY : PersonStorage.cpp.i
 
-UserStorage.s: UserStorage.cpp.s
+PersonStorage.s: PersonStorage.cpp.s
 
-.PHONY : UserStorage.s
+.PHONY : PersonStorage.s
 
 # target to generate assembly for a file
-UserStorage.cpp.s:
-	$(MAKE) -f CMakeFiles\Ueb01.dir\build.make CMakeFiles/Ueb01.dir/UserStorage.cpp.s
-.PHONY : UserStorage.cpp.s
+PersonStorage.cpp.s:
+	$(MAKE) -f CMakeFiles\Ueb01.dir\build.make CMakeFiles/Ueb01.dir/PersonStorage.cpp.s
+.PHONY : PersonStorage.cpp.s
 
 main.obj: main.cpp.obj
 
@@ -212,12 +239,15 @@ help:
 	@echo ... Ueb01
 	@echo ... edit_cache
 	@echo ... rebuild_cache
+	@echo ... MockInput.obj
+	@echo ... MockInput.i
+	@echo ... MockInput.s
 	@echo ... Person.obj
 	@echo ... Person.i
 	@echo ... Person.s
-	@echo ... UserStorage.obj
-	@echo ... UserStorage.i
-	@echo ... UserStorage.s
+	@echo ... PersonStorage.obj
+	@echo ... PersonStorage.i
+	@echo ... PersonStorage.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

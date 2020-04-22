@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/Ueb01.dir/MockInput.cpp.obj"
   "CMakeFiles/Ueb01.dir/Person.cpp.obj"
-  "CMakeFiles/Ueb01.dir/UserStorage.cpp.obj"
+  "CMakeFiles/Ueb01.dir/PersonStorage.cpp.obj"
   "CMakeFiles/Ueb01.dir/main.cpp.obj"
   "Ueb01.exe"
   "Ueb01.exe.manifest"

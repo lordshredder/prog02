@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+E:/Git/Prog02/Ueb01/Person.h
+string
+-
+
+E:/Git/Prog02/Ueb01/PersonStorage.cpp
+PersonStorage.h
+E:/Git/Prog02/Ueb01/PersonStorage.h
+
+E:/Git/Prog02/Ueb01/PersonStorage.h
+Person.h
+E:/Git/Prog02/Ueb01/Person.h
+
