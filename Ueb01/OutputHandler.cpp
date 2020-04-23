@@ -14,8 +14,6 @@ void printAllPeople(Person *personArray, int arrayLength){
     }
 }
 
-///
-/// \param person
 void writePerson(Person &person) {
     int space = 32;
     cout << "\nName: " << person.surname;
