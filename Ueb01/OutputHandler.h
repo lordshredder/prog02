@@ -3,4 +3,4 @@
 #include <iostream>
 
 void printAllPeople(Person *personArray, int arrayLength);
-void WritePerson(Person &person);
+void writePerson(Person &person);

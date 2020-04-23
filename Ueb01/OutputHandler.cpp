@@ -1,21 +1,25 @@
 #include <iostream>
+#include <iomanip>
 #include "Person.h"
 #include "OutputHandler.h"
 
 using std::cout;
+using std::setw;
 
-void printAllPeople(Person *personArray, int arrayLength)
-{
+
+void printAllPeople(Person *personArray, int arrayLength){
     for (int i = 0; i < arrayLength; i++)
     {
-        WritePerson(personArray[i]);
+        writePerson(personArray[i]);
     }
 }
 
-void WritePerson(Person &person) {
-
+///
+/// \param person
+void writePerson(Person &person) {
+    int space = 32;
     cout << "\nName: " << person.surname;
-    cout << "\tVorname: " << person.name;
-    cout << "\t\tGeburtsdatum: " << person.birthdate.day << ".";
+    cout << setw(space-person.surname.length()) << "Vorname: " << person.name;
+    cout << setw(space-person.name.length()) << "Geburtsdatum: " << person.birthdate.day << ".";
     cout << person.birthdate.month << "." << person.birthdate.year;
 }
