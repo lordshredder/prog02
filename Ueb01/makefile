@@ -13,7 +13,7 @@ LOESCHLISTE = *.o *.exe *stackdump
 RULES = make-regeln
 
 ### Ziele
-all: dep ueb01
+all: dep main
 
 # Bereinigung des Verzeichnisses
 # @ vor dem Kommando sorgt dafür, dass das Kommando selbst nicht
@@ -24,7 +24,7 @@ clean:
 		rm -f $(LOESCHLISTE)
 
 ### Abhaengigkeiten
-ueb01: $(OBJECTS)
+main: $(OBJECTS)
 
 ### Anlegen der Abhängigkeitsdatei
 dep: $(SRC)
