@@ -1,5 +1,10 @@
+/**
+ *
+ *  @file InputHandler.h
+ *  @authors David Berres, Nico Schorr
+ *  @date 23.04.2020
+ */
 #pragma once
-
 #include <iostream>
 
     /**
@@ -11,10 +16,10 @@
     /**
      *
      * @param personArray The array that should get filled.
-     * @param size The size of the array.
+     * @param arraySize The arraySize of the array.
      * @return
      */
-    int controlInput(Person personArray[], int size);
+    int controlInput(Person personArray[], int arraySize);
 
 
 

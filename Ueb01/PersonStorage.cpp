@@ -1,3 +1,9 @@
+/**
+ *
+ *  @file PersonStorage.cpp
+ *  @authors David Berres, Nico Schorr
+ *  @date 23.04.2020
+ */
 #include "PersonStorage.h"
 
 void sortPerson(Person *personArray, int arrayLength) {

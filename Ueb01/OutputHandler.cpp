@@ -1,3 +1,9 @@
+/**
+ *
+ *  @file OutputHandler.cpp
+ *  @authors David Berres, Nico Schorr
+ *  @date 23.04.2020
+ */
 #include <iostream>
 #include <iomanip>
 #include "Person.h"

@@ -1,11 +1,16 @@
+/**
+ *
+ *  @file OutputHandler.h
+ *  @authors David Berres, Nico Schorr
+ *  @date 23.04.2020
+ */
 #pragma once
-
 #include <iostream>
 
 /**
  * Prints all people in the array.
  * @param personArray The array that should get filled.
- * @param size The size of the array.
+ * @param arrayLength The size of the array.
  */
 void printAllPeople(Person *personArray, int arrayLength);
 
