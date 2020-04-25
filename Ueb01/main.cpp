@@ -11,7 +11,6 @@
 
 #include <iostream>
 #include "Person.h"
-#include "MockInput.h"
 #include "PersonStorage.h"
 #include "InputHandler.h"
 #include "OutputHandler.h"
@@ -20,17 +19,14 @@ using std::cout;
 
 int main() {
 
-    int arraySize = 10;
+    const int arraySize = 100;
     int readPeople = 0;
-    Person personen[arraySize];
-
-    readPeople = controlInput(personen, arraySize);
-    //MockInput::CreateRandomMockInput(personen, arraySize);
-    printAllPeople(personen, readPeople);
+    Person people[arraySize];
+    readPeople = controlInput(people, arraySize);
+    printAllPeople(people, readPeople);
     cout << "\n\nSortiere Array..." << std::endl;
-    sortPerson(personen, readPeople);
-    printAllPeople(personen, readPeople);
-
+    sortPerson(people, readPeople);
+    printAllPeople(people, readPeople);
     return 0;
 }
 

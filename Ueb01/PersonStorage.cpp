@@ -31,25 +31,3 @@ void swapPerson(Person *personArray, int positionOne, int positionTwo) {
     personArray[positionOne] = personArray[positionTwo];
     personArray[positionTwo] = temp;
 }
-
-/*
-for (int i = 0; i < arrayLength-1; ++i) {
-min = i;
-for (int j = i+1; j < arrayLength; ++j) {
-if (personArray[j].surname.compare(personArray[min].surname) < 0) {
-min = j;
-}
-}
-swapPerson(personArray, min, i);
-}
-
-for (int i = 0; i < arrayLength-1; ++i) {
-min = i;
-for (int j = i+1; j < arrayLength; ++j) {
-if (personArray[j].surname == personArray[min].surname
-        && personArray[j].name.compare(personArray[min].name) < 0) {
-min = j;
-}
-}
-swapPerson(personArray, min, i);
-}*/
