@@ -16,18 +16,7 @@
 # $^ ist die Liste aller Abhängigkeiten dieses Ziels
 %: %.cpp
 	$(CXX) $(CXXFLAGS) $(CFLAGS) $(LDFLAGS) -o $@ $^
-	
 
-### Einfache Regeln für die C-Programmierung
 
-# Regel, um aus .c-Dateien .o-Dateien zu erzeugen
-# $< ist die erste Abhängigkeit
-%.o: %.c
-	$(CC) $(CFLAGS) -c $<
 
-# Regel, um aus .c-Dateien eine ausführbare Datei zu erzeugen
-# $@ ist das zu erzeugende Ziel
-# $^ ist die Liste aller Abhängigkeiten dieses Ziels
-%: %.c
-	$(CC) $(CFLAGS) -o $@ $^
 	

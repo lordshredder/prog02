@@ -6,14 +6,14 @@ CXXFLAGS = -g -std=c++17 -pedantic -Wall -Wextra
 LD = g++	# Linker + Flags
 LDFLAGS =
 
-OBJECTS = sortier.o tab_io.o tab_sort.o
+OBJECTS = main.o InputHandler.o OutputHandler.o Person.o Birthdate.o PersonStorage.o
 SRC = $(OBJECTS:%.o=%.cpp)
 DEPENDFILE = .depend	# Abhängigkeitsdefinitionen
 LOESCHLISTE = *.o *.exe *stackdump
 RULES = make-regeln
 
 ### Ziele
-all: dep main
+all: dep ueb01
 
 # Bereinigung des Verzeichnisses
 # @ vor dem Kommando sorgt dafür, dass das Kommando selbst nicht
@@ -24,7 +24,7 @@ clean:
 		rm -f $(LOESCHLISTE)
 
 ### Abhaengigkeiten
-sortier: $(OBJECTS)
+ueb01: $(OBJECTS)
 
 ### Anlegen der Abhängigkeitsdatei
 dep: $(SRC)
