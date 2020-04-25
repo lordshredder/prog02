@@ -26,7 +26,7 @@ int main() {
     printAllPeople(people, readPeople);
     cout << "\n\nSortiere Array..." << std::endl;
     sortPerson(people, readPeople);
-    printAllPeople(people, readPeople);
+    printAllPeople(people, readPeople) std::endl;
     return 0;
 }
 
