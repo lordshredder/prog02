@@ -13,3 +13,7 @@ Example::Example(int aNR, const std::string& dec) {
 Example::Example(double someIntForlol) {
 
 }
+
+Example::Example() {
+
+}

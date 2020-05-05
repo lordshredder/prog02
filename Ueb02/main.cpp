@@ -1,10 +1,19 @@
 #include <iostream>
 #include "Example.h"
+
+void f(){
+
+}
+
 int main() {
 
     Example test2('c');
-    Example* example = new Example(7);
+    Example* example = new Example();
+    Example eexample();
+    example->lol = 44;
 
-    std::cout << "Hello, World!" << std::endl;
+    void (*fp)();
+    fp = f;
+    std::cout << "Hello, World! " << example->lol<< std::endl;
     return 0;
 }
