@@ -20,7 +20,7 @@ public:
 
     string getDescription() const;
 
-    void setDescription(string newDescription);
+    void setDescription(const string& newDescription);
 
 private:
     int articleNr;

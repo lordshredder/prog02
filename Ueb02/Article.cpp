@@ -22,6 +22,7 @@ void Article::addQuantity(int amount){
     if (amount < 0){
         throw "When adding quantity, the amount must be positive";
     }
+    if (amount+stock < stock) throw "THE STOCK IS FULL";
     this->stock += amount;
 }
 
@@ -47,7 +48,7 @@ string Article::getDescription() const{
     return description;
 }
 
-void Article::setDescription(string newDescription){
+void Article::setDescription(const string& newDescription){
     if (newDescription.length() > STRING_LIMIT){
         throw "The article description is greater than the set string limit of 128";
     }
