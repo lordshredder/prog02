@@ -1,6 +1,9 @@
-#include <iostream>
-using namespace std;
 #pragma once
+#include <iostream>
+#include <string>
+#define STRING_LIMIT 128
+using namespace std;
+
 
 
 class Article {
