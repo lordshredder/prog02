@@ -7,13 +7,13 @@
 
 class Example {
 public:
-    Example() = delete;
+    Example();
     explicit Example(int aNR, const std::string& dec);
     explicit Example(double omeDOUBLEForlol);
 
 
 
-private:
+public:
     int lol;
     std::string stuff;
 
