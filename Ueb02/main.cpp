@@ -8,8 +8,7 @@ void f(){
 int main() {
 
     Example test2('c');
-    Example* example = new Example();
-    Example eexample();
+    auto* example = new Example();
     example->lol = 44;
 
     void (*fp)();
