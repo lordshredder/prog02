@@ -7,7 +7,7 @@ Article::Article(int articleNr, string description, int stock){
     if (articleNr > 9999 || articleNr < 1000) {
         throw "The article number must be 4 digits";
     }
-    if (description.empty(){
+    if (description.empty()){
         throw "The article description cannot be empty";
     }
     if (stock < 0){
@@ -51,7 +51,7 @@ void Article::setDescription(string newDescription){
     if (newDescription.length() > STRING_LIMIT){
         throw "The article description is greater than the set string limit of 128";
     }
-    if (newDescription.empty(){
+    if (newDescription.empty()){
         throw "Article description cannot be empty";
     }
     this->description = newDescription;
