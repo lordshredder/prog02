@@ -1,14 +1,13 @@
 #pragma once
 #include <iostream>
 #include <string>
-#define STRING_LIMIT 128
 using namespace std;
 
 
 
 class Article {
 public:
-    Article(int articleNr, string description, int stock = 0);
+    Article(int articleNr, const string& description, int stock = 0);
 
     void addQuantity(int amount);
 
