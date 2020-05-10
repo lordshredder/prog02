@@ -19,6 +19,8 @@ public:
 
     string getDescription() const;
 
+    void printArticle(const Article &article);
+
     void setDescription(const string& newDescription);
 
 private:

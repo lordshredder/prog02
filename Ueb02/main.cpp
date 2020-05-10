@@ -17,7 +17,6 @@ int main() {
         std::cout << "main: " << e.what() << std::endl;
     } catch (...) {
         std::cout << "main error" << std::endl;
-
     }
 
 /*    Example test2('c');

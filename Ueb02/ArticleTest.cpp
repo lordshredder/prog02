@@ -4,13 +4,12 @@
 namespace {
     const std::string SUCCESS = "\nS U C C E S S, message: ";
     const std::string FAILURE = "\n----- F A I L E D -----\n";
-
 }
 
 void ArticleTest::runFullTest() {
     try {
         Article* article = new Article(1122,"777");
-        printArticle(*article);
+        article->printArticle(*article);
         testArticleConstructor();
         testArticleName();
         testArticleStock();
@@ -105,20 +104,6 @@ void ArticleTest::articleName_is_not_empty() {
         testResult += "Unknown exception";
     }
     cout << "\narticleName_is_not_empty " << testResult << endl;
-}
-
-void ArticleTest::articleName_is_not_null() {
-    testResult = FAILURE;
-    try {
-        Article* test = new Article(1999, nullptr);
-    }  catch (const string& e) {
-        testResult = SUCCESS + e + "\n";
-    } catch (std::exception &e) {
-        testResult += e.what();
-    } catch (...) {
-        testResult += "Unknown exception";
-    }
-    cout << "\narticleName_is_not_null " << testResult << endl;
 }
 
 void ArticleTest::articleName_size_is_smaller_than_limit() {
@@ -224,21 +209,6 @@ void ArticleTest::articleRemoveQuantity_stock_minus_amount_is_positive() {
     cout << "\narticleRemoveQuantity_stock_minus_amount_is_positive " << testResult << endl;
 }
 
-void ArticleTest::articleSetDescription_string_is_not_null() {
-    testResult = FAILURE;
-    try {
-        Article* test = new Article(1999, "Test", 10);
-        test->setDescription(nullptr);
-    }  catch (const string& e) {
-        testResult = SUCCESS + e + "\n";
-    } catch (std::exception &e) {
-        testResult += e.what();
-    } catch (...) {
-        testResult += "Unknown exception";
-    }
-    cout << "\narticleSetDescription_string_is_not_null " << testResult << endl;
-}
-
 void ArticleTest::articleSetDescription_string_is_not_empty() {
     testResult = FAILURE;
     try {
@@ -270,9 +240,4 @@ void ArticleTest::articleSetDescription_string_size_is_smaller_than_limit() {
     cout << "\narticleSetDescription_string_size_is_smaller_than_limit " << testResult << endl;
 }
 
-void ArticleTest::printArticle(const Article &article) {
-    cout << "Article: \nID: "
-    << article.getArticleNr()
-    << "\nName: " << article.getDescription()
-    << "\nStock: " << article.getStock() << std::endl;
-}
+
