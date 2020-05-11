@@ -8,6 +8,9 @@
 #include "Article.h"
 using namespace std;
 
+/**
+ * Simple test class for the class Article.
+ */
 class ArticleTest {
 public:
     /**
