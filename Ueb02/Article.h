@@ -4,11 +4,6 @@
  *  @authors David Berres, Nico Schorr
  *  @date 11.05.2020
  */
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 5466b64f68eb2081560a0571366115a515f01c0b
 #pragma once
 #include <iostream>
 #include <string>
