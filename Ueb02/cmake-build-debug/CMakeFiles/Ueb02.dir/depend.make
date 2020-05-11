@@ -8,11 +8,7 @@ CMakeFiles/Ueb02.dir/ArticleTest.cpp.obj: ../Article.h
 CMakeFiles/Ueb02.dir/ArticleTest.cpp.obj: ../ArticleTest.cpp
 CMakeFiles/Ueb02.dir/ArticleTest.cpp.obj: ../ArticleTest.h
 
-CMakeFiles/Ueb02.dir/Example.cpp.obj: ../Example.cpp
-CMakeFiles/Ueb02.dir/Example.cpp.obj: ../Example.h
-
 CMakeFiles/Ueb02.dir/main.cpp.obj: ../Article.h
 CMakeFiles/Ueb02.dir/main.cpp.obj: ../ArticleTest.h
-CMakeFiles/Ueb02.dir/main.cpp.obj: ../Example.h
 CMakeFiles/Ueb02.dir/main.cpp.obj: ../main.cpp
 

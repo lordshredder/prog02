@@ -1,31 +1,29 @@
-#include <iostream>
+/**
+ *
+ *  @file Article.cpp
+ *  @authors David Berres, Nico Schorr
+ *  @date 11.05.2020
+ */
 #include <string>
 #include "Article.h"
-using namespace std;
 
-namespace {
-    const int MAX_ARTICLE_ID = 9999;
-    const int MIN_ARTICLE_ID = 1000;
-    const int MAX_STOCK = 10;
-    const int MAX_ARTICLE_DESCRIPTION_SIZE = 20;
-    const std::string EMPTY_ARTICLE_DESCRIPTION = "The description cannot be empty.";
-    const std::string DESCRIPTION_LIMIT_EXCEEDED = "The description must be smaller than "+std::to_string(MAX_ARTICLE_DESCRIPTION_SIZE);
-    const std::string ARTICLE_MUST_BE_FOUR_DIGITS = "The number must be 4 digits and positive.";
-    const std::string STOCK_MUST_BE_POSITIVE = "The stock must be positive.";
-    const std::string ADD_POSITIVE_QUANTITY_ONLY = "When adding quantity, the amount must be positive.";
-    const std::string REMOVE_POSITIVE_QUANTITY_ONLY = "When removing quantity, the amount must be positive.";
-    const std::string STOCK_LIMIT_EXCEEDED = "You have exceeded the maximum stock capacity.";
+const string Article::EMPTY_ARTICLE_DESCRIPTION = "The description cannot be empty.";
+const string Article::DESCRIPTION_LIMIT_EXCEEDED = "The description must be smaller than "+std::to_string(MAX_ARTICLE_DESCRIPTION_SIZE);
+const string Article::ARTICLE_MUST_BE_FOUR_DIGITS = "The number must be 4 digits and positive.";
+const string Article::STOCK_MUST_BE_POSITIVE = "The stock must be positive.";
+const string Article::ADD_POSITIVE_QUANTITY_ONLY = "When adding quantity, the amount must be positive.";
+const string Article::REMOVE_POSITIVE_QUANTITY_ONLY = "When removing quantity, the amount must be positive.";
+const string Article::STOCK_LIMIT_EXCEEDED = "You have exceeded the maximum stock capacity.";
 
-}
-
-Article::Article(int articleNr, const string& description, int stock){
+Article::Article(int articleNr, const string &description, int stock){
     if (articleNr > MAX_ARTICLE_ID || articleNr < MIN_ARTICLE_ID) {
         throw ARTICLE_MUST_BE_FOUR_DIGITS;
     }
-    if (description.empty()){
-        throw EMPTY_ARTICLE_DESCRIPTION;
-    }
+    setDescription(description);
     if (stock < 0){
+        throw STOCK_MUST_BE_POSITIVE;
+    }
+    if (stock > MAX_STOCK){
         throw STOCK_MUST_BE_POSITIVE;
     }
     this->articleNr = articleNr;
@@ -63,12 +61,13 @@ string Article::getDescription() const{
     return description;
 }
 
-void Article::setDescription(const string& newDescription){
-    if (newDescription.length() > MAX_ARTICLE_DESCRIPTION_SIZE){
-        throw DESCRIPTION_LIMIT_EXCEEDED;
-    }
+void Article::setDescription(const string &newDescription){
     if (newDescription.empty()){
         throw EMPTY_ARTICLE_DESCRIPTION;
     }
+    if (newDescription.length() > MAX_ARTICLE_DESCRIPTION_SIZE){
+        throw DESCRIPTION_LIMIT_EXCEEDED;
+    }
     this->description = newDescription;
 }
+
