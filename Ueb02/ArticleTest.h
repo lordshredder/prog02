@@ -31,7 +31,7 @@ public:
      */
     void testArticleName();
     /**
-     * Runs all tests that test the functions for the stock for the artciel.
+     * Runs all tests that test the functions for the stock for the article.
      */
     void testArticleStock();
 

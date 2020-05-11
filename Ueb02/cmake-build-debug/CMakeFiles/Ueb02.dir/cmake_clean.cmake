@@ -1,7 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/Ueb02.dir/Article.cpp.obj"
   "CMakeFiles/Ueb02.dir/ArticleTest.cpp.obj"
-  "CMakeFiles/Ueb02.dir/Example.cpp.obj"
   "CMakeFiles/Ueb02.dir/main.cpp.obj"
   "Ueb02.exe"
   "Ueb02.exe.manifest"

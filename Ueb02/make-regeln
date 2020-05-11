@@ -1,0 +1,22 @@
+### Einfache Regeln für die C++-Programmierung
+
+# Regel, um aus .cpp-Dateien .o-Dateien zu erzeugen
+# $< ist die erste Abhängigkeit
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) $(CFLAGS) -c $<
+
+# Regel, um aus .o-Dateien eine ausführbare Datei zu erzeugen
+# $@ ist das zu erzeugende Ziel
+# $^ ist die Liste aller Abhängigkeiten dieses Ziels
+%: %.o
+	$(LD) $(LDFLAGS) -o $@ $^
+	
+# Regel, um aus .cpp-Dateien eine ausführbare Datei zu erzeugen
+# $@ ist das zu erzeugende Ziel
+# $^ ist die Liste aller Abhängigkeiten dieses Ziels
+%: %.cpp
+	$(CXX) $(CXXFLAGS) $(CFLAGS) $(LDFLAGS) -o $@ $^
+
+
+
+	

@@ -176,33 +176,6 @@ ArticleTest.cpp.s:
 	$(MAKE) -f CMakeFiles\Ueb02.dir\build.make CMakeFiles/Ueb02.dir/ArticleTest.cpp.s
 .PHONY : ArticleTest.cpp.s
 
-Example.obj: Example.cpp.obj
-
-.PHONY : Example.obj
-
-# target to build an object file
-Example.cpp.obj:
-	$(MAKE) -f CMakeFiles\Ueb02.dir\build.make CMakeFiles/Ueb02.dir/Example.cpp.obj
-.PHONY : Example.cpp.obj
-
-Example.i: Example.cpp.i
-
-.PHONY : Example.i
-
-# target to preprocess a source file
-Example.cpp.i:
-	$(MAKE) -f CMakeFiles\Ueb02.dir\build.make CMakeFiles/Ueb02.dir/Example.cpp.i
-.PHONY : Example.cpp.i
-
-Example.s: Example.cpp.s
-
-.PHONY : Example.s
-
-# target to generate assembly for a file
-Example.cpp.s:
-	$(MAKE) -f CMakeFiles\Ueb02.dir\build.make CMakeFiles/Ueb02.dir/Example.cpp.s
-.PHONY : Example.cpp.s
-
 main.obj: main.cpp.obj
 
 .PHONY : main.obj
@@ -245,9 +218,6 @@ help:
 	@echo ... ArticleTest.obj
 	@echo ... ArticleTest.i
 	@echo ... ArticleTest.s
-	@echo ... Example.obj
-	@echo ... Example.i
-	@echo ... Example.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
