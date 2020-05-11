@@ -1,12 +1,40 @@
+/**
+ *
+ *  @file ArticleTest.h
+ *  @authors David Berres, Nico Schorr
+ *  @date 11.05.2020
+ */
 #pragma once
 #include "Article.h"
+using namespace std;
 
 class ArticleTest {
 public:
+    /**
+     * Runs all tests in the following order:
+     * - testArticleConstructor
+     * - testArticleName
+     * - testArticleStock
+     */
     void runFullTest();
+    /**
+     * Prints the provided article.
+     * @param article The article to print.
+     */
+    void printArticle(const Article &article);
+    /**
+     * Runs all tests that test the constructor.
+     */
     void testArticleConstructor();
+    /**
+     * Runs all tests that test the functions for the article description.
+     */
     void testArticleName();
+    /**
+     * Runs all tests that test the functions for the stock for the artciel.
+     */
     void testArticleStock();
+
     void articleId_is_more_than_four_digits();
     void articleId_is_less_than_four_digits();
     void articleId_is_positive();
@@ -21,5 +49,7 @@ public:
     void articleSetDescription_string_is_not_empty();
     void articleSetDescription_string_size_is_smaller_than_limit();
 private:
-    std::string testResult;
+    string testResult;
+    static const string TEST_SUCCESS;
+    static const string TEST_FAILURE;
 };
