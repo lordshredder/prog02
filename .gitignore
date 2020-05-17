@@ -34,3 +34,6 @@
 # Cmake
 /Ueb01/cmake-build-debug
 /Ueb01/CMakeLists.txt
+
+/Ueb03/cmake-build-debug
+/Ueb03/.idea
