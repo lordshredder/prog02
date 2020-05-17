@@ -27,7 +27,6 @@ Article::Article(int articleNr, const string &description, int stock){
         throw STOCK_MUST_BE_POSITIVE;
     }
     this->articleNr = articleNr;
-    this->description = description;
     this->stock = stock;
 }
 
