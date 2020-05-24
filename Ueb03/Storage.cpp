@@ -32,7 +32,7 @@ Storage::~Storage() {
         delete (*i);
     }
     cout << "Deleted storage " << storageName
-    << " which stored " << count << " exotic articles";
+    << " which stored " << count << " exotic articles" << endl;
 }
 
 void Storage::addArticle(int articleId, const string& articleName, long double price, int stock) {
