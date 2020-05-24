@@ -31,7 +31,8 @@ Storage::~Storage() {
     for (auto i = articles.begin(); i != articles.end(); ++i) {
         delete (*i);
     }
-    cout << "Deleted storage " << storageName << " which stored " << count << " exotic articles";
+    cout << "Deleted storage " << storageName
+    << " which stored " << count << " exotic articles";
 }
 
 void Storage::addArticle(int articleId, const string& articleName, long double price, int stock) {
@@ -42,7 +43,8 @@ void Storage::addArticle(int articleId, const string& articleName, long double p
 }
 
 int Storage::findArticle(const int& articleId) {
-    for (int i = 0; i < articles.size(); ++i) {
+    int count = articles.size();
+    for (int i = 0; i < count; ++i) {
         if(articles[i]->articleNr == articleId) return i;
     }
     return ARTICLE_NOT_FOUND;
@@ -129,7 +131,8 @@ void Storage::setArticleName(int articleId, const string& newDescription) {
 
 string Storage::toString() const {
     ostringstream oStr;
-    oStr << "Storage Name: " << storageName << "\t" << "Number of Articles: " << getArticleAmount() << endl;
+    oStr << "Storage Name: " << storageName << "\t"
+    << "Number of Articles: " << getArticleAmount() << endl;
     if (articles.size() < 1) return oStr.str();
     oStr << "Articles: " << endl;
     for (auto article : articles) {

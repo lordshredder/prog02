@@ -94,10 +94,9 @@ private:
     static const std::string STOCK_LIMIT_EXCEEDED;
 
     int articleNr;
-    int stock;
-    long double price;
     string description;
-
+    long double price;
+    int stock;
 };
 
 

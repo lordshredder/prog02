@@ -134,7 +134,8 @@ void StorageDialogue::addArticle() {
     cout << "\nPlease enter the initial stock for the article: ";
     cin >> stock;
     storage->addArticle(articleId, articleDescription, articlePrice, stock);
-    cout << "\nThe article with the ID: " << articleId << " was added successfully." << endl;
+    cout << "\nThe article with the ID: "
+    << articleId << " was added successfully." << endl;
 
 
 }
@@ -142,7 +143,8 @@ void StorageDialogue::addArticle() {
 void StorageDialogue::removeArticle() {
     int articleId = readArticleId();
     storage->removeArticle(articleId);
-    cout << "\nThe article with the ID: " << articleId << " was removed successfully." << endl;
+    cout << "\nThe article with the ID: "
+    << articleId << " was removed successfully." << endl;
 }
 
 void StorageDialogue::printArticle() {
@@ -167,7 +169,9 @@ void StorageDialogue::addQuantity() {
     cout << "\nPlease enter a quantity: ";
     cin >> quantity;
     storage->addQuantity(articleId, quantity);
-    cout << "\nThe article with the ID: " << articleId << " has had its stock increased by " << quantity  << "." << endl;
+    cout << "\nThe article with the ID: "
+    << articleId << " has had its stock increased by "
+    << quantity  << "." << endl;
 }
 
 void StorageDialogue::removeQuantity() {
@@ -176,7 +180,9 @@ void StorageDialogue::removeQuantity() {
     cout << "\nPlease enter a quantity: ";
     cin >> quantity;
     storage->removeQuantity(articleId, quantity);
-    cout << "\nThe article with the ID: " << articleId << " has had its stock decreased by " << quantity  << "." << endl;
+    cout << "\nThe article with the ID: "
+    << articleId << " has had its stock decreased by "
+    << quantity  << "." << endl;
 }
 
 void StorageDialogue::setArticleName() {
@@ -185,7 +191,9 @@ void StorageDialogue::setArticleName() {
     cout << "\nPlease enter a new name for the article:";
     cin >> newDescription;
     storage->setArticleName(articleId, newDescription);
-    cout << "The name of the article with ID: " << articleId << " has been changed to " << newDescription << "." << endl;
+    cout << "The name of the article with ID: "
+    << articleId << " has been changed to "
+    << newDescription << "." << endl;
 }
 
 void StorageDialogue::setPrice() {
@@ -194,7 +202,9 @@ void StorageDialogue::setPrice() {
     cout << "\nPlease enter a new price:";
     cin >> newPrice;
     storage->setPrice(articleId, newPrice);
-    cout << "Price of the article with ID: " << articleId << " has been changed to " << newPrice << "." << endl;
+    cout << "Price of the article with ID: "
+    << articleId << " has been changed to "
+    << newPrice << "." << endl;
 }
 
 void StorageDialogue::adjustPrice() {
@@ -205,7 +215,8 @@ void StorageDialogue::adjustPrice() {
     << "\n-18 -> decreases the price by 18.0%\n";
     cin >> percent;
     storage->adjustPriceByPercent(articleId, percent);
-    cout << "Price of the article with ID: " << articleId << " adjusted by " << percent << "%." << endl;
+    cout << "Price of the article with ID: "
+    << articleId << " adjusted by " << percent << "%." << endl;
 }
 
 void StorageDialogue::adjustPrices() {
@@ -227,7 +238,11 @@ void StorageDialogue::showStorage() {
 }
 
 void StorageDialogue::showArticleAmount() {
-    cout << "The storage " << storage->getName() << " contains " << storage->getArticleAmount() << " articles." << endl;
+    cout << "The storage "
+    << storage->getName()
+    << " contains "
+    << storage->getArticleAmount()
+    << " articles." << endl;
 }
 
 void StorageDialogue::createDummyArticles() {
@@ -241,4 +256,7 @@ void StorageDialogue::createDummyArticles() {
         storage->addArticle(articleId, articleDesc, roundedPrice, stock);
         articleId++;
     }
+    cout << AMOUNT_DUMMY_ARTICLES
+    << " articles with random values have been created and added to the storage "
+    << storage->getName()  << "." << endl;
 }
