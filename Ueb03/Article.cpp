@@ -17,8 +17,7 @@ const string Article::ADD_POSITIVE_QUANTITY_ONLY = "When adding quantity, the am
 const string Article::REMOVE_POSITIVE_QUANTITY_ONLY = "When removing quantity, the amount must be positive.";
 const string Article::STOCK_LIMIT_EXCEEDED = "You have exceeded the maximum stock capacity.";
 
-Article::Article(int articleNr, const string &description, double price, int stock) {
-    cout << "article constructor called" << endl;
+Article::Article(int articleNr, const string &description, long double price, int stock) {
     if (articleNr > MAX_ARTICLE_ID || articleNr < MIN_ARTICLE_ID) {
         throw ARTICLE_MUST_BE_FOUR_DIGITS;
     }
@@ -34,11 +33,15 @@ Article::Article(int articleNr, const string &description, double price, int sto
     this->stock = stock;
 }
 
-Article::Article(const Article &article) {
- cout << "Copy Test: copy constructor called!" << endl;
+Article::Article(const Article &article) :
+articleNr(article.articleNr), description(article.description),
+price(article.price), stock(article.stock)
+{
+    cout << "DEBUG CHECK: Article copy constructor called" << endl;
 }
 
 Article::~Article() {
+    cout << "DEBUG CHECK: Article destructor called" << endl;
 }
 
 void Article::addQuantity(int amount) {
@@ -71,7 +74,7 @@ string Article::getDescription() const {
     return description;
 }
 
-double Article::getPrice() const {
+long double Article::getPrice() const {
     return price;
 }
 
@@ -85,19 +88,24 @@ void Article::setDescription(const string &newDescription) {
     this->description = newDescription;
 }
 
-void Article::setPrice(const double& newPrice) {
+void Article::setPrice(const long double& newPrice) {
     if (newPrice < 0.0) {
         throw PRICE_MUST_BE_POSITIVE;
     }
     this->price = newPrice;
 }
 
+Article *Article::copy() const {
+    return new Article(*this);
+}
+
 string Article::toString() const {
+    int space = 32;
     ostringstream oStr;
     oStr << "Article Number: " << articleNr << "\t"
-    << "Article Name: " << description << "\t"
-    << "Article Price: " << price << "\t"
-    << "Article Stock: " << stock;
+    << "Name: "  << description << std::setw(space-description.length()) << "\t"
+    << "Price: " << setprecision(2) << fixed << left << price << right <<" EUR\t"
+    << "Current Stock: " << stock;
     return oStr.str();
 }
 

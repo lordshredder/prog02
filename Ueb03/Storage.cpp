@@ -2,179 +2,143 @@
  *
  *  @file Storage.cpp
  *  @authors David Berres, Nico Schorr
- *  @date 24.05.2020
+ *  @date 23.05.2020
  */
 
 #include "Storage.h"
-#include "Article.h"
-#include <string>
-#include <iostream>
-#include <sstream>
-using namespace std;
 
+const string Storage::EMPTY_STORAGE_NAME = "The name cannot be empty.";
+const string Storage::NAME_LIMIT_EXCEEDED = "The name must be smaller than " + std::to_string(MAX_STORAGE_NAME_SIZE);
+const string Storage::ARTICLE_DOES_NOT_EXIST = "The article with this ID does not exist.";
+const string Storage::ARTICLE_ID_ALREADY_EXISTS = "The article ID is already in use.";
 
-const string Storage::ARTICLE_TAKEN = "This ArticleNr. is already taken";
-const string Storage::ARTICLE_NOT_FOUND = "This ArticleNr. could not be found";
-const string Storage::STORAGE_SPACE = "Not Enough Space in this Storage";
-const string Storage::AMOUNT_TOO_SMALL = "The given amount is too small";
-const string Storage::STOCK_MUST_BE_POSITIVE = "The stock must be positive.";
-
-
-Storage::Storage(string name, int size_database)
-{
-    this->size_database = size_database;
-    this->name = name;
-    article_database = new Article*[size_database];
-    article_count = 0;
+Storage::Storage(const string& storageName) {
+    setName(storageName);
+    articles.reserve(STANDARD_STORAGE_SIZE);
 }
 
-
-
-
-int Storage::find_Article(int articleNr)
-{
-    for (int i = 0; i < article_count; i++)
-    {
-        if (article_database[i]->getArticleNr() == articleNr)
-            return i;
-    }
-    return -1;
-}
-
-
-
-
-void Storage::change_price(int articleNr, double price)
-{
-
-    int position = find_Article(articleNr);
-
-
-    if (position == -1) throw ARTICLE_NOT_FOUND;
-    if(price < 0.0) throw AMOUNT_TOO_SMALL;
-
-
-    article_database[position]->setprice(price);
-}
-
-
-
-
-void Storage::addArticle(int articleNr, double price, string description, int stock = 0)
-{
-    int existing_articleNr = -1;
-    existing_articleNr = find_Article(articleNr);
-    if(article_count == size_database)
-    {
-        throw STORAGE_SPACE;
-    }
-    else if(existing_articleNr != -1)
-    {
-        throw ARTICLE_TAKEN;
-    }
-    else if (articleNr < 1)
-    {
-        throw ARTICLE_NOT_FOUND;
-    }
-    else if (stock < 0)
-    {
-        throw STOCK_MUST_BE_POSITIVE;
-    }
-    else
-    {
-        article_database[article_count] = new Article(articleNr, price, stock, description);
-        article_count++;
+Storage::Storage(const Storage &storage) {
+    this->storageName = storage.storageName;
+    articles.reserve(STANDARD_STORAGE_SIZE);
+    for (auto article : storage.articles) {
+        articles.push_back(article->copy());
     }
 }
 
+Storage::~Storage() {
+    cout << "Storage destructor" << endl;
+    int count = articles.size();
+    for (auto i = articles.begin(); i != articles.end(); ++i) {
+        delete (*i);
+    }
+    cout << "Deleted storage " << storageName << " which stored " << count << " exotic articles";
+}
 
+void Storage::addArticle(int articleId, const string& articleName, long double price, int stock) {
+    int position = findArticle(articleId);
+    if (position != ARTICLE_NOT_FOUND) throw ARTICLE_ID_ALREADY_EXISTS;
+    auto article = new Article(articleId, articleName, price, stock);
+    articles.push_back(article);
+}
 
+int Storage::findArticle(const int& articleId) {
+    for (int i = 0; i < articles.size(); ++i) {
+        if(articles[i]->articleNr == articleId) return i;
+    }
+    return ARTICLE_NOT_FOUND;
+}
 
-void Storage::adjustPriceByPercent(double percent)
-{
-    double old_price = 0.0;
-    double new_price = 0.0;
-    double percentage = percent/100;
+Article* Storage::removeArticle(int articleId, bool deleteArticle) {
+    int position = findArticle(articleId);
+    if (position == ARTICLE_NOT_FOUND) throw ARTICLE_DOES_NOT_EXIST;
+    Article* reference = articles[position];
+    if(deleteArticle) delete articles[position];
+    articles.erase(articles.begin() + position);
+    return reference;
+}
 
-    for (int i = 0; i < article_count; i++)
-    {
-        old_price = article_database[i]->getPrice();
-        new_price = old_price + (percentage * old_price);
-        article_database[i]->setPrice(new_price);
+void Storage::addQuantity(int articleId, int quantity) {
+    int position = findArticle(articleId);
+    if (position == ARTICLE_NOT_FOUND) throw ARTICLE_DOES_NOT_EXIST;
+    articles[position]->addQuantity(quantity);
+}
+
+void Storage::removeQuantity(int articleId, int quantity) {
+    int position = findArticle(articleId);
+    if (position == ARTICLE_NOT_FOUND) throw ARTICLE_DOES_NOT_EXIST;
+    articles[position]->removeQuantity(quantity);
+}
+
+void Storage::adjustPriceByPercent(long double percent) {
+    long double actualPercent = 1.0f + percent/100.0f;
+    for (auto article : articles) {
+        article->price *= actualPercent;
     }
 }
 
+void Storage::adjustPriceByPercent(int articleId, long double percent) {
+    int position = findArticle(articleId);
+    if (position == ARTICLE_NOT_FOUND) throw ARTICLE_DOES_NOT_EXIST;
+    long double currentPrice = articles[position]->getPrice();
+    long double actualPercent = 1.0f + percent/100.0f;
+    long double newPrice = percent < 0.0 ? currentPrice/actualPercent : currentPrice*actualPercent;
+    articles[position]->setPrice(newPrice+currentPrice);
+}
 
-void Storage::addQuantity(int articleNr, int amount)
-{
-    int position = find_Article(articleNr);
+string Storage::getName() const {
+    return storageName;
+}
 
-    if (position == -1)
-    {
-        throw ARTICLE_NOT_FOUND;
-    }
-    else if (amount < 1)
-    {
-        throw AMOUNT_TOO_SMALL;
-    }
-    else
-    {
-        article_database[position]->???;
+int Storage::getArticleAmount() const {
+    return articles.size();
+}
+
+void Storage::printArticle(int articleId) {
+    int position = findArticle(articleId);
+    if (position == ARTICLE_NOT_FOUND) throw ARTICLE_DOES_NOT_EXIST;
+    cout << articles[position]->toString() << endl;
+}
+
+void Storage::printArticles() {
+    for (const auto article : articles) {
+        cout << (*article) << endl;
     }
 }
 
-
-void Storage::removeQuantity(int articleNr, int amount)
-{
-    int position = find_Article(articleNr);
-
-    if (position == -1)
-    {
-        throw ARTICLE_NOT_FOUND;
+void Storage::setName(const string& newName) {
+    if (newName.empty()) {
+        throw EMPTY_STORAGE_NAME;
     }
-    else if (amount < 1)
-    {
-        throw AMOUNT_TOO_SMALL;
+    if (newName.length() > MAX_STORAGE_NAME_SIZE) {
+        throw NAME_LIMIT_EXCEEDED;
     }
-    else
-    {
-        article_database[position]->???;
-    }
+    this->storageName = newName;
 }
 
+void Storage::setPrice(int articleId, long double newPrice) {
+    int position = findArticle(articleId);
+    if (position == ARTICLE_NOT_FOUND) throw ARTICLE_DOES_NOT_EXIST;
+    articles[position]->setPrice(newPrice);
+}
 
-void Storage::removeArticle(int articleNr)
-{
-    int position = find_Article(articleNr);
+void Storage::setArticleName(int articleId, const string& newDescription) {
+    int position = findArticle(articleId);
+    if (position == ARTICLE_NOT_FOUND) throw ARTICLE_DOES_NOT_EXIST;
+    articles[position]->setDescription(newDescription);
+}
 
-    if (position == -1)
-    {
-        throw ARTICLE_NOT_FOUND;
+string Storage::toString() const {
+    ostringstream oStr;
+    oStr << "Storage Name: " << storageName << "\t" << "Number of Articles: " << getArticleAmount() << endl;
+    if (articles.size() < 1) return oStr.str();
+    oStr << "Articles: " << endl;
+    for (auto article : articles) {
+        oStr << (*article) << endl;
     }
-    else
-    {
-        delete article_database[position];
-        for (int i = position; i < size_database; i++)
-        {
-            article_database[i] = article_database[i+1];
-        }
-        article_database[size_database-1] = nullptr;
-        article_count--;
-    }
+    oStr << endl;
+    return oStr.str();
 }
 
-
-string Storage::getName() const
-{
-    return this->name;
-}
-
-int Storage::getSize_database() const
-{
-    return this->size_database;
-}
-
-int Storage::getArticle_count() const
-{
-    return this->article_count;
+ostream& operator<<(ostream& stream, const Storage& storage) {
+    return stream << storage.toString();
 }

@@ -6,9 +6,9 @@ CXXFLAGS = -g -std=c++17 -pedantic -Wall -Wextra
 LD = g++	# Linker + Flags
 LDFLAGS =
 
-OBJECTS = main.o Article.o ArticleTest.o
+OBJECTS = main.o Article.o Storage.o StorageDialogue.o
 SRC = $(OBJECTS:%.o=%.cpp)
-DEPENDFILE = .depend	# Abhängigkeitsdefinitionen
+DEPENDFILE = .depend	# Abhaengigkeitsdefinitionen
 LOESCHLISTE = *.o *.exe *stackdump
 RULES = make-regeln
 
@@ -16,7 +16,7 @@ RULES = make-regeln
 all: dep main
 
 # Bereinigung des Verzeichnisses
-# @ vor dem Kommando sorgt dafür, dass das Kommando selbst nicht
+# @ vor dem Kommando sorgt dafuer, dass das Kommando selbst nicht
 #   ausgegeben wird.
 clean:
 		@echo "Folgende Dateien werden geloescht"

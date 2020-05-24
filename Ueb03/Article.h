@@ -6,8 +6,10 @@
  */
 #pragma once
 #include <iostream>
+#include <iomanip>
 #include <string>
 using namespace std;
+using std::setw;
 
 /**
  *  A class called Article, used to simulate inventory management by
@@ -23,9 +25,18 @@ public:
      *  @param description The description used for additional information. Cannot be empty or above the set limit.
      *  @param stock The quantity of the article. Cannot be negative.
      */
-    Article(int articleNr, const string& description, double price, int stock = 0);
-    ~Article();
+    Article(int articleNr, const string& description, long double price, int stock = 0);
+    /**
+     * Copy constructor.
+     * @param article The article we're copying from.
+     */
     Article(const Article& article);
+    /**
+     * Destructor.
+     * Doesn't do much in this case.
+     * We're printing a debug line to test if it is called.
+     */
+    ~Article();
     /**
      *  Function used for adding a specific amount to the article's stock.
      *  An arbitrary maximum was chosen for the stock which cannot be exceeded.
@@ -40,17 +51,32 @@ public:
     void removeQuantity(int amount);
     int getArticleNr() const;
     int getStock() const;
-    double getPrice() const;
+    long double getPrice() const;
     string getDescription() const;
-    string toString() const;
-
     /**
-     *  Function used for changing the description of an article.
+     * Returns a copy of itself.
+     * @return Copy of this object.
+     */
+    Article* copy() const;
+    /**
+     * Simple toString method.
+     * @return String of this object.
+     */
+    string toString() const;
+    /**
+     *  Changes the description of an article.
      *  @param newDescription cannot exceed the set limit and cannot be empty.
      */
     void setDescription(const string& newDescription);
-    void setPrice(const double& newPrice);
-    friend class TestStorage;
+    /**
+     * Directly sets the price of the article.
+     * @param newPrice Cannot be negative.
+     */
+    void setPrice(const long double& newPrice);
+    /**
+     * Storage is a friend for performance reasons... and to try out the friend concept.
+     */
+    friend class Storage;
     friend ostream& operator<<(ostream& stream, const Article& article);
 
 private:
@@ -69,7 +95,7 @@ private:
 
     int articleNr;
     int stock;
-    double price;
+    long double price;
     string description;
 
 };

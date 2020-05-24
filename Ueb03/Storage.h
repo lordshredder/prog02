@@ -2,94 +2,129 @@
  *
  *  @file Storage.h
  *  @authors David Berres, Nico Schorr
- *  @date 24.05.2020
+ *  @date 23.05.2020
  */
 #pragma once
 #include <iostream>
 #include <string>
-#include <Article.h>
+#include <vector>
+#include "Article.h"
 using namespace std;
 
 /**
- * A class called Storage, used to simulate a storage that can manage multiple articles
+ * A storage class that can manage multiple articles
  * with various tasks, such as adding and removing articles as well as changing
  * their price by a set percentage.
  */
-class Storage
-{
-private:
-    string name;
-    Article** article_database;
-    int size_database;
-    int article_count;
-
+class Storage {
 public:
-    static const string ARTICLE_TAKEN;
-    static const string ARTICLE_NOT_FOUND;
-    static const string STORAGE_SPACE;
-    static const string AMOUNT_TOO_SMALL;
-    static const string STOCK_MUST_BE_POSITIVE;
-
     /**
-     * Constructor for the class Storage
-     * @param name Name of the Storage.
-     * @param size_database The Size of the Database.
+     * Creating a Storage without providing a name is not allowed.
      */
-    Storage(string name, int size_database);
-
-
+    Storage() = delete;
     /**
-     * Function used for finding a specific Article in the Storage.
-     * @param articleNr This is used to find the specific Article.
-     * @return -1 if nothing was found.
+     * Constructor for the storage class.
+     * @param storageName The name must be smaller than 20 letters and cannot be empty.
      */
-    int find_Article(int articleNr);
-
+    explicit Storage(const string& storageName);
     /**
-     * Function used for adding an article to the Storage.
+     * Copy constructor.
+     * @param storage Storage to copy.
+     */
+    Storage(const Storage& storage);
+    /**
+     * Will delete all articles inside the vector.
+     */
+    ~Storage();
+    /**
+     * Function used for adding an article to the OldStorage.
      * @param articleNr the identification Number used for labelling the article.
      * @param price used for setting a price.
      * @param description additional information for the article.
      * @param stock used for setting the quantity of the article.
      */
-    void addArticle(int articleNr, double price, string description, int stock = 0);
-
-
+    void addArticle(int articleId, const string& articleName, long double price, int stock = 0);
     /**
-     * Function used for removing an Article from the Storage.
-     * @param articleNr used for finding the specific Article to remove.
+     * Removes the article from the article vector.
+     * If the boolean is set to false, this returns a pointer to the article that was removed from the storage
+     * In case that in the future, we want to be able to transfer an article to a different storage.
+     * Throws an exception if the article does not exist.
+     * @param articleId The ID of the article to remove from the storage.
+     * @param deleteArticle
+     * @return Pointer to the removed article object.
      */
-    void removeArticle(int articleNr);
-
+    Article* removeArticle(int articleId, bool deleteArticle = true);
     /**
-     * Function used for adding a specific quantity to a specific Article.
-     * @param articleNr used for finding the specific Article.
-     * @param amount used for adding a specific quantity to the Article.
+     * Increases the stock of an article.
+     * @param articleId The ID of the article that should have its stock increased.
+     * @param quantity The amount to add to the article; Cannot be negative.
      */
-    void addQuantity(int articleNr, int amount);
-
+    void addQuantity(int articleId, int quantity);
     /**
-     * Function used for removing a specific quantity to a specific Article.
-     * @param articleNr used for finding the specific Article.
-     * @param amount used for adding a specific quantity to the Article.
+     * Decreases the stock of an article.
+     * @param articleId The ID of the article to remove stock from.
+     * @param quantity The amount to remove from the article; Cannot be negative.
      */
-    void removeQuantity(int articleNr, int amount);
-
+    void removeQuantity(int articleId, int quantity);
     /**
-     * Function used for changing the price of all articles by a set percent.
-     * @param percent this is the specific percentage that changes the articles.
+     * Adjusts the price of all articles by a specific percent.
+     * @param percent Can be positive or negative.
      */
-    void adjustPriceByPercent(double percent);
-
+    void adjustPriceByPercent(long double percent);
     /**
-     * Function used for changing the price of a specific article.
-     * @param articleNr used for finding the specific Article.
-     * @param price used for setting a price.
+     * Adjusts the price of the article
+     * @param articleId The ID of the article to be adjusted.
+     * @param percent Can be positive or negative.
      */
-    void change_price(int articleNr, double price);
-
+    void adjustPriceByPercent(int articleId, long double percent);
+    /**
+     * Prints the article.
+     * @param articleId The ID of the article to print.
+     */
+    void printArticle(int articleId);
+    /**
+     * Prints all articles in this storage.
+     */
+    void printArticles();
+    int getArticleAmount() const;
     string getName() const;
-    int getArticle_count() const;
-    int getSize_database() const;
+
+    void setPrice(int articleId, long double newPrice);
+    void setArticleName(int articleId, const string& newDescription);
+
+    /**
+     * Adjust the name of the Storage
+     * @param newName has to be smaller than 20 letters and cannot be empty.
+     */
+    void setName(const string& newName);
+    /**
+     * It prints out the storage object. This includes all articles it is currently storing.
+     * @return The storage as string.
+     */
+    string toString() const;
+
+    /**
+     * Basically toString() but a little more comfortable to use.
+     */
+    friend ostream& operator<<(ostream& stream, const Storage& storage);
+
+private:
+    static const int STANDARD_STORAGE_SIZE = 20;
+    static const int ARTICLE_NOT_FOUND = -1;
+    static const int MAX_STORAGE_NAME_SIZE = 20;
+    static const std::string EMPTY_STORAGE_NAME;
+    static const std::string NAME_LIMIT_EXCEEDED;
+    static const std::string ARTICLE_DOES_NOT_EXIST;
+    static const std::string ARTICLE_ID_ALREADY_EXISTS;
+
+    string storageName;
+    vector<Article*> articles;
+
+    /**
+     * Finds a specific Article in the storage.
+     * @param articleNr This is used to find the specific article.
+     * @return position of the article inside the vector; -1 if nothing was found.
+     */
+    int findArticle(const int& articleId);
 };
 
