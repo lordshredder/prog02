@@ -7,6 +7,7 @@
 
 #include "StorageDialogue.h"
 #include "MockInput.h"
+#include <string>
 
 const string StorageDialogue::STORAGE_NOT_READY = "Please initialize the storage first.";
 const string StorageDialogue::BAD_USER_INPUT = "Invalid input.";
@@ -118,11 +119,26 @@ void StorageDialogue::executeSelection(const Select& selection) {
 }
 
 void StorageDialogue::createStorage() {
-    if (storage != nullptr) delete storage;
-    char name[Storage::MAX_STORAGE_NAME_SIZE];
+    if (storage != nullptr) {
+        delete storage;
+        storage = nullptr;
+    }
     cout << "\nPlease enter a name for the storage, maximum 20 letters:" << endl;
+    string name;
     cin >> name;
-    storage = new Storage(name);
+    //std::getline(cin, name, '\n'); // How to get this to work?
+    try {
+        storage = new Storage(name);
+    } catch (const string& e) {
+        if (storage != nullptr) delete storage;
+        throw e;
+    } catch (std::exception& e) {
+        if (storage != nullptr) delete storage;
+        throw e;
+    } catch (...) {
+        if (storage != nullptr) delete storage;
+        throw;
+    }
     clearUserInput();
     cout << "\nNew storage created. Its name is: " << storage->getName() << endl;
 }
