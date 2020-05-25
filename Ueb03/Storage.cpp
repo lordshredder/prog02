@@ -26,13 +26,19 @@ Storage::Storage(const Storage &storage) {
 }
 
 Storage::~Storage() {
-    cout << "Storage destructor" << endl;
+    cout << "DEBUG CHECK: Storage destructor called." << endl;
     int count = articles.size();
     for (auto i = articles.begin(); i != articles.end(); ++i) {
         delete (*i);
     }
     cout << "Deleted storage " << storageName
-    << " which stored " << count << " exotic articles" << endl;
+    << " which stored " << count << " exotic articles." << endl;
+}
+
+void Storage::addArticle(Article& article) {
+    int position = findArticle(article.articleNr);
+    if (position != ARTICLE_NOT_FOUND) throw ARTICLE_ID_ALREADY_EXISTS;
+    articles.push_back(&article);
 }
 
 void Storage::addArticle(int articleId, const string& articleName, long double price, int stock) {
@@ -50,13 +56,11 @@ int Storage::findArticle(const int& articleId) {
     return ARTICLE_NOT_FOUND;
 }
 
-Article* Storage::removeArticle(int articleId, bool deleteArticle) {
+void Storage::removeArticle(int articleId) {
     int position = findArticle(articleId);
     if (position == ARTICLE_NOT_FOUND) throw ARTICLE_DOES_NOT_EXIST;
-    Article* reference = articles[position];
-    if(deleteArticle) delete articles[position];
+    delete articles[position];
     articles.erase(articles.begin() + position);
-    return reference;
 }
 
 void Storage::addQuantity(int articleId, int quantity) {
@@ -73,18 +77,19 @@ void Storage::removeQuantity(int articleId, int quantity) {
 
 void Storage::adjustPriceByPercent(long double percent) {
     long double actualPercent = 1.0f + percent/100.0f;
+    long double newPrice = 0.0L;
     for (auto article : articles) {
-        article->price *= actualPercent;
+        newPrice = article->price * actualPercent;
+        article->setPrice(newPrice);
     }
 }
 
 void Storage::adjustPriceByPercent(int articleId, long double percent) {
     int position = findArticle(articleId);
     if (position == ARTICLE_NOT_FOUND) throw ARTICLE_DOES_NOT_EXIST;
-    long double currentPrice = articles[position]->getPrice();
     long double actualPercent = 1.0f + percent/100.0f;
-    long double newPrice = percent < 0.0 ? currentPrice/actualPercent : currentPrice*actualPercent;
-    articles[position]->setPrice(newPrice+currentPrice);
+    long double newPrice = articles[position]->price * actualPercent;
+    articles[position]->setPrice(newPrice);
 }
 
 string Storage::getName() const {
@@ -98,12 +103,12 @@ int Storage::getArticleAmount() const {
 void Storage::printArticle(int articleId) {
     int position = findArticle(articleId);
     if (position == ARTICLE_NOT_FOUND) throw ARTICLE_DOES_NOT_EXIST;
-    cout << articles[position]->toString() << endl;
+    cout << endl << *articles[position] << endl;
 }
 
 void Storage::printArticles() {
     for (const auto article : articles) {
-        cout << (*article) << endl;
+        cout << *article << endl;
     }
 }
 
@@ -136,7 +141,7 @@ string Storage::toString() const {
     if (articles.size() < 1) return oStr.str();
     oStr << "Articles: " << endl;
     for (auto article : articles) {
-        oStr << (*article) << endl;
+        oStr << *article << endl;
     }
     oStr << endl;
     return oStr.str();

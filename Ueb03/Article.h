@@ -19,6 +19,10 @@ using std::setw;
  */
 class Article {
 public:
+    static const int MAX_ARTICLE_ID = 9999;
+    static const int MIN_ARTICLE_ID = 1000;
+    static const int MAX_STOCK = 10;
+    static const int MAX_ARTICLE_DESCRIPTION_SIZE = 20;
     /**
      *  Constructor for the class Article
      *  @param articleNr The Number used to identify the article. Must be 4 digits and positive.
@@ -80,10 +84,6 @@ public:
     friend ostream& operator<<(ostream& stream, const Article& article);
 
 private:
-    static const int MAX_ARTICLE_ID = 9999;
-    static const int MIN_ARTICLE_ID = 1000;
-    static const int MAX_STOCK = 10;
-    static const int MAX_ARTICLE_DESCRIPTION_SIZE = 20;
     static const std::string EMPTY_ARTICLE_DESCRIPTION;
     static const std::string DESCRIPTION_LIMIT_EXCEEDED;
     static const std::string ARTICLE_MUST_BE_FOUR_DIGITS;

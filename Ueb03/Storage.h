@@ -18,6 +18,7 @@ using namespace std;
  */
 class Storage {
 public:
+    static const int MAX_STORAGE_NAME_SIZE = 20;
     /**
      * Creating a Storage without providing a name is not allowed.
      */
@@ -37,6 +38,11 @@ public:
      */
     ~Storage();
     /**
+     * Adds an already created article.
+     * @param article The article to add.
+     */
+    void addArticle(Article& article);
+    /**
      * Function used for adding an article to the OldStorage.
      * @param articleNr the identification Number used for labelling the article.
      * @param price used for setting a price.
@@ -46,14 +52,10 @@ public:
     void addArticle(int articleId, const string& articleName, long double price, int stock = 0);
     /**
      * Removes the article from the article vector.
-     * If the boolean is set to false, this returns a pointer to the article that was removed from the storage
-     * In case that in the future, we want to be able to transfer an article to a different storage.
      * Throws an exception if the article does not exist.
      * @param articleId The ID of the article to remove from the storage.
-     * @param deleteArticle
-     * @return Pointer to the removed article object.
      */
-    Article* removeArticle(int articleId, bool deleteArticle = true);
+    void removeArticle(int articleId);
     /**
      * Increases the stock of an article.
      * @param articleId The ID of the article that should have its stock increased.
@@ -111,7 +113,6 @@ public:
 private:
     static const int STANDARD_STORAGE_SIZE = 20;
     static const int ARTICLE_NOT_FOUND = -1;
-    static const int MAX_STORAGE_NAME_SIZE = 20;
     static const std::string EMPTY_STORAGE_NAME;
     static const std::string NAME_LIMIT_EXCEEDED;
     static const std::string ARTICLE_DOES_NOT_EXIST;

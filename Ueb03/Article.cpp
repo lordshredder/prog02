@@ -37,11 +37,11 @@ Article::Article(const Article &article) :
 articleNr(article.articleNr), description(article.description),
 price(article.price), stock(article.stock)
 {
-    cout << "DEBUG CHECK: Article copy constructor called" << endl;
+    cout << "DEBUG CHECK: Article copy constructor called." << endl;
 }
 
 Article::~Article() {
-    cout << "DEBUG CHECK: Article destructor called" << endl;
+    cout << "DEBUG CHECK: Article destructor called." << endl;
 }
 
 void Article::addQuantity(int amount) {
@@ -100,11 +100,11 @@ Article *Article::copy() const {
 }
 
 string Article::toString() const {
-    int space = 32;
+    int space = 26;
     ostringstream oStr;
     oStr << "Article Number: " << articleNr << "\t"
-    << "Name: "  << description << std::setw(space-description.length()) << "\t"
-    << "Price: " << setprecision(2) << fixed << left << price << right <<" EUR\t"
+    << "Description: "  << description << std::setw(space-description.length()) << "\t"
+    << "Price: " << setprecision(2) << fixed << right << std::setw(6) << price <<" EUR\t"
     << "Current Stock: " << stock;
     return oStr.str();
 }

@@ -22,6 +22,7 @@ enum Select : unsigned char {
     SelectSetPrice,
     SelectAdjustPrice,
     SelectAdjustPriceAll,
+    SelectTestCopyConstructor,
     SelectCreateTestArticles,
     SelectQuit
 };
@@ -61,13 +62,16 @@ private:
      */
     void readUserSelection();
     /**
+     * Deletes anything after the first input.
+     */
+    void clearUserInput();
+    /**
      * Calls a giant, ugly switch block to execute the selected option.
      * @param selection The user input.
      */
     void executeSelection(const Select& selection);
     /**
      * Calling this will delete any existing storage first.
-     * REPLACE ASAP.
      */
     void createStorage();
     /**
@@ -82,7 +86,6 @@ private:
 
     /**
      * All of these methods are just there to make the switch block a little cleaner and easier to read.
-     * TODO: Swap switch block with something more elegant.
      */
     void addArticle();
     void removeArticle();
@@ -95,11 +98,13 @@ private:
     void setPrice();
     void adjustPrice();
     void adjustPrices();
+    void copyArticle();
 
     /**
      * Called every time the user makes a selection to make sure a storage was created.
      */
     void checkStorageState();
+
     /**
      * Creates completely random articles.
      * Makes testing easier.
