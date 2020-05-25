@@ -63,6 +63,7 @@ void StorageDialogue::readUserSelection() {
 }
 
 void StorageDialogue::executeSelection(const Select& selection) {
+    if (selection == SelectQuit) return;
     if (selection != SelectCreateStorage) checkStorageState();
     switch (currentSelection) {
         case SelectCreateStorage:
