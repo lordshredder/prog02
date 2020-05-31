@@ -8,6 +8,7 @@
 #include "StorageDialogue.h"
 #include "MockInput.h"
 #include <string>
+using namespace std;
 
 const string StorageDialogue::STORAGE_NOT_READY = "Please initialize the storage first.";
 const string StorageDialogue::BAD_USER_INPUT = "Invalid input.";
@@ -21,7 +22,7 @@ StorageDialogue::~StorageDialogue() {
 }
 
 void StorageDialogue::startDialogue() {
-    while (currentSelection != SelectQuit) {
+    while (currentSelection != SELECT_QUIT) {
         try {
             readUserSelection();
             executeSelection(currentSelection);
@@ -29,8 +30,10 @@ void StorageDialogue::startDialogue() {
             clearUserInput();
             cout << "\nERROR: " << e << "\n";
         } catch (std::exception &e) {
+            clearUserInput();
             std::cout << e.what() << std::endl;
         } catch (...) {
+            clearUserInput();
             cout << "\nSomething went terribly wrong." << endl;
         }
     }
@@ -40,22 +43,23 @@ void StorageDialogue::startDialogue() {
 void StorageDialogue::readUserSelection() {
     int selection = -1;
     cout << "\nPlease Select an option by entering a valid number:\n"
-    << SelectCreateStorage << " : Create new storage\n"
-    << SelectShowStorage << " : Show the current storage\n"
-    << SelectShowArticleCount << " : Show the current amount of articles in the storage\n"
-    << SelectAddArticle << " : Add new article\n"
-    << SelectRemoveArticle << " : Remove existing article\n"
-    << SelectShowArticle << " : Print article\n"
-    << SelectShowArticles << " : Print all articles\n"
-    << SelectAddQuantity << " : Add stock to article\n"
-    << SelectRemoveQuantity << " : Remove stock from article\n"
-    << SelectSetName << " : Set name of article\n"
-    << SelectSetPrice << " : Set Price of article\n"
-    << SelectAdjustPrice << " : Adjust Price of article\n"
-    << SelectAdjustPriceAll << " : Adjust Price of all articles\n"
-    << SelectTestCopyConstructor << " : Create then Clone a new article and add it to the storage.\n"
-    << SelectCreateTestArticles << " : Create random articles for testing purposes.\n"
-    << SelectQuit << " : Quit\n";
+            << SELECT_CREATE_STORAGE << " : Create new storage\n"
+            << SELECT_SHOW_STORAGE << " : Show the current storage\n"
+            << SELECT_SHOW_ARTICLE_COUNT << " : Show the current amount of articles in the storage\n"
+            << SELECT_ADD_ARTICLE << " : Add new article\n"
+            << SELECT_REMOVE_ARTICLE << " : Remove existing article\n"
+            << SELECT_SHOW_ARTICLE << " : Print article\n"
+            << SELECT_SHOW_ARTICLES << " : Print all articles\n"
+            << SELECT_ADD_QUANTITY << " : Add stock to article\n"
+            << SELECT_REMOVE_QUANTITY << " : Remove stock from article\n"
+            << SELECT_SET_NAME << " : Set name of article\n"
+            << SELECT_SET_PRICE << " : Set Price of article\n"
+            << SELECT_ADJUST_PRICE << " : Adjust Price of article\n"
+            << SELECT_ADJUST_PRICE_ALL << " : Adjust Price of all articles\n"
+            << SELECT_TEST_COPY << " : Create then Clone a new article and add it to the storage.\n"
+            << SELECT_TEST_EQUALS_OPERATOR << " : Create then set a new article to the created article and add it to the storage.\n"
+            << SELECT_CREATE_DUMMY_ARTICLES << " : Create random articles for testing purposes.\n"
+            << SELECT_QUIT << " : Quit\n";
     if (cin >> selection) {
         currentSelection = static_cast<Select>(selection);
     } else{
@@ -64,52 +68,55 @@ void StorageDialogue::readUserSelection() {
 }
 
 void StorageDialogue::executeSelection(const Select& selection) {
-    if (selection == SelectQuit) return;
-    if (selection != SelectCreateStorage) checkStorageState();
+    if (selection == SELECT_QUIT) return;
+    if (selection != SELECT_CREATE_STORAGE) checkStorageState();
     switch (currentSelection) {
-        case SelectCreateStorage:
+        case SELECT_CREATE_STORAGE:
             createStorage();
             break;
-        case SelectShowStorage:
+        case SELECT_SHOW_STORAGE:
             showStorage();
             break;
-        case SelectShowArticleCount:
+        case SELECT_SHOW_ARTICLE_COUNT:
             showArticleAmount();
             break;
-        case SelectAddArticle:
+        case SELECT_ADD_ARTICLE:
             addArticle();
             break;
-        case SelectRemoveArticle:
+        case SELECT_REMOVE_ARTICLE:
             removeArticle();
             break;
-        case SelectShowArticle:
+        case SELECT_SHOW_ARTICLE:
             printArticle();
             break;
-        case SelectShowArticles:
+        case SELECT_SHOW_ARTICLES:
             listArticles();
             break;
-        case SelectAddQuantity:
+        case SELECT_ADD_QUANTITY:
             addQuantity();
             break;
-        case SelectRemoveQuantity:
+        case SELECT_REMOVE_QUANTITY:
             removeQuantity();
             break;
-        case SelectSetName:
+        case SELECT_SET_NAME:
             setArticleName();
             break;
-        case SelectSetPrice:
+        case SELECT_SET_PRICE:
             setPrice();
             break;
-        case SelectAdjustPrice:
+        case SELECT_ADJUST_PRICE:
             adjustPrice();
             break;
-        case SelectAdjustPriceAll:
+        case SELECT_ADJUST_PRICE_ALL:
             adjustPrices();
             break;
-        case SelectTestCopyConstructor:
+        case SELECT_TEST_COPY:
             copyArticle();
             break;
-        case SelectCreateTestArticles:
+        case SELECT_TEST_EQUALS_OPERATOR:
+            testEqualArticle();
+            break;
+        case SELECT_CREATE_DUMMY_ARTICLES:
             createDummyArticles();
             break;
         default:
@@ -125,21 +132,9 @@ void StorageDialogue::createStorage() {
     }
     cout << "\nPlease enter a name for the storage, maximum 20 letters:" << endl;
     string name;
-    cin >> name;
-    //std::getline(cin, name, '\n'); // How to get this to work?
-    try {
-        storage = new Storage(name);
-    } catch (const string& e) {
-        if (storage != nullptr) delete storage;
-        throw e;
-    } catch (std::exception& e) {
-        if (storage != nullptr) delete storage;
-        throw e;
-    } catch (...) {
-        if (storage != nullptr) delete storage;
-        throw;
-    }
     clearUserInput();
+    getline(cin, name);
+    storage = new Storage(name);
     cout << "\nNew storage created. Its name is: " << storage->getName() << endl;
 }
 
@@ -150,15 +145,12 @@ void StorageDialogue::addArticle() {
     int stock = 0;
     cout << "\nPlease enter an article description with a maximum length of "
     << Article::MAX_ARTICLE_DESCRIPTION_SIZE << ": ";
-    cin >> articleDescription;
-    clearUserInput();
+    getline(cin, articleDescription);
     cout << "\nPlease enter a price for the article: ";
     cin >> articlePrice;
-    clearUserInput();
     cout << "\nPlease enter the initial stock for the article, maximum " << Article::MAX_STOCK << ": ";
     cin >> stock;
     storage->addArticle(articleId, articleDescription, articlePrice, stock);
-    clearUserInput();
     cout << "\nThe article with the ID: "
     << articleId << " was added successfully." << endl;
 }
@@ -193,7 +185,6 @@ void StorageDialogue::addQuantity() {
     cout << "\nPlease enter a quantity: ";
     cin >> quantity;
     storage->addQuantity(articleId, quantity);
-    clearUserInput();
     cout << "\nThe article with the ID: "
     << articleId << " has had its stock increased by "
     << quantity  << "." << endl;
@@ -215,9 +206,9 @@ void StorageDialogue::setArticleName() {
     int articleId = readArticleId();
     string newDescription;
     cout << "\nPlease enter a new name for the article:";
-    cin >> newDescription;
-    storage->setArticleName(articleId, newDescription);
     clearUserInput();
+    getline(cin, newDescription);
+    storage->setArticleName(articleId, newDescription);
     cout << "The name of the article with ID: "
     << articleId << " has been changed to "
     << newDescription << "." << endl;
@@ -286,10 +277,22 @@ void StorageDialogue::copyArticle() {
          << articleId << " was copied and added successfully." << endl;
 }
 
+void StorageDialogue::testEqualArticle() {
+    int articleId = 1000 + storage->getArticleAmount();
+    Article* article = new Article(articleId, "equalsTest", 0.0, 5);
+    cout << "\nThe article with the ID: "
+         << articleId << " was created. Attempting Article* copy = article..." << endl;
+    Article* copy = article;
+    storage->addArticle((*copy));
+    cout << "\nThe article with the ID: "
+         << articleId << " was set and added successfully." << endl;
+}
+
 void StorageDialogue::clearUserInput() {
-    char c;
+    //if (cin.peek() == EOF) return;
+    string temp;
     cin.clear();
-    while (cin.get(c) && c != '\n');
+    getline(cin, temp);
 }
 
 void StorageDialogue::createDummyArticles() {

@@ -7,6 +7,8 @@
 #include <string>
 #include <sstream>
 #include "Article.h"
+using namespace std;
+using std::setw;
 
 const string Article::EMPTY_ARTICLE_DESCRIPTION = "The description cannot be empty.";
 const string Article::DESCRIPTION_LIMIT_EXCEEDED = "The description must be smaller than "+std::to_string(MAX_ARTICLE_DESCRIPTION_SIZE);
@@ -25,7 +27,7 @@ Article::Article(int articleNr, const string &description, long double price, in
         throw STOCK_MUST_BE_POSITIVE;
     }
     if (stock > MAX_STOCK) {
-        throw STOCK_MUST_BE_POSITIVE;
+        throw STOCK_LIMIT_EXCEEDED;
     }
     setDescription(description);
     setPrice(price);
@@ -37,11 +39,23 @@ Article::Article(const Article &article) :
 articleNr(article.articleNr), description(article.description),
 price(article.price), stock(article.stock)
 {
-    cout << "DEBUG CHECK: Article copy constructor called." << endl;
+    cout << "DEBUG CHECK: Article copy constructor called..." << endl;
+    cout << "Memory Address of article to be copied: " << &article << endl;
+    cout << "Memory Address of new article: " << this << endl;
 }
 
 Article::~Article() {
     cout << "DEBUG CHECK: Article destructor called." << endl;
+}
+
+Article &Article::operator=(const Article& article) {
+    cout << "DEBUG CHECK: Article operator= called." << endl;
+    if(this == &article) return *this;
+    this->articleNr = article.articleNr;
+    this->description = article.description;
+    this->price = article.price;
+    this->stock = article.stock;
+    return *this;
 }
 
 void Article::addQuantity(int amount) {

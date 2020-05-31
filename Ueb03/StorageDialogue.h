@@ -6,25 +6,27 @@
  */
 #pragma once
 #include "Storage.h"
+#include "safeRead.h"
 
 enum Select : unsigned char {
-    SelectNone,
-    SelectCreateStorage,
-    SelectShowStorage,
-    SelectShowArticleCount,
-    SelectAddArticle,
-    SelectRemoveArticle,
-    SelectShowArticle,
-    SelectShowArticles,
-    SelectAddQuantity,
-    SelectRemoveQuantity,
-    SelectSetName,
-    SelectSetPrice,
-    SelectAdjustPrice,
-    SelectAdjustPriceAll,
-    SelectTestCopyConstructor,
-    SelectCreateTestArticles,
-    SelectQuit
+    SELECT_NONE,
+    SELECT_CREATE_STORAGE,
+    SELECT_SHOW_STORAGE,
+    SELECT_SHOW_ARTICLE_COUNT,
+    SELECT_ADD_ARTICLE,
+    SELECT_REMOVE_ARTICLE,
+    SELECT_SHOW_ARTICLE,
+    SELECT_SHOW_ARTICLES,
+    SELECT_ADD_QUANTITY,
+    SELECT_REMOVE_QUANTITY,
+    SELECT_SET_NAME,
+    SELECT_SET_PRICE,
+    SELECT_ADJUST_PRICE,
+    SELECT_ADJUST_PRICE_ALL,
+    SELECT_TEST_COPY,
+    SELECT_TEST_EQUALS_OPERATOR,
+    SELECT_CREATE_DUMMY_ARTICLES,
+    SELECT_QUIT
 };
 
 /**
@@ -54,7 +56,7 @@ private:
     static const int AMOUNT_DUMMY_ARTICLES = 10;
     static const std::string STORAGE_NOT_READY;
     static const std::string BAD_USER_INPUT;
-    Select currentSelection = Select::SelectNone;
+    Select currentSelection = Select::SELECT_NONE;
     Storage* storage = nullptr;
     /**
      * Reads the user input to determine the selection.
@@ -98,6 +100,7 @@ private:
     void setPrice();
     void adjustPrice();
     void adjustPrices();
+    void testEqualArticle();
     void copyArticle();
 
     /**

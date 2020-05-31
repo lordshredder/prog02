@@ -6,6 +6,7 @@
  */
 
 #include "Storage.h"
+using namespace std;
 
 const string Storage::EMPTY_STORAGE_NAME = "The name cannot be empty.";
 const string Storage::NAME_LIMIT_EXCEEDED = "The name must be smaller than " + std::to_string(MAX_STORAGE_NAME_SIZE);
@@ -18,6 +19,9 @@ Storage::Storage(const string& storageName) {
 }
 
 Storage::Storage(const Storage &storage) {
+    cout << "DEBUG CHECK: Storage copy constructor called..." << endl;
+    cout << "Memory Address of article to be copied: " << &storage << endl;
+    cout << "Memory Address of new article: " << this << endl;
     this->storageName = storage.storageName;
     articles.reserve(STANDARD_STORAGE_SIZE);
     for (auto article : storage.articles) {
@@ -28,11 +32,20 @@ Storage::Storage(const Storage &storage) {
 Storage::~Storage() {
     cout << "DEBUG CHECK: Storage destructor called." << endl;
     int count = articles.size();
-    for (auto i = articles.begin(); i != articles.end(); ++i) {
-        delete (*i);
-    }
+    deleteStorage();
     cout << "Deleted storage " << storageName
     << " which stored " << count << " exotic articles." << endl;
+}
+
+Storage &Storage::operator=(const Storage &storage) {
+    cout << "DEBUG CHECK: Storage operator= called." << endl;
+    if (this == &storage) return *this;
+    deleteStorage();
+    this->storageName = storage.storageName;
+    for (auto article : storage.articles) {
+        articles.push_back(article->copy());
+    }
+    return *this;
 }
 
 void Storage::addArticle(Article& article) {
@@ -46,14 +59,6 @@ void Storage::addArticle(int articleId, const string& articleName, long double p
     if (position != ARTICLE_NOT_FOUND) throw ARTICLE_ID_ALREADY_EXISTS;
     auto article = new Article(articleId, articleName, price, stock);
     articles.push_back(article);
-}
-
-int Storage::findArticle(const int& articleId) {
-    int count = articles.size();
-    for (int i = 0; i < count; ++i) {
-        if(articles[i]->articleNr == articleId) return i;
-    }
-    return ARTICLE_NOT_FOUND;
 }
 
 void Storage::removeArticle(int articleId) {
@@ -145,6 +150,20 @@ string Storage::toString() const {
     }
     oStr << endl;
     return oStr.str();
+}
+
+int Storage::findArticle(const int& articleId) {
+    int count = articles.size();
+    for (int i = 0; i < count; ++i) {
+        if(articles[i]->articleNr == articleId) return i;
+    }
+    return ARTICLE_NOT_FOUND;
+}
+
+void Storage::deleteStorage() {
+    for (auto i = articles.begin(); i != articles.end(); ++i) {
+        delete (*i);
+    }
 }
 
 ostream& operator<<(ostream& stream, const Storage& storage) {
