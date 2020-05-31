@@ -12,11 +12,11 @@ int main() {
         StorageDialogue dialogue;
         dialogue.startDialogue();
     } catch (const std::string& e) {
-        std::cout << e << std::endl;
+        std::cerr << e << std::endl;
     } catch (std::exception &e) {
-        std::cout << e.what() << std::endl;
+        std::cerr << e.what() << std::endl;
     } catch(...){
-        std::cout << "FATAL ERROR" << std::endl;
+        std::cerr << "FATAL ERROR" << std::endl;
     }
     return 0;
 }

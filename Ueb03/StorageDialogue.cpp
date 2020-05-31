@@ -31,7 +31,7 @@ void StorageDialogue::startDialogue() {
             cout << "\nERROR: " << e << "\n";
         } catch (std::exception &e) {
             clearUserInput();
-            std::cout << e.what() << std::endl;
+            cout << e.what() << std::endl;
         } catch (...) {
             clearUserInput();
             cout << "\nSomething went terribly wrong." << endl;
@@ -60,7 +60,7 @@ void StorageDialogue::readUserSelection() {
             << SELECT_TEST_EQUALS_OPERATOR << " : Create then set a new article to the created article and add it to the storage.\n"
             << SELECT_CREATE_DUMMY_ARTICLES << " : Create random articles for testing purposes.\n"
             << SELECT_QUIT << " : Quit\n";
-    if (cin >> selection) {
+    if (safeRead(cin, selection)) {
         currentSelection = static_cast<Select>(selection);
     } else{
         throw BAD_USER_INPUT;
@@ -147,9 +147,9 @@ void StorageDialogue::addArticle() {
     << Article::MAX_ARTICLE_DESCRIPTION_SIZE << ": ";
     getline(cin, articleDescription);
     cout << "\nPlease enter a price for the article: ";
-    cin >> articlePrice;
+    safeRead(cin, articlePrice);
     cout << "\nPlease enter the initial stock for the article, maximum " << Article::MAX_STOCK << ": ";
-    cin >> stock;
+    safeRead(cin, stock);
     storage->addArticle(articleId, articleDescription, articlePrice, stock);
     cout << "\nThe article with the ID: "
     << articleId << " was added successfully." << endl;
@@ -174,7 +174,7 @@ void StorageDialogue::listArticles() {
 int StorageDialogue::readArticleId() {
     int articleId = -1;
     cout << "\nPlease enter an article ID consisting of 4 digits: ";
-    cin >> articleId;
+    safeRead(cin, articleId);
     clearUserInput();
     return articleId;
 }
@@ -183,7 +183,7 @@ void StorageDialogue::addQuantity() {
     int articleId = readArticleId();
     int quantity = 0;
     cout << "\nPlease enter a quantity: ";
-    cin >> quantity;
+    safeRead(cin, quantity);
     storage->addQuantity(articleId, quantity);
     cout << "\nThe article with the ID: "
     << articleId << " has had its stock increased by "
@@ -194,7 +194,7 @@ void StorageDialogue::removeQuantity() {
     int articleId = readArticleId();
     int quantity = 0;
     cout << "\nPlease enter a quantity: ";
-    cin >> quantity;
+    safeRead(cin, quantity);
     storage->removeQuantity(articleId, quantity);
     clearUserInput();
     cout << "\nThe article with the ID: "
@@ -219,6 +219,7 @@ void StorageDialogue::setPrice() {
     long double newPrice = 0;
     cout << "\nPlease enter a new price:";
     cin >> newPrice;
+    safeRead(cin, newPrice);
     storage->setPrice(articleId, newPrice);
     clearUserInput();
     cout << "Price of the article with ID: "
@@ -232,7 +233,7 @@ void StorageDialogue::adjustPrice() {
     cout << "\nPlease enter a percentage in the following format:"
     << "\n50.3 -> increases the price by 50.3%"
     << "\n-18 -> decreases the price by 18.0%\n";
-    cin >> percent;
+    safeRead(cin, percent);
     storage->adjustPriceByPercent(articleId, percent);
     clearUserInput();
     cout << "Price of the article with ID: "
@@ -244,7 +245,7 @@ void StorageDialogue::adjustPrices() {
     cout << "\nPlease enter a percentage in the following format:"
          << "\n50.3 -> increases the price by 50.3%"
          << "\n-18 -> decreases the price by 18.0%\n";
-    cin >> percent;
+    safeRead(cin, percent);
     storage->adjustPriceByPercent(percent);
     clearUserInput();
     cout << "Prices of all articles adjusted by " << percent << "%." << endl;
@@ -289,7 +290,6 @@ void StorageDialogue::testEqualArticle() {
 }
 
 void StorageDialogue::clearUserInput() {
-    //if (cin.peek() == EOF) return;
     string temp;
     cin.clear();
     getline(cin, temp);
