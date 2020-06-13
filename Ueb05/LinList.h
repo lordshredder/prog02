@@ -29,6 +29,7 @@ public:
     std::string toString() const;
     friend ostream& operator<< (ostream& stream, const LinList& list);
     friend istream& operator>> (istream& stream, LinList&list);
+    static const std::string POSITION_INVALID;
 private:
     size_t size;
     ListElement* first;
