@@ -20,14 +20,9 @@ int main() {
     cout << liste1 << endl;
     liste1.insert(15, "vor beta");
     cout << liste1 << endl;
-    cout << "Please input something: ";
-    cin >> liste1;
+    liste1.erase(5);
     cout << liste1 << endl;
-    liste1.pop_front();
-    cout << liste1 << endl;
-    liste1.pop_back();
-    cout << liste1 << endl;
-    liste1.clear();
-    cout << liste1 << endl;
+
+
     return 0;
 }

@@ -99,7 +99,23 @@ void LinList::insert(int position, ContentType content) {
 }
 
 void LinList::erase(int position) {
+    --position;
 
+    if (position < 0 ) throw POSITION_INVALID;
+
+    if (position == 0) {
+        pop_front();
+        return;
+    }
+    ListElement* findPos = this->first;
+
+    for(int i = 0; i < position; i++) {
+        findPos = findPos->nextElement;
+    }
+    findPos->previousElement->nextElement = findPos->nextElement;
+    findPos->nextElement->previousElement = findPos->previousElement;
+    delete findPos;
+    --size;
 }
 
 void LinList::clear() {
