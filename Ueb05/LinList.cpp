@@ -18,7 +18,7 @@ LinList::LinList() {
     this->listSize = 0;
 }
 
-LinList::LinList(const LinList &list) : first(nullptr), last(nullptr), listSize(0) {
+LinList::LinList(const LinList &list) : listSize(0), first(nullptr), last(nullptr) {
     ListElement* temp = list.first;
     for (int i = 0; i < list.listSize; ++i) {
         push_back(temp->content);
