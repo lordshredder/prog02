@@ -1,8 +1,8 @@
 /**
  *
- * @file	ListElement.h
- * @author	folz
- * @date	20.05.2012
+ *  @file ListElement.h
+ *  @authors David Berres, Nico Schorr
+ *  @date 14.06.2020
  */
 #pragma once
 #include <string>

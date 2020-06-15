@@ -1,8 +1,8 @@
 /**
  *
- * @file	ListElement.cpp
- * @author	folz
- * @date	20.05.2012
+ *  @file ListElement.cpp
+ *  @authors David Berres, Nico Schorr
+ *  @date 14.06.2020
  */
 
 #include "ListElement.h"

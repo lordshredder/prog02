@@ -1,8 +1,8 @@
 /**
  *
- * @file	LinList.cpp
- * @author	folz
- * @date	20.05.2012
+ *  @file LinList.cpp
+ *  @authors David Berres, Nico Schorr
+ *  @date 14.06.2020
  */
 
 #include "LinList.h"
@@ -19,7 +19,7 @@ LinList::LinList() {
 }
 
 LinList::~LinList() {
-    // TODO Auto-generated destructor stub
+    clear();
 }
 
 void LinList::push_back(ContentType content) {
@@ -149,5 +149,6 @@ istream &operator>>(istream& stream, LinList& list) {
     list.push_back(temp);
     return stream;
 }
+
 
 

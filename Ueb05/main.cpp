@@ -1,8 +1,8 @@
 /**
  *
- * @file	LinListTst.cpp
- * @author	folz
- * @date	21.05.2012
+ *  @file main.cpp
+ *  @authors David Berres, Nico Schorr
+ *  @date 14.06.2020
  */
 #include <iostream>
 using namespace std;
@@ -22,6 +22,7 @@ int main() {
     cout << liste1 << endl;
     liste1.erase(5);
     cout << liste1 << endl;
+
 
 
     return 0;
