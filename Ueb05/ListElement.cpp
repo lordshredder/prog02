@@ -7,18 +7,31 @@
 
 #include "ListElement.h"
 
-
-ListElement::ListElement(ContentType content, ListElement* previousElement, ListElement* nextElement) {
+ListElement::ListElement(const ContentType& content, ListElement* previousElement, ListElement* nextElement) {
     this->content = content;
     this->previousElement = previousElement;
     this->nextElement = nextElement;
 }
 
+ListElement::ListElement(const ListElement& element) : content(element.content) { }
+
 ListElement::~ListElement() {
-    // TODO Auto-generated destructor stub
+    previousElement = nullptr;
+    nextElement = nullptr;
 }
 
 std::string ListElement::toString() const {
-    return std::__cxx11::string();
+    return content;
 }
 
+ListElement &ListElement::operator=(const ListElement& list) {
+    if (this == &list) return *this;
+    this->content = list.content;
+    this->nextElement = list.nextElement;
+    this->previousElement = list.previousElement;
+    return *this;
+}
+
+ostream& operator<<(ostream& stream, const ListElement& element) {
+    return stream << element.toString();
+}

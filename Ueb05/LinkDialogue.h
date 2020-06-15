@@ -10,27 +10,26 @@
 
 enum Select : unsigned char {
     SELECT_NONE,
-    SELECT_CREATE_LIST,
     SELECT_SHOW_LIST,
-    SELECT_SHOW_ARTICLE_COUNT,
-    SELECT_ADD_ARTICLE,
-    SELECT_REMOVE_ARTICLE,
-    SELECT_SHOW_ARTICLE,
-    SELECT_SHOW_ARTICLES,
-    SELECT_ADD_QUANTITY,
-    SELECT_REMOVE_QUANTITY,
-    SELECT_SET_NAME,
-    SELECT_SET_PRICE,
-    SELECT_ADJUST_PRICE,
-    SELECT_ADJUST_PRICE_ALL,
-    SELECT_TEST_COPY,
-    SELECT_TEST_EQUALS_OPERATOR,
+    SELECT_SHOW_LIST_COUNT,
+    SELECT_PUSH_BACK,
+    SELECT_PUSH_FRONT,
+    SELECT_POP_BACK,
+    SELECT_POP_FRONT,
+    SELECT_INSERT,
+    SELECT_ERASE,
+    SELECT_CLEAR,
+    SELECT_AT,
+    SELECT_CONCATENATE_LISTS,
+    SELECT_APPEND_LIST,
+    SELECT_LIST_EQUAL,
+    SELECT_SET_LIST,
     SELECT_CREATE_DUMMY_ARTICLES,
     SELECT_QUIT
 };
 
 /**
- * Storage dialogue to managed a list with articles.
+ * Linked list dialogue to manage a list.
  * Every action gives the user feedback.
  */
 class LinkDialogue {
@@ -53,8 +52,7 @@ public:
     void startDialogue();
 
 private:
-    static const int AMOUNT_DUMMY_ARTICLES = 10;
-    static const std::string LIST_NOT_READY;
+    static const int AMOUNT_DUMMY_ITEMS = 10;
     static const std::string BAD_USER_INPUT;
     Select currentSelection = Select::SELECT_NONE;
     LinList* list = nullptr;
@@ -77,35 +75,39 @@ private:
      */
     void showList();
     /**
-     * Requests the user for a an article ID.
-     * @return The article ID that was provided by the user.
+     * Requests the user for a position.
+     * @return The position that was provided by the user.
      */
-    int readArticleId();
+    int readPositionFromUser();
 
     /**
      * All of these methods are just there to make the switch block a little cleaner and easier to read.
      */
-    void addArticle();
-    void removeArticle();
-    void printArticle();
-    void listArticles();
-    void addQuantity();
-    void removeQuantity();
-    void setArticleName();
-    void setPrice();
-    void adjustPrice();
-    void adjustPrices();
-    void testEqualArticle();
-    void copyArticle();
+    void createList();
+    void showListCount();
+    void pushBack();
+    void pushFront();
+    void popBack();
+    void popFront();
+    void insertItem();
+    void eraseItem();
+    void clear();
+    void testAt();
+    void concatenateList();
+    void appendList();
+    void checkEquality();
+    void setList();
 
     /**
-     * Called every time the user makes a selection to make sure a list was created.
+     * Asks the user if they are ABSOLUTELY sure they want to delete the list.
+     * Just for fun.
+     * @return The user's decision.
      */
-    void checkListState();
+    bool warnUserClear();
 
     /**
      * Creates completely random articles.
      * Makes testing easier.
      */
-    void createDummyArticles();
+    LinList& createDummyArticles();
 };

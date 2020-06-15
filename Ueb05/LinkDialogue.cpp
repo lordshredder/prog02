@@ -2,18 +2,18 @@
  *
  *  @file LinkDialogue.h
  *  @authors David Berres, Nico Schorr
- *  @date 23.05.2020
+ *  @date 02.06.2020
  */
 
 #include "LinkDialogue.h"
+#include "MockInput.h"
 #include <string>
 using namespace std;
 
-const string LinkDialogue::LIST_NOT_READY = "Please initialize the list first.";
 const string LinkDialogue::BAD_USER_INPUT = "Invalid input.";
 
 LinkDialogue::LinkDialogue() {
-
+    createList();
 }
 
 LinkDialogue::~LinkDialogue() {
@@ -25,6 +25,7 @@ void LinkDialogue::startDialogue() {
         try {
             readUserSelection();
             executeSelection(currentSelection);
+            showList();
         } catch (const string& e) {
             clearUserInput();
             cout << "\nERROR: " << e << "\n";
@@ -42,22 +43,21 @@ void LinkDialogue::startDialogue() {
 void LinkDialogue::readUserSelection() {
     int selection = -1;
     cout << "\nPlease Select an option by entering a valid number:\n"
-         << SELECT_CREATE_LIST << " : Create new list\n"
-         << SELECT_SHOW_LIST << " : Show the current list\n"
-         << SELECT_SHOW_ARTICLE_COUNT << " : Show the current amount of articles in the list\n"
-         << SELECT_ADD_ARTICLE << " : Add new article\n"
-         << SELECT_REMOVE_ARTICLE << " : Remove existing article\n"
-         << SELECT_SHOW_ARTICLE << " : Print article\n"
-         << SELECT_SHOW_ARTICLES << " : Print all articles\n"
-         << SELECT_ADD_QUANTITY << " : Add stock to article\n"
-         << SELECT_REMOVE_QUANTITY << " : Remove stock from article\n"
-         << SELECT_SET_NAME << " : Set name of article\n"
-         << SELECT_SET_PRICE << " : Set Price of article\n"
-         << SELECT_ADJUST_PRICE << " : Adjust Price of article\n"
-         << SELECT_ADJUST_PRICE_ALL << " : Adjust Price of all articles\n"
-         << SELECT_TEST_COPY << " : Create then Clone a new article and add it to the list.\n"
-         << SELECT_TEST_EQUALS_OPERATOR << " : Create then set a new article to the created article and add it to the list.\n"
-         << SELECT_CREATE_DUMMY_ARTICLES << " : Create random articles for testing purposes.\n"
+            << SELECT_SHOW_LIST << " : Show the current list\n"
+            << SELECT_SHOW_LIST_COUNT << " : Show the current list count\n"
+            << SELECT_PUSH_BACK << " : Append new item(s) at the end\n"
+            << SELECT_PUSH_FRONT << " : Append new item at the start\n"
+            << SELECT_POP_BACK << " : Remove last item\n"
+            << SELECT_POP_FRONT << " : Remove first item\n"
+            << SELECT_INSERT << " : Insert item at position\n"
+            << SELECT_ERASE << " : Remove item at position\n"
+            << SELECT_CLEAR << " : Clear list\n"
+            << SELECT_AT << " : Test operator[ ]\n"
+            << SELECT_CONCATENATE_LISTS << " : Concatenate list\n"
+            << SELECT_APPEND_LIST << " : Append list\n"
+            << SELECT_LIST_EQUAL << " : Check equality\n"
+            << SELECT_SET_LIST << " : Test operator=\n"
+         << SELECT_CREATE_DUMMY_ARTICLES << " : Create random articles for testing purposes\n"
          << SELECT_QUIT << " : Quit\n";
     if (safeRead(cin, selection)) {
         currentSelection = static_cast<Select>(selection);
@@ -68,49 +68,50 @@ void LinkDialogue::readUserSelection() {
 
 void LinkDialogue::executeSelection(const Select& selection) {
     if (selection == SELECT_QUIT) return;
-    if (selection != SELECT_CREATE_LIST) checkListState();
     switch (currentSelection) {
         case SELECT_SHOW_LIST:
             showList();
             break;
-        case SELECT_ADD_ARTICLE:
-            addArticle();
+        case SELECT_SHOW_LIST_COUNT:
+            showListCount();
+        case SELECT_PUSH_BACK:
+            pushBack();
             break;
-        case SELECT_REMOVE_ARTICLE:
-            removeArticle();
+        case SELECT_PUSH_FRONT:
+            pushFront();
             break;
-        case SELECT_SHOW_ARTICLE:
-            printArticle();
+        case SELECT_POP_BACK:
+            popBack();
             break;
-        case SELECT_SHOW_ARTICLES:
-            listArticles();
+        case SELECT_POP_FRONT:
+            popFront();
             break;
-        case SELECT_ADD_QUANTITY:
-            addQuantity();
+        case SELECT_INSERT:
+            insertItem();
             break;
-        case SELECT_REMOVE_QUANTITY:
-            removeQuantity();
+        case SELECT_ERASE:
+            eraseItem();
             break;
-        case SELECT_SET_NAME:
-            setArticleName();
+        case SELECT_CLEAR:
+            clear();
             break;
-        case SELECT_SET_PRICE:
-            setPrice();
+        case SELECT_AT:
+            testAt();
             break;
-        case SELECT_ADJUST_PRICE:
-            adjustPrice();
+        case SELECT_CONCATENATE_LISTS:
+            concatenateList();
             break;
-        case SELECT_ADJUST_PRICE_ALL:
-            adjustPrices();
+        case SELECT_APPEND_LIST:
+            appendList();
             break;
-        case SELECT_TEST_COPY:
-            copyArticle();
+        case SELECT_LIST_EQUAL:
+            checkEquality();
             break;
-        case SELECT_TEST_EQUALS_OPERATOR:
-            testEqualArticle();
+        case SELECT_SET_LIST:
+            setList();
             break;
         case SELECT_CREATE_DUMMY_ARTICLES:
-            createDummyArticles();
+            *list += createDummyArticles();
             break;
         default:
             throw BAD_USER_INPUT;
@@ -118,139 +119,136 @@ void LinkDialogue::executeSelection(const Select& selection) {
 
 }
 
-void LinkDialogue::addArticle() {
-    int articleId = readArticleId();
-    string articleDescription;
-    cout << "\nPlease enter an article description with a maximum length of "
-         << ListElement::MAX_CONTENT_SIZE << ": ";
-    getline(cin, articleDescription);
-    cout << "\nThe article with the ID: "
-         << articleId << " was added successfully." << endl;
+void LinkDialogue::createList() {
+    if (list != nullptr) {
+        delete list;
+        list = nullptr;
+    }
+    list = new LinList();
 }
 
-void LinkDialogue::removeArticle() {
-    int articleId = readArticleId();
-    //list->removeArticle(articleId);
-    cout << "\nThe article with the ID: "
-         << articleId << " was removed successfully." << endl;
-}
-
-void LinkDialogue::printArticle() {
-    int articleId = readArticleId();
-    //list->printArticle(articleId);
-}
-
-void LinkDialogue::listArticles() {
-    //list->printArticles();
-}
-
-int LinkDialogue::readArticleId() {
-    int articleId = -1;
-    cout << "\nPlease enter an article ID consisting of 4 digits: ";
-    safeRead(cin, articleId);
+void LinkDialogue::pushBack() {
     clearUserInput();
-    return articleId;
+    cin >> *list;
 }
 
-void LinkDialogue::addQuantity() {
-    int articleId = readArticleId();
-    int quantity = 0;
-    cout << "\nPlease enter a quantity: ";
-    safeRead(cin, quantity);
-    //list->addQuantity(articleId, quantity);
-    cout << "\nThe article with the ID: "
-         << articleId << " has had its stock increased by "
-         << quantity  << "." << endl;
-}
-
-void LinkDialogue::removeQuantity() {
-    int articleId = readArticleId();
-    int quantity = 0;
-    cout << "\nPlease enter a quantity: ";
-    safeRead(cin, quantity);
-    //list->removeQuantity(articleId, quantity);
+void LinkDialogue::pushFront() {
+    ContentType content;
     clearUserInput();
-    cout << "\nThe article with the ID: "
-         << articleId << " has had its stock decreased by "
-         << quantity  << "." << endl;
+    cout << "\nPlease enter a string: ";
+    getline(cin, content);
+    list->push_front(content);
+    cout << "\nThe item with the content: "
+         << content << " was successfully added to the start of the list." << endl;
 }
 
-void LinkDialogue::setArticleName() {
-    int articleId = readArticleId();
-    string newDescription;
-    cout << "\nPlease enter a new name for the article:";
+void LinkDialogue::popBack() {
+    if (!list->pop_back()) return;
+    cout << "\nThe last item in the list was removed successfully." << endl;
+}
+
+void LinkDialogue::popFront() {
+    if (!list->pop_front()) return;
+    cout << "\nThe first item in the list was removed successfully." << endl;
+}
+
+int LinkDialogue::readPositionFromUser() {
+    int position = -1;
+    cout << "\nPlease enter the position: ";
+    safeRead(cin, position);
     clearUserInput();
-    getline(cin, newDescription);
-    //list->setArticleName(articleId, newDescription);
-    cout << "The name of the article with ID: "
-         << articleId << " has been changed to "
-         << newDescription << "." << endl;
+    return position;
 }
 
-void LinkDialogue::setPrice() {
-    int articleId = readArticleId();
-    long double newPrice = 0;
-    cout << "\nPlease enter a new price:";
-    cin >> newPrice;
-    safeRead(cin, newPrice);
-    //list->setPrice(articleId, newPrice);
+void LinkDialogue::insertItem() {
+    int position = readPositionFromUser();
+    ContentType content;
+    cout << "\nPlease enter a string: ";
+    safeRead(cin, content);
+    list->insert(position-1, content);
+    cout << "\nThe item with the content: "
+         << content << " was successfully added in front of the position: " << position << "." << endl;
+}
+
+void LinkDialogue::eraseItem() {
+    int position = readPositionFromUser();
+    list->erase(position-1);
+    cout << "\nThe item at the position: " << position << " has been removed successfully." << endl;
+}
+
+void LinkDialogue::clear() {
+    if (warnUserClear()) {
+        list->clear();
+        cout << "You shouldn't have done that." << endl;
+    } else{
+        cout << "Cancelled deletion." << endl;
+    }
+}
+
+void LinkDialogue::testAt() {
     clearUserInput();
-    cout << "Price of the article with ID: "
-         << articleId << " has been changed to "
-         << newPrice << "." << endl;
+    cout << "First, we will change the content of an element at a certain position."
+    << "\nThis is using the at() method that throws exceptions and the first index is 1." << endl;
+    int position = readPositionFromUser();
+    list->at(position-1) = "testAt";
+    cout << "The item at position " << position << " has been set to testAt." << endl;
+    showList();
+    cout << "\nNext, please enter another position to test the overloaded operator[ ]."
+    << "\nThe index starts at 0 and there will be no exceptions thrown. "
+    << "\nThe element will be shown on the screen." << endl;
+    position = readPositionFromUser();
+    cout << (*list)[position] << endl;
 }
 
-void LinkDialogue::adjustPrice() {
-    int articleId = readArticleId();
-    long double percent = 0;
-    cout << "\nPlease enter a percentage in the following format:"
-         << "\n50.3 -> increases the price by 50.3%"
-         << "\n-18 -> decreases the price by 18.0%\n";
-    safeRead(cin, percent);
-   // list->adjustPriceByPercent(articleId, percent);
-    clearUserInput();
-    cout << "Price of the article with ID: "
-         << articleId << " adjusted by " << percent << "%." << endl;
+void LinkDialogue::appendList() {
+    cout << "Creating a new random list to be added at the end via += operator..." << endl;
+    LinList temp;
+    temp.push_back("test");
+    temp.push_back("t3est");
+    temp.push_back("t34est");
+    *list += createDummyArticles();
 }
 
-void LinkDialogue::adjustPrices() {
-    long double percent = 0;
-    cout << "\nPlease enter a percentage in the following format:"
-         << "\n50.3 -> increases the price by 50.3%"
-         << "\n-18 -> decreases the price by 18.0%\n";
-    safeRead(cin, percent);
-    //list->adjustPriceByPercent(percent);
-    clearUserInput();
-    cout << "Prices of all articles adjusted by " << percent << "%." << endl;
+void LinkDialogue::concatenateList() {
+    cout << "Creating two random lists to combine them..." << endl;
+    LinList temp = createDummyArticles() + createDummyArticles();
+    cout << "Combined list:\n" << temp << endl;
 }
 
-void LinkDialogue::checkListState() {
-    if(list == nullptr) throw LIST_NOT_READY;
+void LinkDialogue::checkEquality() {
+    cout << "Creating three lists to check: " << endl;
+    LinList list1;
+    LinList list2;
+    LinList list3;
+    list1.push_back("test1");
+    list1.push_back("Hello");
+    list1.push_back("World");
+    list2.push_back("test1");
+    list2.push_back("Hello");
+    list2.push_back("World");
+    list3.push_back("other test");
+    list3.push_back("Hello");
+    list3.push_back("World");
+    cout << "\nList 1: " << list1 << "\n\nList 2: " << list2 << "\n\nList 3: " << list3 << endl;
+    bool equal = list1 == list2;
+    bool notEqual = list1 != list3;
+    cout << "Comparing list 1 == list2... : " << boolalpha << equal << endl;
+    cout << "Comparing list 1 != list3... : " << boolalpha << notEqual << endl;
+    equal = list1 == list3;
+    cout << "Comparing list 1 == list3... : " << boolalpha << equal << endl;
+}
+
+void LinkDialogue::setList() {
+    cout << "Creating new random list which overwrites the current list via the operator=...." << endl;
+    *list = createDummyArticles();
+}
+
+void LinkDialogue::showListCount() {
+    cout << "Size: " << list->size() << endl;
 }
 
 void LinkDialogue::showList() {
     cout << *list << endl;
-}
-
-void LinkDialogue::copyArticle() {
-    ListElement* article = new ListElement("CopyTest", nullptr, nullptr);
-   /* cout << "\nThe article with the ID: "
-         << articleId << " was created. Attempting to copy..." << endl;*/
-   // ListElement* copy = article->copy();
-    //list->addArticle((*copy));
-/*    cout << "\nThe article with the ID: "
-         << articleId << " was copied and added successfully." << endl;*/
-}
-
-void LinkDialogue::testEqualArticle() {
-/*    int articleId = 1000 + list->getArticleAmount();
-    Article* article = new Article(articleId, "equalsTest", 0.0, 5);
-    cout << "\nThe article with the ID: "
-         << articleId << " was created. Attempting Article* copy = article..." << endl;
-    Article* copy = article;
-    list->addArticle((*copy));
-    cout << "\nThe article with the ID: "
-         << articleId << " was set and added successfully." << endl;*/
 }
 
 void LinkDialogue::clearUserInput() {
@@ -259,18 +257,31 @@ void LinkDialogue::clearUserInput() {
     getline(cin, temp);
 }
 
-void LinkDialogue::createDummyArticles() {
-/*    MockInput mock;
-    int stock = 1;
-    int articleId = 1000 + list->getArticleAmount();
-    for (int i = 0; i < AMOUNT_DUMMY_ARTICLES; ++i) {
-        string articleDesc = mock.RandomString(20, 9);
-        long double price = mock.RandomNumber(250.0L, 10.5L);
-        float roundedPrice = (float)((int)(price * 100 + 0.5f))/100;
-        list->addArticle(articleId, articleDesc, roundedPrice, stock);
-        articleId++;
+LinList& LinkDialogue::createDummyArticles() {
+    MockInput mock;
+    LinList* temp = new LinList();
+    for (int i = 0; i < AMOUNT_DUMMY_ITEMS; ++i) {
+        string content = mock.RandomString(20, 9);
+        temp->push_back(content);
     }
-    cout << AMOUNT_DUMMY_ARTICLES
-         << " articles with random values have been created and added to the list "
-         << list->getName() << "." << endl;*/
+    cout << AMOUNT_DUMMY_ITEMS
+         << " items with random values have been created." << endl;
+    return *temp;
+}
+
+bool LinkDialogue::warnUserClear() {
+    string input = "1";
+    cout << "------ WARNING ------" << endl << "This will delete your current list. Are you sure?";
+    while (input[0] != 'y' && input[0] != 'n'){
+        cout << "\ny/n:";
+        safeRead(cin, input);
+    }
+    if (input[0] == 'n') return false;
+    clearUserInput();
+    cout << "Please enter \"CONFIRM\" to proceed with the deletion. You will be UNABLE to recover your data." << endl;
+    safeReadln(cin, input);
+    if (input != "CONFIRM") return false;
+    cout << "What was the name of your first pet?" << endl;
+    safeReadln(cin, input);
+    return true;
 }

@@ -19,10 +19,12 @@ typedef string ContentType;
  */
 class ListElement {
 public:
-    static const int MAX_CONTENT_SIZE = 20;
-    explicit ListElement(ContentType type, ListElement* previousElement = nullptr, ListElement* nextElement = nullptr);
+    explicit ListElement(const ContentType& type, ListElement* previousElement = nullptr, ListElement* nextElement = nullptr);
+    ListElement(const ListElement& element);
     ~ListElement();
+    ListElement& operator=(const ListElement& list);
     std::string toString() const;
+    friend std::ostream& operator<<(std::ostream& stream, const ListElement& element);
     friend class LinList;
 private:
     ContentType content;

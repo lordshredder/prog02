@@ -5,6 +5,7 @@
  * @author	folz
  * @date	25.05.2012
  */
+#pragma once
 #include <iostream>
 using namespace std;
 
