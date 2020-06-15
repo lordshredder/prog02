@@ -190,7 +190,7 @@ void LinkDialogue::testAt() {
     cout << "First, we will change the content of an element at a certain position."
     << "\nThis is using the at() method that throws exceptions and the first index is 1." << endl;
     int position = readPositionFromUser();
-    list->at(position-1) = "testAt";
+    list->at(position) = "testAt";
     cout << "The item at position " << position << " has been set to testAt." << endl;
     showList();
     cout << "\nNext, please enter another position to test the overloaded operator[ ]."
@@ -203,9 +203,9 @@ void LinkDialogue::testAt() {
 void LinkDialogue::appendList() {
     cout << "Creating a new random list to be added at the end via += operator..." << endl;
     LinList temp;
-    temp.push_back("test");
-    temp.push_back("t3est");
-    temp.push_back("t34est");
+    temp.push_back("testONE");
+    temp.push_back("testTWO");
+    temp.push_back("testTHREE");
     *list += createDummyArticles();
 }
 

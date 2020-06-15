@@ -149,6 +149,7 @@ std::string LinList::toString() const {
 }
 
 ContentType LinList::at(ssize_t position) const {
+    --position;
     if (position < 0 || position > listSize) throw INDEX_OUT_OF_BOUNDS;
     ListElement* findPos = this->first;
     for(int i = 0; i < position; i++) {
@@ -158,6 +159,7 @@ ContentType LinList::at(ssize_t position) const {
 }
 
 ContentType& LinList::at(ssize_t position) {
+    --position;
     if (position < 0 || position > listSize) throw INDEX_OUT_OF_BOUNDS;
     ListElement* findPos = this->first;
     for(int i = 0; i < position; i++) {
