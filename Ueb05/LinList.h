@@ -48,7 +48,6 @@ public:
     /**
      * Function used for removing an element at the end of the list.
      */
-
     bool pop_back();
     /**
      * Function used for removing an element at the start of the list.

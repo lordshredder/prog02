@@ -55,7 +55,6 @@ void LinList::push_front(const ContentType &content) {
     this->first = new ListElement(content, nullptr, currentFirst);
     currentFirst->previousElement = this->first;
     ++listSize;
-
 }
 
 bool LinList::pop_back() {

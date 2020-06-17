@@ -11,7 +11,7 @@
 #include "MockInput.h"
 
 
-MockInput::MockInput()  : generator(std::chrono::system_clock::now().time_since_epoch().count()){
+MockInput::MockInput()  : generator(std::chrono::system_clock::now().time_since_epoch().count()) {
 }
 
 string MockInput::RandomString(const int &maxLetters, const int& minLetters) {
