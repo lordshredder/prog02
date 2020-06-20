@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:feature" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:feature" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="Ueb06" targetName="Ueb06" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3130a70d-5033-4559-9186-edba2780e3f0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/make-regeln" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/makefile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1daA8CTaWtDjDHPomATKM7HCasd" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="cf.first.check.clang-format" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/test.txt" />
+    <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Nico.000\Documents\prog02\Ueb06" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Ueb06" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="$FilePrompt$" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Ueb06" TARGET_NAME="Ueb06" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Ueb06" RUN_TARGET_NAME="Ueb06">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3130a70d-5033-4559-9186-edba2780e3f0" name="Default Changelist" comment="" />
+      <created>1592652668351</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1592652668351</updated>
+      <workItem from="1592652670502" duration="7079000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="174" y="170" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1592653493596">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="174" y="170" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1592653493596" />
+    <state x="500" y="220" key="#com.intellij.ide.macro.MacrosDialog" timestamp="1592653479871">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="500" y="220" key="#com.intellij.ide.macro.MacrosDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1592653479871" />
+    <state x="908" y="185" key="FileChooserDialogImpl" timestamp="1592659997908">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="908" y="185" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1592659997908" />
+    <state width="1877" height="168" key="GridCell.Tab.0.bottom" timestamp="1592659998121">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="168" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592659998121" />
+    <state width="1877" height="168" key="GridCell.Tab.0.center" timestamp="1592659998120">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="168" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592659998120" />
+    <state width="1877" height="168" key="GridCell.Tab.0.left" timestamp="1592659998120">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="168" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592659998120" />
+    <state width="1877" height="168" key="GridCell.Tab.0.right" timestamp="1592659998120">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="168" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592659998120" />
+    <state width="1418" height="242" key="GridCell.Tab.1.bottom" timestamp="1592657585826">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1418" height="242" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592657585826" />
+    <state width="1418" height="242" key="GridCell.Tab.1.center" timestamp="1592657585826">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1418" height="242" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592657585826" />
+    <state width="1418" height="242" key="GridCell.Tab.1.left" timestamp="1592657585825">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1418" height="242" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592657585825" />
+    <state width="1418" height="242" key="GridCell.Tab.1.right" timestamp="1592657585826">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1418" height="242" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592657585826" />
+    <state x="910" y="270" key="run.anything.popup" timestamp="1592652897845">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="910" y="270" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1592652897845" />
+  </component>
+</project>
