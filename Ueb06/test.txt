@@ -1,11 +1,11 @@
 This is the first line.
 This is the second line.
 3154
-//This is a comment line.
+//this is a comment line.
 Hallo das ist ein Test.
-//Dies ist eine Kommentier Zeile.
+//Dies ist 11 eine Kommentier Zeile.
 /Das ist keine Kommentier Zeile.
 322
-Test
-Letzte Zeile.
+test
+Letzte Zeile. // kommentar
 Das ist die tatsächlich letzte Zeile.

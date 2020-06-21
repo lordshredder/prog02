@@ -1,68 +1,85 @@
 #include <string>
 #include <iomanip>
-#include <iostream>
+#include <cstring>
 #include <fstream>
 #include "FileAnalyzer.h"
+#include "FileDialogue.h"
 
 using namespace std;
 
-string getFileName(const string& s) {
+void countFile(char *letter, int &cLetterCount, int &sLetterCount, int &numberCount)
+{
 
-    char sep = '/';
-
-#ifdef _WIN32
-    sep = '\\';
-#endif
-
-    size_t i = s.rfind(sep, s.length());
-    if (i != string::npos) {
-        return(s.substr(i+1, s.length() - i));
+    int len = strlen(letter);
+    for (int i =0; i < len; i++)
+    {
+        if (letter[i] < 67)
+        for (char b = 'A'; b <= 'Z'; b++)
+        {
+            if (letter[i] == b)
+                cLetterCount++;
+        }
     }
-
-    return("");
+    for (int i = 0; i < len; i++)
+    {
+        for (char b = 'a'; b <= 'z'; b++)
+        {
+            if (letter[i] == b)
+                sLetterCount++;
+        }
+    }
+    for (int i =0; i < len; i++)
+    {
+        for (char b = '0'; b <= '9'; b++)
+        {
+            if (letter[i] == b)
+                numberCount++;
+        }
+    }
 }
 
 
 int main(int argc, char *argv[]) {
-    ifstream infile;	// Eingabedatei
-    ofstream outfile;	// Ausgabedatei
-    double count = 0;
-    double commentcount = 0;
-    double cmtdensity;
-    string line;
-    string path = argv[1];
-    FileAnalyzer analyzer;
-    if (argc > 1){
+    try {
+        FileAnalyzer analyzer;
+        if (argc > 1) analyzer.analyzeFiles(argc, argv);
+        FileDialogue dialogue(analyzer);
+        dialogue.startDialogue();
+    } catch (const string& e) {
+        cout << "\nERROR: " << e << "\n";
+    } catch (std::exception &e) {
+        cout << e.what() << std::endl;
+    } catch (...) {
+        cout << "\nSomething went terribly wrong." << endl;
     }
-    cout << "Eingabedatei: ";
-    //cin >> eingabe;
-
-    infile.open(argv[1]);
-    if (!infile) {
-        cout << argv[1] << " kann nicht geoeffnet werden\n";
-        return 1;
-    }
-    cout << getFileName(path) << endl;
-    while(!infile.eof()) {
-
-        getline(infile,line);
-        count++;
-        if (!line.find ("//")) {
-            commentcount++;
-        }
-    }
-    infile.close();
-
-    cmtdensity = commentcount *100 / count;
-
-
-    cout << "Number of lines: " << count << endl;
-    cout << "Number of comment lines: " << commentcount << endl;
-    cout << "Comment density is: " << setprecision(4) << cmtdensity << "%" << endl;
 
 
 
 
+
+//
+//    ifstream infile;	// Eingabedatei
+//    ofstream outfile;	// Ausgabedatei
+//    string line;
+//
+//
+//    infile.open(argv[1]);
+//    if (!infile) {
+//        cout << argv[1] << " kann nicht geoeffnet werden\n";
+//        return 1;
+//    }
+//    while(!infile.eof()) {
+//        getline(infile,line);
+//        char *a = (char*)line.c_str();
+//        countFile(a, cLetterCount, sLetterCount, numberCount);
+//
+//    }
+//    infile.close();
+//
+//    cout << "The file contains: " << endl;
+//    cout << cLetterCount << " uppercase letters" << endl;
+//    cout << sLetterCount << " lowercase letters" << endl;
+//    cout << numberCount << " digits" << endl;
 
 
 /*    int length = 10000000;
