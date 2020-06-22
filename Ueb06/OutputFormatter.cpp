@@ -1,6 +1,9 @@
-//
-// Created by Pai on 21/06/2020.
-//
+/**
+ *
+ *  @file OutputFormatter.cpp
+ *  @authors David Berres, Nico Schorr
+ *  @date 21.06.2021
+ */
 
 #include <string>
 #include <sstream>

@@ -6,7 +6,7 @@ CXXFLAGS = -g -std=c++17 -pedantic -Wall -Wextra
 LD = g++	# Linker + Flags
 LDFLAGS =
 
-OBJECTS = main.o FileAnalyzer.o
+OBJECTS = main.o FileAnalyzer.o OutputFormatter.o
 SRC = $(OBJECTS:%.o=%.cpp)
 DEPENDFILE = .depend	# Abhaengigkeitsdefinitionen
 LOESCHLISTE = *.o *.exe *stackdump
