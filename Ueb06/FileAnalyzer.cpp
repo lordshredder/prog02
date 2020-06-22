@@ -4,8 +4,25 @@
 #include <string>
 #include <iomanip>
 #include <cstring>
-#include <fstream>
+#include <sstream>
+#include <vector>
 #include "FileAnalyzer.h"
+#include "OutputFormatter.h"
+
+using namespace std;
+
+void FileAnalyzer::analyzeFiles(int argc, char *argv[]) {
+    if (argc < 2) return;
+    vector<string> files;
+    for (int i = 1; i < argc; ++i) {
+        resetAttributes();
+        files.push_back(analyzeFileContent(argv[i]));
+    }
+    cout << printHeader();
+    for (const auto& file : files) {
+        cout << file;
+    }
+}
 
 void FileAnalyzer::resetAttributes() {
     numberCount = 0;
@@ -16,61 +33,32 @@ void FileAnalyzer::resetAttributes() {
     commentDensity = 0.0;
 }
 
-void FileAnalyzer::analyzeFiles(int argc, char **argv) {
-    for (int i = 1; i < argc; ++i) {
-        analyzeFileContent(argv, argv[i]);
-    }
-}
-
-void FileAnalyzer::analyzeFileContent(char *const *argv, const string &path) {
+string FileAnalyzer::analyzeFileContent(const string& path) {
     ifstream infile;
     string line;
-    infile.open(argv[1]);
+    infile.open(path);
     if (!infile) {
-        cout << argv[1] << " cannot be opened.\n";
-        return;
+        return center(path + " does not exist.", 105) + "\n";
     }
     fileName = getFileName(path);
-    char c = '1';
     while(!infile.eof()) {
         getline(infile,line);
-        for (char i : line) {
-            c = i;
-            if(c >= 65 && c <= 90){
+        for (char c : line) {
+            if(c >= ASCII_A && c <= ASCII_Z){
                 ++cLetterCount;
-            } else if (c >= 97 && c <= 122){
+            } else if (c >= ASCII_a && c <= ASCII_z){
                 ++sLetterCount;
-            } else if(c >= 48 && c <= 57){
+            } else if(c >= ASCII_0 && c <= ASCII_9){
                 ++numberCount;
             }
         }
-        lineCount++;
-        if (line.find("//") != -1) {
-            commentCount++;
-        }
+        ++lineCount;
+        if (line.find("//") == NOT_FOUND) continue;
+        ++commentCount;
     }
     infile.close();
     commentDensity = commentCount * 100.0 / lineCount;
-    cout << *this << endl;
-    resetAttributes();
-}
-
-std::string FileAnalyzer::toString() const {
-    int space = 15;
-    ostringstream ostr;
-    ostr << "Input File: ";
-    ostr << fileName << endl;
-    ostr << "Lines" << "\t";
-    ostr << "Comments" << "\t" << "Comment Density" << "\t";
-    ostr << "0-9" << "\t" << "A-Z" << "\t" << "a-z" << endl;
-    ostr << lineCount << "\t";
-    ostr << commentCount << "\t" << setprecision(3) << commentDensity << "%" << "\t";
-    ostr << numberCount << "\t" << cLetterCount << "\t" << sLetterCount << "\t" << endl << endl;
-    return ostr.str();
-}
-
-ostream& operator<< (ostream& stream, const FileAnalyzer& analyzer){
-    return stream << analyzer.toString();
+    return this->toString();
 }
 
 std::string FileAnalyzer::getFileName(const string& path) {
@@ -79,5 +67,30 @@ std::string FileAnalyzer::getFileName(const string& path) {
     if (i != string::npos) {
         return(path.substr(i + 1, path.length() - i));
     }
-    return("");
+    return "";
+}
+
+string FileAnalyzer::printHeader() const {
+    int space = 15;
+    ostringstream ostr;
+    ostr << center("Lines", space) << "\t" << center("Comments", space) << "\t";
+    ostr << center("Comment Density", space) << "\t" << center("0-9", space) << "\t" << center("A-Z", space) << "\t";
+    ostr << center("a-z", space) << center("Input File", space) << endl;
+    return ostr.str();
+}
+
+string FileAnalyzer::toString() const {
+    int space = 15;
+    stringstream commentDens;
+    commentDens << setprecision(3) << commentDensity << "%";
+    ostringstream ostr;
+    ostr << center(to_string(lineCount), space) << "\t" << center(to_string(commentCount), space) << "\t";
+    ostr << center(commentDens.str(), space) << "\t" << center(to_string(numberCount), space) << "\t";
+    ostr << center(to_string(cLetterCount), space) << "\t" << center(to_string(sLetterCount), space) << "\t";
+    ostr << center(fileName, space) << endl;
+    return ostr.str();
+}
+
+ostream& operator<<(ostream& stream, const FileAnalyzer& analyzer){
+    return stream << analyzer.toString();
 }

@@ -74,6 +74,7 @@ void LinkDialogue::executeSelection(const Select& selection) {
             break;
         case SELECT_SHOW_LIST_COUNT:
             showListCount();
+            break;
         case SELECT_PUSH_BACK:
             pushBack();
             break;
