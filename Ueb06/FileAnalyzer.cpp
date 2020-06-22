@@ -52,7 +52,7 @@ string FileAnalyzer::analyzeFileContent(const string& path) {
             }
         }
         ++lineCount;
-        if (line.find("//") == NOT_FOUND) continue;
+        if (line.find("//") == string::npos) continue;
         ++commentCount;
     }
     infile.close();
