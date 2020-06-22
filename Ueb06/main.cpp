@@ -4,7 +4,6 @@
  *  @authors David Berres, Nico Schorr
  *  @date 21.06.2021
  */
-#include <string>
 #include "FileAnalyzer.h"
 
 using namespace std;

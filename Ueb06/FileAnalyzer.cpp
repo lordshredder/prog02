@@ -4,10 +4,6 @@
  *  @authors David Berres, Nico Schorr
  *  @date 21.06.2021
  */
-#include <string>
-#include <iomanip>
-#include <cstring>
-#include <sstream>
 #include <vector>
 #include "FileAnalyzer.h"
 #include "OutputFormatter.h"
@@ -65,12 +61,16 @@ string FileAnalyzer::analyzeFileContent(const string& path) {
 }
 
 std::string FileAnalyzer::getFileName(const string& path) {
-    char sep = _WIN32 ? '\\' : '/';
+    //char sep = _WIN32 ? '\\' : '/';
+    char sep = '/';
+    #ifdef _WIN32
+        sep = '\\';
+    #endif
     size_t i = path.rfind(sep, path.length());
     if (i != string::npos) {
         return(path.substr(i + 1, path.length() - i));
     }
-    return "";
+    return path;
 }
 
 string FileAnalyzer::printHeader() const {

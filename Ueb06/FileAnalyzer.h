@@ -23,7 +23,7 @@ public:
     static const int ASCII_z = 122;
     static const int ASCII_0 = 48;
     static const int ASCII_9 = 57;
-    static const int NOT_FOUND = -1;
+    static const size_t NOT_FOUND = -1;
 
     /**
      * A function that calls both analyzeFileContent and printHeader.
