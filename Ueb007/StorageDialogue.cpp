@@ -297,10 +297,11 @@ void StorageDialogue::clearUserInput() {
 
 void StorageDialogue::createDummyArticles() {
     MockInput mock;
+    const int maxLetters = Article::MAX_ARTICLE_DESCRIPTION_SIZE;
     int stock = 1;
     int articleId = 1000 + storage->getArticleAmount();
     for (int i = 0; i < AMOUNT_DUMMY_ARTICLES; ++i) {
-        string articleDesc = mock.RandomString(15, 9);
+        string articleDesc = mock.RandomString(maxLetters, 9);
         long double price = mock.RandomNumber(250.0L, 10.5L);
         float roundedPrice = (float)((int)(price * 100 + 0.5f))/100;
         shared_ptr<Article> temp = make_shared<Article>(articleId, articleDesc, roundedPrice, stock);
