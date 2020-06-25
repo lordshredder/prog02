@@ -269,22 +269,22 @@ void StorageDialogue::showArticleAmount() {
 
 void StorageDialogue::copyArticle() {
     int articleId = 1000 + storage->getArticleAmount();
-    Article* article = new Article(articleId, "CopyTest", 0.0, 5);
+    shared_ptr<Article> article = make_shared<Article>(articleId, "CopyTest", 0.0, 5);
     cout << "\nThe article with the ID: "
          << articleId << " was created. Attempting to copy..." << endl;
-    Article* copy = article->copy();
-    storage->addArticle((*copy));
+    shared_ptr<Article> copy = article->copy();
+    storage->addArticle(copy);
     cout << "\nThe article with the ID: "
          << articleId << " was copied and added successfully." << endl;
 }
 
 void StorageDialogue::testEqualArticle() {
     int articleId = 1000 + storage->getArticleAmount();
-    Article* article = new Article(articleId, "equalsTest", 0.0, 5);
+    shared_ptr<Article> article = make_shared<Article>(articleId, "equalsTest", 0.0, 5);
     cout << "\nThe article with the ID: "
          << articleId << " was created. Attempting Article* copy = article..." << endl;
-    Article* copy = article;
-    storage->addArticle((*copy));
+    shared_ptr<Article> copy = article;
+    storage->addArticle(copy);
     cout << "\nThe article with the ID: "
          << articleId << " was set and added successfully." << endl;
 }
@@ -300,10 +300,11 @@ void StorageDialogue::createDummyArticles() {
     int stock = 1;
     int articleId = 1000 + storage->getArticleAmount();
     for (int i = 0; i < AMOUNT_DUMMY_ARTICLES; ++i) {
-        string articleDesc = mock.RandomString(20, 9);
+        string articleDesc = mock.RandomString(15, 9);
         long double price = mock.RandomNumber(250.0L, 10.5L);
         float roundedPrice = (float)((int)(price * 100 + 0.5f))/100;
-        storage->addArticle(articleId, articleDesc, roundedPrice, stock);
+        shared_ptr<Article> temp = make_shared<Article>(articleId, articleDesc, roundedPrice, stock);
+        storage->addArticle(temp);
         articleId++;
     }
     cout << AMOUNT_DUMMY_ARTICLES

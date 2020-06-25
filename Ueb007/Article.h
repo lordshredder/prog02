@@ -7,7 +7,10 @@
 #pragma once
 #include <iostream>
 #include <iomanip>
+#include <memory>
 #include <string>
+
+using namespace std;
 
 
 /**
@@ -21,7 +24,7 @@ public:
     static const int MAX_ARTICLE_ID = 9999;
     static const int MIN_ARTICLE_ID = 1000;
     static const int MAX_STOCK = 10;
-    static const int MAX_ARTICLE_DESCRIPTION_SIZE = 20;
+    static const int MAX_ARTICLE_DESCRIPTION_SIZE = 16;
     static const std::string EMPTY_ARTICLE_DESCRIPTION;
     static const std::string DESCRIPTION_LIMIT_EXCEEDED;
     static const std::string ARTICLE_MUST_BE_FOUR_DIGITS;
@@ -53,7 +56,7 @@ public:
      * @param article The article we're copying from.
      * @return The article with new values from the parameter.
      */
-    Article& operator=(const Article& article);
+    Article& operator=(Article article);
     /**
      *  Function used for adding a specific amount to the article's stock.
      *  An arbitrary maximum was chosen for the stock which cannot be exceeded.
@@ -74,12 +77,12 @@ public:
      * Returns a copy of itself.
      * @return Copy of this object.
      */
-    Article* copy() const;
+    virtual shared_ptr<Article> copy() const;
     /**
      * Simple toString method.
      * @return String of this object.
      */
-    std::string toString() const;
+    virtual std::string toString() const;
     /**
      *  Changes the description of an article.
      *  @param newDescription cannot exceed the set limit and cannot be empty.
@@ -96,7 +99,7 @@ public:
     friend class Storage;
     friend std::ostream& operator<<(std::ostream& stream, const Article& article);
 
-private:
+protected:
     int articleNr;
     std::string description;
     long double price;

@@ -11,7 +11,7 @@ using namespace std;
 using std::setw;
 
 const string Article::EMPTY_ARTICLE_DESCRIPTION = "The description cannot be empty.";
-const string Article::DESCRIPTION_LIMIT_EXCEEDED = "The description must be smaller than "+std::to_string(MAX_ARTICLE_DESCRIPTION_SIZE);
+const string Article::DESCRIPTION_LIMIT_EXCEEDED = "The description must be smaller than "+std::to_string(MAX_ARTICLE_DESCRIPTION_SIZE)+ ".";
 const string Article::ARTICLE_MUST_BE_FOUR_DIGITS = "The number must be 4 digits and positive.";
 const string Article::STOCK_MUST_BE_POSITIVE = "The stock must be positive.";
 const string Article::PRICE_MUST_BE_POSITIVE = "The price must be positive.";
@@ -48,13 +48,12 @@ Article::~Article() {
     cout << "DEBUG CHECK: Article destructor called." << endl;
 }
 
-Article &Article::operator=(const Article& article) {
+Article &Article::operator=(Article article) {
     cout << "DEBUG CHECK: Article operator= called." << endl;
-    if(this == &article) return *this;
-    this->articleNr = article.articleNr;
-    this->description = article.description;
-    this->price = article.price;
-    this->stock = article.stock;
+    swap(this->articleNr, article.articleNr);
+    swap(this->description, article.description);
+    swap(this->price, article.price);
+    swap(this->stock, article.stock);
     return *this;
 }
 
@@ -109,17 +108,17 @@ void Article::setPrice(const long double& newPrice) {
     this->price = newPrice;
 }
 
-Article *Article::copy() const {
-    return new Article(*this);
+shared_ptr<Article> Article::copy() const {
+    return make_shared<Article>(*this);
 }
 
 string Article::toString() const {
-    int space = 26;
+    int space = 14;
     ostringstream oStr;
-    oStr << "Article Number: " << articleNr << "\t"
+    oStr << "Article ID: " << articleNr << "\t"
          << "Description: "  << description << std::setw(space-description.length()) << "\t"
          << "Price: " << setprecision(2) << fixed << right << std::setw(6) << price <<" EUR\t"
-         << "Current Stock: " << stock;
+         << "Stock: " << stock;
     return oStr.str();
 }
 

@@ -53,7 +53,7 @@ public:
      * Adds an already created article.
      * @param article The article to add.
      */
-    void addArticle(Article& article);
+    void addArticle(shared_ptr<Article> article);
     /**
      * Function used for adding an article to the Storage.
      * @param articleNr the identification Number used for labelling the article.
@@ -124,7 +124,7 @@ public:
 
 private:
     std::string storageName;
-    std::vector<Article*> articles;
+    std::vector<shared_ptr<Article>> articles;
 
     /**
      * Finds a specific Article in the storage.

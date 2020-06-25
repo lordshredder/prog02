@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(Ube07)
+project(Ube007)
 
 set(CMAKE_CXX_STANDARD 17)
 

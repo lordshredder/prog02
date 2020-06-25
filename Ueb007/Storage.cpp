@@ -48,23 +48,22 @@ Storage &Storage::operator=(const Storage &storage) {
     return *this;
 }
 
-void Storage::addArticle(Article& article) {
-    int position = findArticle(article.articleNr);
+void Storage::addArticle(shared_ptr<Article> article) {
+    int position = findArticle(article->articleNr);
     if (position != ARTICLE_NOT_FOUND) throw ARTICLE_ID_ALREADY_EXISTS;
-    articles.push_back(&article);
+    articles.push_back(article);
 }
 
 void Storage::addArticle(int articleId, const string& articleName, long double price, int stock) {
     int position = findArticle(articleId);
     if (position != ARTICLE_NOT_FOUND) throw ARTICLE_ID_ALREADY_EXISTS;
     auto article = new Article(articleId, articleName, price, stock);
-    articles.push_back(article);
+    articles.push_back(article->copy());
 }
 
 void Storage::removeArticle(int articleId) {
     int position = findArticle(articleId);
     if (position == ARTICLE_NOT_FOUND) throw ARTICLE_DOES_NOT_EXIST;
-    delete articles[position];
     articles.erase(articles.begin() + position);
 }
 
@@ -161,9 +160,7 @@ int Storage::findArticle(const int& articleId) {
 }
 
 void Storage::deleteStorage() {
-    for (auto i = articles.begin(); i != articles.end(); ++i) {
-        delete (*i);
-    }
+    articles.clear();
 }
 
 ostream& operator<<(ostream& stream, const Storage& storage) {
