@@ -6,6 +6,8 @@
  */
 
 #include "ElectronicDevice.h"
+#include "ExceptionChecker.h"
+#include "StorageExceptions.h"
 
 using namespace std;
 
@@ -49,9 +51,7 @@ int ElectronicDevice::getKilowatts() const {
 }
 
 void ElectronicDevice::setKilowatts(const int &kilowatts) {
-    if (kilowatts <= 0) {
-        throw NEGATIVE_KILOWATTS;
-    }
+    check<ElectronicDeviceException>(kilowatts > 0, NEGATIVE_KILOWATTS);
     this->kilowatts = kilowatts;
 }
 

@@ -6,6 +6,8 @@
  */
 
 #include "Clothing.h"
+#include "ExceptionChecker.h"
+#include "StorageExceptions.h"
 
 using namespace std;
 
@@ -58,21 +60,14 @@ std::string Clothing::getColor() const {
 }
 
 void Clothing::setClothingSize(const string &clothingSize) {
-    if (clothingSize.empty()) {
-        throw EMPTY_CLOTHING_SIZE;
-    }
-    if (clothingSize.length() > MAX_STRING_ATTRIBUTE_SIZE) {
-        throw CLOTHING_SIZE_LIMIT_EXCEEDED;
-    }
+    check<ClothingException>(!clothingSize.empty(), EMPTY_CLOTHING_SIZE);
+    check<ClothingException>(clothingSize.length() <= MAX_STRING_ATTRIBUTE_SIZE, CLOTHING_SIZE_LIMIT_EXCEEDED);
     this->clothingSize = clothingSize;
 }
 
 void Clothing::setColor(const string &color) {
-    if (color.empty()) {
-        throw EMPTY_COLOR;
-    }
-    if (color.length() > MAX_STRING_ATTRIBUTE_SIZE) {
-        throw COLOR_LIMIT_EXCEEDED;
-    }
+    check<ClothingException>(!color.empty(), EMPTY_COLOR);
+    check<ClothingException>(color.length() <= MAX_STRING_ATTRIBUTE_SIZE, COLOR_LIMIT_EXCEEDED);
+
     this->color = color;
 }
