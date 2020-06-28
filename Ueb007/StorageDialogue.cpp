@@ -7,19 +7,18 @@
 
 #include "StorageDialogue.h"
 #include "MockInput.h"
+#include "StorageExceptions.h"
+#include "Clothing.h"
+#include "ElectronicDevice.h"
 #include <string>
 using namespace std;
 
 const string StorageDialogue::STORAGE_NOT_READY = "Please initialize the storage first.";
 const string StorageDialogue::BAD_USER_INPUT = "Invalid input.";
 
-StorageDialogue::StorageDialogue() {
+StorageDialogue::StorageDialogue() = default;
 
-}
-
-StorageDialogue::~StorageDialogue() {
-    delete storage;
-}
+StorageDialogue::~StorageDialogue() = default;
 
 void StorageDialogue::startDialogue() {
     while (currentSelection != SELECT_QUIT) {
@@ -31,7 +30,7 @@ void StorageDialogue::startDialogue() {
             cout << "\nERROR: " << e << "\n";
         } catch (std::exception &e) {
             clearUserInput();
-            cout << e.what() << std::endl;
+            cout << "\nERROR: " << e.what() << std::endl;
         } catch (...) {
             clearUserInput();
             cout << "\nSomething went terribly wrong." << endl;
@@ -63,7 +62,7 @@ void StorageDialogue::readUserSelection() {
     if (safeRead(cin, selection)) {
         currentSelection = static_cast<Select>(selection);
     } else{
-        throw BAD_USER_INPUT;
+        throw StorageException(BAD_USER_INPUT);
     }
 }
 
@@ -81,7 +80,7 @@ void StorageDialogue::executeSelection(const Select& selection) {
             showArticleAmount();
             break;
         case SELECT_ADD_ARTICLE:
-            addArticle();
+            getTypeOfArticleToAdd();
             break;
         case SELECT_REMOVE_ARTICLE:
             removeArticle();
@@ -120,27 +119,84 @@ void StorageDialogue::executeSelection(const Select& selection) {
             createDummyArticles();
             break;
         default:
-            throw BAD_USER_INPUT;
+            throw StorageException(BAD_USER_INPUT);
     }
 
 }
 
 void StorageDialogue::createStorage() {
     if (storage != nullptr) {
-        delete storage;
         storage = nullptr;
     }
     cout << "\nPlease enter a name for the storage, maximum 20 letters:" << endl;
     string name;
     clearUserInput();
     getline(cin, name);
-    storage = new Storage(name);
+    storage = make_shared<Storage>(name);
     cout << "\nNew storage created. Its name is: " << storage->getName() << endl;
 }
 
-void StorageDialogue::addArticle() {
+void StorageDialogue::getTypeOfArticleToAdd() {
+    int selection = -1;
+    cout << "\nPlease Select an option by entering a valid number:\n"
+         << SUBSELECT_CREATE_CLOTHING << " : Add new clothing\n"
+         << SUBSELECT_CREATE_EDEVICE << " : Add new electronic device\n"
+         << SUBSELECT_QUIT << " : Return\n";
+    if (safeRead(cin, selection)) {
+        addSpecificArticle(static_cast<SubSelect>(selection));
+    } else{
+        throw StorageException(BAD_USER_INPUT);
+    }
+
+
+
+}
+
+void StorageDialogue::addSpecificArticle(const SubSelect& articleType) {
+    switch (articleType) {
+        case SUBSELECT_CREATE_CLOTHING:
+            addClothing();
+            break;
+        case SUBSELECT_CREATE_EDEVICE:
+            addElectronicDevice();
+            break;
+        case SUBSELECT_QUIT:
+            break;
+        default:
+            throw StorageException(BAD_USER_INPUT);
+    }
+}
+
+void StorageDialogue::addClothing() {
     int articleId = readArticleId();
     string articleDescription;
+    string articleColor;
+    string articleSize;
+    double articlePrice;
+    int stock = 0;
+    cout << "\nPlease enter an article description with a maximum length of "
+         << Article::MAX_ARTICLE_DESCRIPTION_SIZE << ": ";
+    getline(cin, articleDescription);
+    cout << "\nPlease enter the clothing size with a maximum length of "
+         << Clothing::MAX_STRING_ATTRIBUTE_SIZE << " letters: ";
+    getline(cin, articleSize);
+    cout << "\nPlease enter a color with a maximum length of "
+         << Clothing::MAX_STRING_ATTRIBUTE_SIZE << " letters: ";
+    getline(cin, articleColor);
+    cout << "\nPlease enter a price for the article: ";
+    safeRead(cin, articlePrice);
+    cout << "\nPlease enter the initial stock for the article, maximum " << Article::MAX_STOCK << ": ";
+    safeRead(cin, stock);
+    shared_ptr<Clothing> temp = make_shared<Clothing>(articleId, articleDescription, articlePrice, articleSize, articleColor, stock);
+    storage->addArticle(temp);
+    cout << "\nThe article with the ID: "
+         << articleId << " was added successfully." << endl;
+}
+
+void StorageDialogue::addElectronicDevice() {
+    int articleId = readArticleId();
+    string articleDescription;
+    double articleWatts;
     double articlePrice;
     int stock = 0;
     cout << "\nPlease enter an article description with a maximum length of "
@@ -148,9 +204,12 @@ void StorageDialogue::addArticle() {
     getline(cin, articleDescription);
     cout << "\nPlease enter a price for the article: ";
     safeRead(cin, articlePrice);
+    cout << "\nPlease enter kilowatts per hour for the article: ";
+    safeRead(cin, articleWatts);
     cout << "\nPlease enter the initial stock for the article, maximum " << Article::MAX_STOCK << ": ";
     safeRead(cin, stock);
-    storage->addArticle(articleId, articleDescription, articlePrice, stock);
+    shared_ptr<ElectronicDevice> temp = make_shared<ElectronicDevice>(articleId, articleDescription, articlePrice, articleWatts, stock);
+    storage->addArticle(temp);
     cout << "\nThe article with the ID: "
          << articleId << " was added successfully." << endl;
 }
@@ -206,7 +265,6 @@ void StorageDialogue::setArticleName() {
     int articleId = readArticleId();
     string newDescription;
     cout << "\nPlease enter a new name for the article:";
-    clearUserInput();
     getline(cin, newDescription);
     storage->setArticleName(articleId, newDescription);
     cout << "The name of the article with ID: "
@@ -218,10 +276,8 @@ void StorageDialogue::setPrice() {
     int articleId = readArticleId();
     long double newPrice = 0;
     cout << "\nPlease enter a new price:";
-    cin >> newPrice;
     safeRead(cin, newPrice);
     storage->setPrice(articleId, newPrice);
-    clearUserInput();
     cout << "Price of the article with ID: "
          << articleId << " has been changed to "
          << newPrice << "." << endl;
@@ -269,7 +325,7 @@ void StorageDialogue::showArticleAmount() {
 
 void StorageDialogue::copyArticle() {
     int articleId = 1000 + storage->getArticleAmount();
-    shared_ptr<Article> article = make_shared<Article>(articleId, "CopyTest", 0.0, 5);
+    shared_ptr<Article> article = make_shared<Clothing>(articleId, "CopyTest", 0.0,"CopySIZE", "Blue", 5);
     cout << "\nThe article with the ID: "
          << articleId << " was created. Attempting to copy..." << endl;
     shared_ptr<Article> copy = article->copy();
@@ -280,13 +336,19 @@ void StorageDialogue::copyArticle() {
 
 void StorageDialogue::testEqualArticle() {
     int articleId = 1000 + storage->getArticleAmount();
-    shared_ptr<Article> article = make_shared<Article>(articleId, "equalsTest", 0.0, 5);
-    cout << "\nThe article with the ID: "
-         << articleId << " was created. Attempting Article* copy = article..." << endl;
-    shared_ptr<Article> copy = article;
-    storage->addArticle(copy);
-    cout << "\nThe article with the ID: "
-         << articleId << " was set and added successfully." << endl;
+    int articleId2 = articleId+1;
+    cout << "Creating two sample clothing articles..." << endl;
+
+    shared_ptr<Clothing> equalsTest1 = make_shared<Clothing>(articleId, "equalsTest1", 0.0, "equal S", "Equal1", 3);
+    shared_ptr<Clothing> equalsTest2 = make_shared<Clothing>(articleId2, "equalsTest2", 55.0, "equal XL", "Equal2", 6);
+
+    cout << "Created Articles:\n" << *equalsTest1 << endl << *equalsTest2 << endl;
+    cout << "\nAttempting Clothing equalsTest2 = equalsTest1..." << endl;
+    *equalsTest2 = *equalsTest1;
+    cout << "Result:\n" << *equalsTest1 << endl << *equalsTest2 << endl;
+    storage->addArticle(equalsTest2);
+    cout << "\n" << equalsTest2->getDescription() << " with the ID: "
+         << equalsTest2->getArticleNr() << " was set and added successfully." << endl;
 }
 
 void StorageDialogue::clearUserInput() {
@@ -300,12 +362,19 @@ void StorageDialogue::createDummyArticles() {
     const int maxLetters = Article::MAX_ARTICLE_DESCRIPTION_SIZE;
     int stock = 1;
     int articleId = 1000 + storage->getArticleAmount();
+
     for (int i = 0; i < AMOUNT_DUMMY_ARTICLES; ++i) {
+        int power = mock.RandomNumber(800, 10);
+        string size = mock.RandomString(3, 1);
+        string color = mock.RandomString(8, 5);
         string articleDesc = mock.RandomString(maxLetters, 9);
         long double price = mock.RandomNumber(250.0L, 10.5L);
         float roundedPrice = (float)((int)(price * 100 + 0.5f))/100;
-        shared_ptr<Article> temp = make_shared<Article>(articleId, articleDesc, roundedPrice, stock);
-        storage->addArticle(temp);
+        if (mock.RandomNumber(1,0) > 0){
+            storage->addArticle(make_shared<Clothing>(articleId, articleDesc, roundedPrice, size, color, stock));
+        } else{
+            storage->addArticle(make_shared<ElectronicDevice>(articleId, articleDesc, roundedPrice, power, stock));
+        }
         articleId++;
     }
     cout << AMOUNT_DUMMY_ARTICLES

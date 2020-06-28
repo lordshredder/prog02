@@ -24,7 +24,7 @@ public:
      * @param kilowatts The power of the device in kilowatts.
      * @param stock The quantity of the device article. Cannot be negative.
      */
-    ElectronicDevice(int articleNr, const std::string& description, long double price, const int kilowatts, int stock = 0);
+    ElectronicDevice(int articleNr, const std::string& description, long double price, double kilowatts, int stock = 0);
     /**
      * Copy constructor.
      * @param e The device article we're copying from.
@@ -45,14 +45,14 @@ public:
      * @return Copy of this object.
      */
     virtual shared_ptr<Article> copy() const override;
-    int getKilowatts() const;
-    void setKilowatts(const int &kilowatts);
+    double getKilowatts() const;
+    void setKilowatts(const double &kilowatts);
     /**
      * Simple toString method.
      * @return String of this object.
      */
     virtual std::string toString() const override;
 protected:
-    int  kilowatts;
+    double  kilowatts;
 
 };

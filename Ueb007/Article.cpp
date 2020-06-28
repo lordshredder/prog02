@@ -14,7 +14,7 @@ using namespace std;
 using std::setw;
 
 const string Article::EMPTY_ARTICLE_DESCRIPTION = "The description cannot be empty.";
-const string Article::DESCRIPTION_LIMIT_EXCEEDED = "The description must be smaller than "+std::to_string(MAX_ARTICLE_DESCRIPTION_SIZE)+ ".";
+const string Article::DESCRIPTION_LIMIT_EXCEEDED = "The description must be smaller than "+std::to_string(MAX_ARTICLE_DESCRIPTION_SIZE+1)+ ".";
 const string Article::ARTICLE_MUST_BE_FOUR_DIGITS = "The number must be 4 digits and positive.";
 const string Article::STOCK_MUST_BE_POSITIVE = "The stock must be positive.";
 const string Article::PRICE_MUST_BE_POSITIVE = "The price must be positive.";
@@ -84,7 +84,7 @@ long double Article::getPrice() const {
 
 void Article::setDescription(const string &newDescription) {
     check<ArticleException>(!newDescription.empty(), EMPTY_ARTICLE_DESCRIPTION);
-    check<ArticleException>(newDescription.length() < MAX_ARTICLE_DESCRIPTION_SIZE, DESCRIPTION_LIMIT_EXCEEDED);
+    check<ArticleException>(newDescription.length() <= MAX_ARTICLE_DESCRIPTION_SIZE, DESCRIPTION_LIMIT_EXCEEDED);
     this->description = newDescription;
 }
 
@@ -100,10 +100,10 @@ shared_ptr<Article> Article::copy() const {
 string Article::toString() const {
     int space = 14;
     ostringstream oStr;
-    oStr << "Article ID: " << articleNr << "\t"
+    oStr << "Article ID: " << articleNr << "  "
          << "Description: "  << description << std::setw(space-description.length()) << "\t"
-         << "Price: " << setprecision(2) << fixed << right << std::setw(6) << price <<" EUR\t"
-         << "Stock: " << stock;
+         << "Price: " << setprecision(2) << fixed << right << std::setw(6) << price <<" EUR"
+         << "    Stock: " << stock;
     return oStr.str();
 }
 

@@ -24,10 +24,11 @@ Clothing::Clothing(int articleNr, const string &description,
 }
 
 Clothing::Clothing(const Clothing &c) : Article(c), clothingSize(c.clothingSize), color(c.color) {
-    cout << "DEBUG COPY CONSTRUCTOR CLOTHING" << endl;
+    cout << "DEBUG CHECK: Clothing copy constructor called." << endl;
 }
 
 Clothing &Clothing::operator=(Clothing clothing) {
+    cout << "DEBUG CHECK: Clothing operator= called." << endl;
     Article::operator=(clothing);
     swap(clothingSize, clothing.clothingSize);
     swap(color, clothing.color);
@@ -35,7 +36,7 @@ Clothing &Clothing::operator=(Clothing clothing) {
 }
 
 Clothing::~Clothing() {
-    cout << "CLOTHING DESTRUCTOR DEBUG" << endl;
+    cout << "DEBUG CHECK: Clothing destructor called." << endl;
 }
 
 shared_ptr<Article> Clothing::copy() const {
@@ -47,7 +48,7 @@ string Clothing::toString() const {
     stringstream str;
     str << Article::toString();
     str << "    Size: "  << clothingSize << setw(space-clothingSize.length()) << "  ";
-    str << "Color: "  << color << setw(space-color.length()) << "\t";
+    str << "Color: "  << color << setw(space-color.length());
     return str.str();
 }
 

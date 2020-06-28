@@ -7,7 +7,7 @@
 #pragma once
 #include <string>
 
-/*
+/**
  * Check condition and if false, throw exception of type EXCEPTION.
  * @param condition
  * @param msg

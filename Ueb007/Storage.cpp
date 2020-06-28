@@ -6,6 +6,9 @@
  */
 
 #include "Storage.h"
+#include "ExceptionChecker.h"
+#include "StorageExceptions.h"
+
 using namespace std;
 
 const string Storage::EMPTY_STORAGE_NAME = "The name cannot be empty.";
@@ -50,32 +53,25 @@ Storage &Storage::operator=(const Storage &storage) {
 
 void Storage::addArticle(shared_ptr<Article> article) {
     int position = findArticle(article->articleNr);
-    if (position != ARTICLE_NOT_FOUND) throw ARTICLE_ID_ALREADY_EXISTS;
+    check<StorageException>(position == ARTICLE_NOT_FOUND, ARTICLE_ID_ALREADY_EXISTS);
     articles.push_back(article);
-}
-
-void Storage::addArticle(int articleId, const string& articleName, long double price, int stock) {
-    int position = findArticle(articleId);
-    if (position != ARTICLE_NOT_FOUND) throw ARTICLE_ID_ALREADY_EXISTS;
-    auto article = new Article(articleId, articleName, price, stock);
-    articles.push_back(article->copy());
 }
 
 void Storage::removeArticle(int articleId) {
     int position = findArticle(articleId);
-    if (position == ARTICLE_NOT_FOUND) throw ARTICLE_DOES_NOT_EXIST;
+    check<StorageException>(position != ARTICLE_NOT_FOUND, ARTICLE_DOES_NOT_EXIST);
     articles.erase(articles.begin() + position);
 }
 
 void Storage::addQuantity(int articleId, int quantity) {
     int position = findArticle(articleId);
-    if (position == ARTICLE_NOT_FOUND) throw ARTICLE_DOES_NOT_EXIST;
+    check<StorageException>(position != ARTICLE_NOT_FOUND, ARTICLE_DOES_NOT_EXIST);
     articles[position]->addQuantity(quantity);
 }
 
 void Storage::removeQuantity(int articleId, int quantity) {
     int position = findArticle(articleId);
-    if (position == ARTICLE_NOT_FOUND) throw ARTICLE_DOES_NOT_EXIST;
+    check<StorageException>(position != ARTICLE_NOT_FOUND, ARTICLE_DOES_NOT_EXIST);
     articles[position]->removeQuantity(quantity);
 }
 
@@ -90,7 +86,7 @@ void Storage::adjustPriceByPercent(long double percent) {
 
 void Storage::adjustPriceByPercent(int articleId, long double percent) {
     int position = findArticle(articleId);
-    if (position == ARTICLE_NOT_FOUND) throw ARTICLE_DOES_NOT_EXIST;
+    check<StorageException>(position != ARTICLE_NOT_FOUND, ARTICLE_DOES_NOT_EXIST);
     long double actualPercent = 1.0f + percent/100.0f;
     long double newPrice = articles[position]->price * actualPercent;
     articles[position]->setPrice(newPrice);
@@ -106,7 +102,7 @@ int Storage::getArticleAmount() const {
 
 void Storage::printArticle(int articleId) {
     int position = findArticle(articleId);
-    if (position == ARTICLE_NOT_FOUND) throw ARTICLE_DOES_NOT_EXIST;
+    check<StorageException>(position != ARTICLE_NOT_FOUND, ARTICLE_DOES_NOT_EXIST);
     cout << endl << *articles[position] << endl;
 }
 
@@ -128,13 +124,13 @@ void Storage::setName(const string& newName) {
 
 void Storage::setPrice(int articleId, long double newPrice) {
     int position = findArticle(articleId);
-    if (position == ARTICLE_NOT_FOUND) throw ARTICLE_DOES_NOT_EXIST;
+    check<StorageException>(position != ARTICLE_NOT_FOUND, ARTICLE_DOES_NOT_EXIST);
     articles[position]->setPrice(newPrice);
 }
 
 void Storage::setArticleName(int articleId, const string& newDescription) {
     int position = findArticle(articleId);
-    if (position == ARTICLE_NOT_FOUND) throw ARTICLE_DOES_NOT_EXIST;
+    check<StorageException>(position != ARTICLE_NOT_FOUND, ARTICLE_DOES_NOT_EXIST);
     articles[position]->setDescription(newDescription);
 }
 

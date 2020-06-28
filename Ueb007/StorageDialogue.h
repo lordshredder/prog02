@@ -29,6 +29,13 @@ enum Select : unsigned char {
     SELECT_QUIT
 };
 
+enum SubSelect : unsigned char {
+    SUBSELECT_CREATE_CLOTHING = 1,
+    SUBSELECT_CREATE_EDEVICE,
+    SUBSELECT_QUIT
+
+};
+
 /**
  * Storage dialogue to managed a storage with articles.
  * Every action gives the user feedback.
@@ -57,7 +64,7 @@ private:
     static const std::string STORAGE_NOT_READY;
     static const std::string BAD_USER_INPUT;
     Select currentSelection = Select::SELECT_NONE;
-    Storage* storage = nullptr;
+    shared_ptr<Storage> storage;
     /**
      * Reads the user input to determine the selection.
      * Bad input is filtered.
@@ -89,7 +96,10 @@ private:
     /**
      * All of these methods are just there to make the switch block a little cleaner and easier to read.
      */
-    void addArticle();
+    void getTypeOfArticleToAdd();
+    void addSpecificArticle(const SubSelect& articleType);
+    void addClothing();
+    void addElectronicDevice();
     void removeArticle();
     void showArticleAmount();
     void printArticle();

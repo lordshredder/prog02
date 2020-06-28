@@ -55,14 +55,6 @@ public:
      */
     void addArticle(shared_ptr<Article> article);
     /**
-     * Function used for adding an article to the Storage.
-     * @param articleNr the identification Number used for labelling the article.
-     * @param price used for setting a price.
-     * @param description additional information for the article.
-     * @param stock used for setting the quantity of the article.
-     */
-    void addArticle(int articleId, const std::string& articleName, long double price, int stock = 0);
-    /**
      * Removes the article from the article vector.
      * Throws an exception if the article does not exist.
      * @param articleId The ID of the article to remove from the storage.
