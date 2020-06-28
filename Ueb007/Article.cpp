@@ -7,6 +7,9 @@
 #include <string>
 #include <sstream>
 #include "Article.h"
+#include "ExceptionChecker.h"
+#include "StorageExceptions.h"
+
 using namespace std;
 using std::setw;
 
@@ -20,15 +23,9 @@ const string Article::REMOVE_POSITIVE_QUANTITY_ONLY = "When removing quantity, t
 const string Article::STOCK_LIMIT_EXCEEDED = "You have exceeded the maximum stock capacity.";
 
 Article::Article(int articleNr, const string &description, long double price, int stock) {
-    if (articleNr > MAX_ARTICLE_ID || articleNr < MIN_ARTICLE_ID) {
-        throw ARTICLE_MUST_BE_FOUR_DIGITS;
-    }
-    if (stock < 0) {
-        throw STOCK_MUST_BE_POSITIVE;
-    }
-    if (stock > MAX_STOCK) {
-        throw STOCK_LIMIT_EXCEEDED;
-    }
+    check<ArticleException>(articleNr < MAX_ARTICLE_ID || articleNr > MIN_ARTICLE_ID, ARTICLE_MUST_BE_FOUR_DIGITS);
+    check<ArticleException>(stock >= 0, STOCK_MUST_BE_POSITIVE);
+    check<ArticleException>(stock < MAX_STOCK, STOCK_LIMIT_EXCEEDED);
     setDescription(description);
     setPrice(price);
     this->articleNr = articleNr;
@@ -58,20 +55,14 @@ Article &Article::operator=(Article article) {
 }
 
 void Article::addQuantity(int amount) {
-    if (amount < 0) {
-        throw ADD_POSITIVE_QUANTITY_ONLY;
-    }
-    if (amount+stock > MAX_STOCK) throw STOCK_LIMIT_EXCEEDED;
+    check<ArticleException>(amount >= 0, ADD_POSITIVE_QUANTITY_ONLY);
+    check<ArticleException>(amount+stock < MAX_STOCK, STOCK_LIMIT_EXCEEDED);
     this->stock += amount;
 }
 
 void Article::removeQuantity(int amount) {
-    if (amount < 0) {
-        throw REMOVE_POSITIVE_QUANTITY_ONLY;
-    }
-    if (this->stock < amount) {
-        throw STOCK_MUST_BE_POSITIVE;
-    }
+    check<ArticleException>(amount >= 0, REMOVE_POSITIVE_QUANTITY_ONLY);
+    check<ArticleException>(this->stock > amount, STOCK_MUST_BE_POSITIVE);
     this->stock -= amount;
 }
 
@@ -92,19 +83,13 @@ long double Article::getPrice() const {
 }
 
 void Article::setDescription(const string &newDescription) {
-    if (newDescription.empty()) {
-        throw EMPTY_ARTICLE_DESCRIPTION;
-    }
-    if (newDescription.length() > MAX_ARTICLE_DESCRIPTION_SIZE) {
-        throw DESCRIPTION_LIMIT_EXCEEDED;
-    }
+    check<ArticleException>(!newDescription.empty(), EMPTY_ARTICLE_DESCRIPTION);
+    check<ArticleException>(newDescription.length() < MAX_ARTICLE_DESCRIPTION_SIZE, DESCRIPTION_LIMIT_EXCEEDED);
     this->description = newDescription;
 }
 
 void Article::setPrice(const long double& newPrice) {
-    if (newPrice < 0.0) {
-        throw PRICE_MUST_BE_POSITIVE;
-    }
+    check<ArticleException>(newPrice >= 0.0, PRICE_MUST_BE_POSITIVE);
     this->price = newPrice;
 }
 

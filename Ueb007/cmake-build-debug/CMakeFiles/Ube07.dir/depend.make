@@ -3,6 +3,8 @@
 
 CMakeFiles/Ube07.dir/Article.cpp.obj: ../Article.cpp
 CMakeFiles/Ube07.dir/Article.cpp.obj: ../Article.h
+CMakeFiles/Ube07.dir/Article.cpp.obj: ../ExceptionChecker.h
+CMakeFiles/Ube07.dir/Article.cpp.obj: ../StorageExceptions.h
 
 CMakeFiles/Ube07.dir/Clothing.cpp.obj: ../Article.h
 CMakeFiles/Ube07.dir/Clothing.cpp.obj: ../Clothing.cpp

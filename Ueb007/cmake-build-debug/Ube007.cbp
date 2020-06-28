@@ -98,6 +98,9 @@
 		<Unit filename="F:/Git/Prog02/Ueb007/ElectronicDevice.h">
 			<Option target="Ube07"/>
 		</Unit>
+		<Unit filename="F:/Git/Prog02/Ueb007/ExceptionChecker.h">
+			<Option target="Ube07"/>
+		</Unit>
 		<Unit filename="F:/Git/Prog02/Ueb007/MockInput.cpp">
 			<Option target="Ube07"/>
 		</Unit>
@@ -114,6 +117,9 @@
 			<Option target="Ube07"/>
 		</Unit>
 		<Unit filename="F:/Git/Prog02/Ueb007/StorageDialogue.h">
+			<Option target="Ube07"/>
+		</Unit>
+		<Unit filename="F:/Git/Prog02/Ueb007/StorageExceptions.h">
 			<Option target="Ube07"/>
 		</Unit>
 		<Unit filename="F:/Git/Prog02/Ueb007/main.cpp">

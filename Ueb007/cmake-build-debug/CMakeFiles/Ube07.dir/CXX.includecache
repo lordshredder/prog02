@@ -6,6 +6,18 @@
 
 #IncludeRegexTransform: 
 
+F:/Git/Prog02/Ueb007/Article.cpp
+string
+-
+sstream
+-
+Article.h
+F:/Git/Prog02/Ueb007/Article.h
+ExceptionChecker.h
+F:/Git/Prog02/Ueb007/ExceptionChecker.h
+StorageExceptions.h
+F:/Git/Prog02/Ueb007/StorageExceptions.h
+
 F:/Git/Prog02/Ueb007/Article.h
 iostream
 -
@@ -16,37 +28,11 @@ memory
 string
 -
 
-F:/Git/Prog02/Ueb007/MockInput.h
-iostream
--
-random
--
-
-F:/Git/Prog02/Ueb007/Storage.h
-iostream
--
-string
--
-vector
--
-Article.h
-F:/Git/Prog02/Ueb007/Article.h
-
-F:/Git/Prog02/Ueb007/StorageDialogue.cpp
-StorageDialogue.h
-F:/Git/Prog02/Ueb007/StorageDialogue.h
-MockInput.h
-F:/Git/Prog02/Ueb007/MockInput.h
+F:/Git/Prog02/Ueb007/ExceptionChecker.h
 string
 -
 
-F:/Git/Prog02/Ueb007/StorageDialogue.h
-Storage.h
-F:/Git/Prog02/Ueb007/Storage.h
-safeRead.h
-F:/Git/Prog02/Ueb007/safeRead.h
-
-F:/Git/Prog02/Ueb007/safeRead.h
-iostream
+F:/Git/Prog02/Ueb007/StorageExceptions.h
+stdexcept
 -
 
