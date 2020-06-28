@@ -23,7 +23,7 @@ const string Article::REMOVE_POSITIVE_QUANTITY_ONLY = "When removing quantity, t
 const string Article::STOCK_LIMIT_EXCEEDED = "You have exceeded the maximum stock capacity.";
 
 Article::Article(int articleNr, const string &description, long double price, int stock) {
-    check<ArticleException>(articleNr < MAX_ARTICLE_ID || articleNr > MIN_ARTICLE_ID, ARTICLE_MUST_BE_FOUR_DIGITS);
+    check<ArticleException>(articleNr <= MAX_ARTICLE_ID && articleNr >= MIN_ARTICLE_ID, ARTICLE_MUST_BE_FOUR_DIGITS);
     check<ArticleException>(stock >= 0, STOCK_MUST_BE_POSITIVE);
     check<ArticleException>(stock < MAX_STOCK, STOCK_LIMIT_EXCEEDED);
     setDescription(description);
