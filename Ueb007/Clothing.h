@@ -10,6 +10,16 @@
 #include "Article.h"
 
 /**
+ * Exception class
+ */
+class ClothingException : public ArticleException {
+public:
+    ClothingException(const std::string& msg = "") : ArticleException(msg) {
+
+    }
+};
+
+/**
  *  A subclass called Clothing, it inherits methods and attributes
  *  from the Article class. It also has it's own attributes called
  *  clothingSize and color.

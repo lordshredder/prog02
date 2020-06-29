@@ -8,7 +8,6 @@
 #include <sstream>
 #include "Article.h"
 #include "ExceptionChecker.h"
-#include "StorageExceptions.h"
 
 using namespace std;
 using std::setw;

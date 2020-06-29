@@ -9,9 +9,19 @@
 #include <iomanip>
 #include <memory>
 #include <string>
+#include <stdexcept>
 
 using namespace std;
 
+/**
+ * Exception class
+ */
+class ArticleException : public logic_error {
+public:
+    ArticleException(const std::string& msg = "") : logic_error(msg) {
+
+    }
+};
 
 /**
  *  A class called Article, used to simulate inventory management by

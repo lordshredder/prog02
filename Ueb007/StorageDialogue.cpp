@@ -7,7 +7,6 @@
 
 #include "StorageDialogue.h"
 #include "MockInput.h"
-#include "StorageExceptions.h"
 #include "Clothing.h"
 #include "ElectronicDevice.h"
 #include <string>

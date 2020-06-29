@@ -10,6 +10,16 @@
 #include "Article.h"
 
 /**
+ * Exception class
+ */
+class ElectronicDeviceException : public ArticleException {
+public:
+    ElectronicDeviceException(const std::string& msg = "") : ArticleException(msg) {
+
+    }
+};
+
+/**
  *  A subclass called ElectronicDevice, it inherits methods and attributes
  *  from the Article class. It also has it's own attribute called kilowatts.
  */

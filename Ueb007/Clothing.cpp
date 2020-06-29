@@ -7,7 +7,6 @@
 
 #include "Clothing.h"
 #include "ExceptionChecker.h"
-#include "StorageExceptions.h"
 
 using namespace std;
 

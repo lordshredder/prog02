@@ -9,7 +9,17 @@
 #include <string>
 #include <vector>
 #include "Article.h"
+#include <stdexcept>
 
+/**
+ * Exception class
+ */
+class StorageException : public logic_error {
+public:
+    StorageException(const std::string& msg = "") : logic_error(msg) {
+
+    }
+};
 
 /**
  * A storage class that can manage multiple articles

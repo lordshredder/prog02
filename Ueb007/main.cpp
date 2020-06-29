@@ -7,7 +7,6 @@
 #include <iostream>
 #include <memory>
 #include "StorageDialogue.h"
-#include "Clothing.h"
 
 int main() {
     try {
