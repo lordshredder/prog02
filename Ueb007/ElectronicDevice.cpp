@@ -39,7 +39,6 @@ shared_ptr<Article> ElectronicDevice::copy() const {
 }
 
 string ElectronicDevice::toString() const {
-    int space = 10;
     stringstream str;
     str << Article::toString();
     str << "    Kilowatts: " << setprecision(2) << fixed << right << std::setw(6) << kilowatts <<" kWh";
