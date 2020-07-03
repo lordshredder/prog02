@@ -11,12 +11,13 @@
 
 class Product : public ProjectComponent{
 public:
-    Product(const std::string& name, const std::string& description, int productioncost);
+    Product(const std::string& name, const std::string& description, int productionCost);
     virtual ~Product();
-    int getProductionCost() const;
-    void setProductionCost(const int productionCost);
+    virtual std::shared_ptr<ProjectComponent> clone() const override;
+    double getProductionCost() const;
+    void setProductionCost(const double cost);
+    virtual double getCost() const override;
 private:
-    int productionCost;
-
+    double productionCost;
 };
 
