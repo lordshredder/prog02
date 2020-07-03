@@ -1,6 +1,9 @@
-//
-// Created by Pai on 03/07/2020.
-//
+/**
+ *
+ *  @file ProjectComponent.cpp
+ *  @authors David Berres, Nico Schorr
+ *  @date 03.07.2020
+ */
 
 #include "ProjectComponent.h"
 

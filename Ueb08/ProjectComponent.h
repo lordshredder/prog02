@@ -1,9 +1,11 @@
-//
-// Created by Pai on 03/07/2020.
-//
+/**
+ *
+ *  @file ProjectComponent.h
+ *  @authors David Berres, Nico Schorr
+ *  @date 03.07.2020
+ */
+
 #pragma once
-
-
 #include <string>
 
 class ProjectComponent {

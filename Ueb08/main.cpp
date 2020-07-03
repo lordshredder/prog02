@@ -1,3 +1,10 @@
+/**
+ *
+ *  @file main.cpp
+ *  @authors David Berres, Nico Schorr
+ *  @date 03.07.2020
+ */
+
 #include <iostream>
 #include "ProjectComponent.h"
 #include "Task.h"
