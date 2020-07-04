@@ -9,10 +9,27 @@
 #include <string>
 #include "ProjectComponent.h"
 
+/**
+ *  A subclass called Product, it inherits methods and attributes
+ *  from the ProjectComponent class. It also has it's own attribute called productionCost.
+ */
 class Product : public ProjectComponent{
 public:
+    /**
+     * Constructor for the subclass Product
+     * @param name The Name of the product.
+     * @param description The description of the product.
+     * @param productionCost The production cost.
+     */
     Product(const std::string& name, const std::string& description, int productionCost);
+    /**
+     * Destructor.
+     */
     virtual ~Product();
+    /**
+     * Returns a copy of itself.
+     * @return Copy of this object.
+     */
     virtual std::shared_ptr<ProjectComponent> clone() const override;
     double getProductionCost() const;
     void setProductionCost(const double cost);
