@@ -37,7 +37,7 @@ public:
     std::string getName() const;
     std::string getDescription() const;
     void setName(const std::string& name);
-    virtual void setProject(shared_ptr<Project> project);
+    void setProject(shared_ptr<Project> project);
     virtual double calcCost(double cost) const = 0;
     virtual std::string toString() const;
     friend std::ostream& operator<<(std::ostream& stream, const ProjectComponent& component);

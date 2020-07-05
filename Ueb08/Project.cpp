@@ -21,9 +21,7 @@ Project::Project(const string &name, double hourlyRate)
 
 }
 
-
-
-Project::Project(const Project &project)
+Project::Project(const Project& project)
         : ProjectComponent(project), hourlyRate(project.hourlyRate) {
     cout << "DEBUG CHECK: Project copy constructor called." << endl;
     for (const auto& comp : project.components) {
