@@ -7,6 +7,7 @@
 
 
 #include <iostream>
+#include <sstream>
 #include "Project.h"
 using namespace std;
 
@@ -31,6 +32,7 @@ Project::Project(const Project &project)
 }
 
 void Project::add(shared_ptr<ProjectComponent> projectComponent) {
+    projectComponent->setProject(this);
     this->components.push_back(projectComponent);
 }
 
@@ -38,6 +40,7 @@ void Project::remove(int uniqueId) {
     int size = components.size();
     int position = 0;
     for (int i = 0; i < size; ++i) {
+        components[i]->remove(uniqueId);
         if (components[i]->getId() != uniqueId) continue;
         position = i;
         components.erase(components.begin()+position);
@@ -59,10 +62,32 @@ void Project::setHourlyRate(const double hourlyRate) {
 }
 
 double Project::getCost() const {
-    return 6.2;
+    double cost = 0.0;
+    for(const auto& comp : components){
+       cost += comp->calcCost(hourlyRate);
+    }
+    return cost;
 }
 
 std::shared_ptr<ProjectComponent> Project::clone() const {
     return make_shared<Project>(*this);
+}
+
+string Project::toString() const {
+    ostringstream ostr;
+    ostr << ProjectComponent::toString();
+    ostr << "\tHourly Rate: " << this->hourlyRate << endl;
+    for(const auto& comp : components) {
+        ostr << *comp;
+    }
+    return ostr.str();
+}
+
+double Project::calcCost(double cost) const {
+    double calculatedCost = 0.0;
+    for(const auto& comp : components){
+       calculatedCost += comp->calcCost(hourlyRate);
+    }
+    return calculatedCost;
 }
 

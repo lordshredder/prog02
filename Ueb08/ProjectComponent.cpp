@@ -6,7 +6,10 @@
  */
 
 #include <iostream>
+#include <sstream>
+#include <utility>
 #include "ProjectComponent.h"
+
 int ProjectComponent::uniqueIDCounter;
 ProjectComponent::ProjectComponent(const std::string& name, const std::string& description)
     : name(name), description(description) {
@@ -30,6 +33,24 @@ void ProjectComponent::setName(const std::string &name) {
     this->name = name;
 }
 
-ProjectComponent::ProjectComponent(const ProjectComponent &) {
+ProjectComponent::ProjectComponent(const ProjectComponent &component) {
     std::cout << "DEBUG: COPY CONSTRUCTOR ProjectComponent." << std::endl;
+}
+
+std::string ProjectComponent::toString() const {
+    std::ostringstream ostr;
+    ostr << "Unique ID: " << uniqueId << "\tName: " << name << "\tDescription: " << description;
+    return ostr.str();
+}
+
+std::ostream &operator<<(std::ostream &stream, const ProjectComponent &component) {
+    return stream << component.toString();
+}
+
+void ProjectComponent::remove(int uniqueId) {
+
+}
+
+void ProjectComponent::setProject(shared_ptr<Project> project) {
+    root = std::move(project);
 }

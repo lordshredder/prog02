@@ -30,10 +30,12 @@ public:
      * @return Copy of this object.
      */
     virtual std::shared_ptr<ProjectComponent> clone() const override;
+    virtual std::string toString() const override;
     int getHours() const;
     void setHours(const int hours);
     virtual double getCost() const override;
-private:
+    virtual double calcCost(double cost) const override;
+protected:
     int hours;
 };
 

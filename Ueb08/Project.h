@@ -50,9 +50,11 @@ public:
      * @return Copy of this object.
      */
     virtual std::shared_ptr<ProjectComponent> clone() const override;
+    virtual std::string toString() const override;
     double getHourlyRate() const;
     void setHourlyRate(const double hourlyRate);
     virtual double getCost() const override;
+    virtual double calcCost(double cost) const override;
     vector<shared_ptr<ProjectComponent>> components;
 private:
     double hourlyRate;

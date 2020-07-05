@@ -13,7 +13,7 @@
  *  A subclass called Product, it inherits methods and attributes
  *  from the ProjectComponent class. It also has it's own attribute called productionCost.
  */
-class Product : public ProjectComponent{
+class Product : public ProjectComponent {
 public:
     /**
      * Constructor for the subclass Product
@@ -21,7 +21,7 @@ public:
      * @param description The description of the product.
      * @param productionCost The production cost.
      */
-    Product(const std::string& name, const std::string& description, int productionCost);
+    Product(const std::string& name, const std::string& description, double productionCost);
     /**
      * Destructor.
      */
@@ -31,9 +31,11 @@ public:
      * @return Copy of this object.
      */
     virtual std::shared_ptr<ProjectComponent> clone() const override;
+    virtual std::string toString() const override;
     double getProductionCost() const;
     void setProductionCost(const double cost);
     virtual double getCost() const override;
+    virtual double calcCost(double cost) const override;
 private:
     double productionCost;
 };
