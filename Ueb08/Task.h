@@ -4,7 +4,7 @@
  *  @authors David Berres, Nico Schorr
  *  @date 03.07.2020
  */
-
+#pragma once
 #include "ProjectComponent.h"
 #include <string>
 
@@ -34,7 +34,6 @@ public:
     int getHours() const;
     void setHours(const int hours);
     virtual double getCost() const override;
-    virtual double calcCost(double cost) const override;
 protected:
     int hours;
 };

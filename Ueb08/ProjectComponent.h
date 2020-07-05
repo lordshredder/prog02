@@ -7,7 +7,6 @@
 #pragma once
 #include <string>
 #include <memory>
-#include "Project.h"
 
 /**
  *  A class called ProjectComponent, used to simulate project management by
@@ -37,8 +36,7 @@ public:
     std::string getName() const;
     std::string getDescription() const;
     void setName(const std::string& name);
-    void setProject(shared_ptr<Project> project);
-    virtual double calcCost(double cost) const = 0;
+    void setProject(std::shared_ptr<ProjectComponent> project);
     virtual std::string toString() const;
     friend std::ostream& operator<<(std::ostream& stream, const ProjectComponent& component);
 
@@ -47,6 +45,6 @@ protected:
     std::string description;
     int uniqueId;
     static int uniqueIDCounter;
-    shared_ptr<Project> root;
+    std::shared_ptr<ProjectComponent> root;
 };
 

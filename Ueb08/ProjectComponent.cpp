@@ -51,6 +51,6 @@ void ProjectComponent::remove(int uniqueId) {
 
 }
 
-void ProjectComponent::setProject(shared_ptr<Project> project) {
+void ProjectComponent::setProject(std::shared_ptr<ProjectComponent> project) {
     root = std::move(project);
 }

@@ -41,7 +41,3 @@ string Task::toString() const {
     ostr << "\tHours: " << this->hours << endl;
     return ostr.str();
 }
-
-double Task::calcCost(double cost) const {
-    return hours*cost;
-}

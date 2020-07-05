@@ -8,8 +8,11 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 #include <map>
 #include "Project.h"
+
+using namespace std;
 
 enum Select : unsigned char {
     SELECT_NONE,

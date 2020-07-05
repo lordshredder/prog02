@@ -35,7 +35,6 @@ public:
     double getProductionCost() const;
     void setProductionCost(const double cost);
     virtual double getCost() const override;
-    virtual double calcCost(double cost) const override;
 private:
     double productionCost;
 };
