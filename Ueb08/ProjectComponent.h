@@ -36,6 +36,7 @@ public:
     std::string getName() const;
     std::string getDescription() const;
     void setName(const std::string& name);
+    std::shared_ptr<ProjectComponent> getRoot() const;
     void setProject(std::shared_ptr<ProjectComponent> project);
     virtual std::string toString() const;
     friend std::ostream& operator<<(std::ostream& stream, const ProjectComponent& component);

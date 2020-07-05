@@ -29,16 +29,21 @@ Project::Project(const Project& project)
 }
 
 void Project::add(shared_ptr<ProjectComponent> projectComponent) {
-    //projectComponent->setProject(this);
+    shared_ptr<Project> temp(this);
+    projectComponent->setProject(temp);
     this->components.push_back(projectComponent);
 }
 
 void Project::remove(int uniqueId) {
+    if (uniqueId == this->uniqueId) {
+        delete this;
+        return;
+    }
     int size = components.size();
     int position = 0;
     for (int i = 0; i < size; ++i) {
         components[i]->remove(uniqueId);
-        if (components[i]->getId() != uniqueId) continue;
+        if (components[i] == nullptr || components[i]->getId() != uniqueId) continue;
         position = i;
         components.erase(components.begin()+position);
         return;
