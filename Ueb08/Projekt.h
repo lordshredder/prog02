@@ -7,7 +7,7 @@
 
 #pragma once
 
-
+#include <vector>
 #include "ProjectComponent.h"
 
 using namespace std;
