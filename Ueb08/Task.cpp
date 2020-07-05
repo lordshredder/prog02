@@ -8,6 +8,7 @@
 #include <iostream>
 #include <sstream>
 #include "Task.h"
+#include "Project.h"
 
 using namespace std;
 
@@ -28,7 +29,9 @@ void Task::setHours(const int hours) {
 }
 
 double Task::getCost() const {
-    return 0.0;
+    shared_ptr<Project> temp = dynamic_pointer_cast<Project>(getRoot());
+    if (temp == nullptr) return 0.0;
+    return hours*temp->getHourlyRate();
 }
 
 shared_ptr<ProjectComponent> Task::clone() const {
@@ -40,8 +43,4 @@ string Task::toString() const {
     ostr << ProjectComponent::toString();
     ostr << "\tHours: " << this->hours << endl;
     return ostr.str();
-}
-
-double Task::calcCost(double cost) const {
-    return hours*cost;
 }

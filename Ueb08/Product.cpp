@@ -42,7 +42,3 @@ string Product::toString() const {
     ostr << "\tProduction cost: " << this->productionCost << endl;
     return ostr.str();
 }
-
-double Product::calcCost(double cost) const {
-    return getCost();
-}

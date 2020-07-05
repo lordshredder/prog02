@@ -5,7 +5,6 @@
  *  @date 03.07.2020
  */
 
-
 #include <iostream>
 #include <sstream>
 #include "Project.h"
@@ -22,7 +21,7 @@ Project::Project(const string &name, double hourlyRate)
 }
 
 Project::Project(const Project& project)
-        : ProjectComponent(project), hourlyRate(project.hourlyRate) {
+        :  ProjectComponent(project.name, project.description), hourlyRate(project.hourlyRate) {
     cout << "DEBUG CHECK: Project copy constructor called." << endl;
     for (const auto& comp : project.components) {
         this->components.push_back(comp->clone());
@@ -30,16 +29,21 @@ Project::Project(const Project& project)
 }
 
 void Project::add(shared_ptr<ProjectComponent> projectComponent) {
-    projectComponent->setProject(this);
+    shared_ptr<Project> temp(this);
+    projectComponent->setProject(temp);
     this->components.push_back(projectComponent);
 }
 
 void Project::remove(int uniqueId) {
+    if (uniqueId == this->uniqueId) {
+        delete this;
+        return;
+    }
     int size = components.size();
     int position = 0;
     for (int i = 0; i < size; ++i) {
         components[i]->remove(uniqueId);
-        if (components[i]->getId() != uniqueId) continue;
+        if (components[i] == nullptr || components[i]->getId() != uniqueId) continue;
         position = i;
         components.erase(components.begin()+position);
         return;
@@ -62,7 +66,7 @@ void Project::setHourlyRate(const double hourlyRate) {
 double Project::getCost() const {
     double cost = 0.0;
     for(const auto& comp : components){
-       cost += comp->calcCost(hourlyRate);
+        cost += comp->getCost();
     }
     return cost;
 }
@@ -80,12 +84,3 @@ string Project::toString() const {
     }
     return ostr.str();
 }
-
-double Project::calcCost(double cost) const {
-    double calculatedCost = 0.0;
-    for(const auto& comp : components){
-       calculatedCost += comp->calcCost(hourlyRate);
-    }
-    return calculatedCost;
-}
-

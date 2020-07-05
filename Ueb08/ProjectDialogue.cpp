@@ -101,6 +101,7 @@ void ProjectDialogue::createProject() {
     cin >> hourlyRate;
     shared_ptr<Project> project = make_shared<Project>(name, description, hourlyRate);
     projects.insert({project->getId(), project});
+    if (currentProjectId != 0) projects[currentProjectId]->add(project);
     currentProjectId = project->getId();
     cout << "\nNew project with ID: " << project->getId() << " created. Its name is: " << project->getName() << endl;
 }
@@ -148,7 +149,6 @@ void ProjectDialogue::createTask() {
     clearUserInput();
     getline(cin, name);
     cout << "\nPlease enter a description for the task, maximum 20 letters:" << endl;
-    clearUserInput();
     getline(cin, description);
     cout << "\nPlease enter the hours for the task:" << endl;
     cin >> hours;
@@ -162,15 +162,14 @@ void ProjectDialogue::createProduct() {
     cout << "\nPlease enter a name for the product, maximum 20 letters:" << endl;
     string name;
     string description;
-    int hours = 0;
+    double productionCost = 0;
     clearUserInput();
     getline(cin, name);
     cout << "\nPlease enter a description for the product, maximum 20 letters:" << endl;
-    clearUserInput();
     getline(cin, description);
-    cout << "\nPlease enter the hours for the product:" << endl;
-    cin >> hours;
-    shared_ptr<Product> product = make_shared<Product>(name, description, hours);
+    cout << "\nPlease enter the production cost for the product:" << endl;
+    cin >> productionCost;
+    shared_ptr<Product> product = make_shared<Product>(name, description, productionCost);
     projects[currentProjectId]->add(product);
     cout << "\nNew product with ID: " << product->getId() << " created. Its name is: " << product->getName() << endl;
 }
