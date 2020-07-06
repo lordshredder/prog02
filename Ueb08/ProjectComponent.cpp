@@ -73,5 +73,5 @@ void ProjectComponent::setRoot(shared_ptr<ProjectComponent> project) {
 }
 
 std::shared_ptr<ProjectComponent> ProjectComponent::getRoot() const {
-    return root;
+    return root.lock();
 }

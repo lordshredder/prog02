@@ -12,8 +12,11 @@
 
 using namespace std;
 
+const string Task::NEGATIVE_HOURS = "Hours cannot be negative.";
+
 Task::Task(const string &name, const string &description, int hours)
-    : ProjectComponent(name, description), hours(hours) {
+    : ProjectComponent(name, description) {
+    setHours(hours);
 }
 
 Task::~Task() {
@@ -25,7 +28,8 @@ int Task::getHours() const {
 }
 
 void Task::setHours(const int hours) {
-
+    if(hours < 0) throw TaskException(NEGATIVE_HOURS);
+    this->hours = hours;
 }
 
 double Task::getCost() const {

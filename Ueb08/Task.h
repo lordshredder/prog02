@@ -8,12 +8,20 @@
 #include "ProjectComponent.h"
 #include <string>
 
+class TaskException : public ProjectComponentException {
+public:
+    TaskException(const string& msg = "") : ProjectComponentException(msg) {
+
+    }
+};
+
 /**
  *  A subclass called Task, it inherits methods and attributes
  *  from the ProjectComponent class. It also has it's own attribute called hours.
  */
 class Task : public ProjectComponent {
 public:
+    const static string NEGATIVE_HOURS;
     /**
      * Constructor for the subclass Task.
      * @param name The name of the Task

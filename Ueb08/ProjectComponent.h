@@ -63,6 +63,6 @@ protected:
     std::string description;
     int uniqueId;
     static int uniqueIDCounter;
-    std::shared_ptr<ProjectComponent> root = nullptr;
+    std::weak_ptr<ProjectComponent> root;
 };
 
