@@ -9,6 +9,7 @@
 #include <sstream>
 #include "Task.h"
 #include "Project.h"
+#include "ExceptionChecker.h"
 
 using namespace std;
 
@@ -28,7 +29,7 @@ int Task::getHours() const {
 }
 
 void Task::setHours(const int hours) {
-    if(hours < 0) throw TaskException(NEGATIVE_HOURS);
+    check<ProjectException>(hours >= 0, NEGATIVE_HOURS);
     this->hours = hours;
 }
 

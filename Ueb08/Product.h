@@ -22,6 +22,7 @@ public:
  */
 class Product : public ProjectComponent {
 public:
+    const static string NEGATIVE_COST;
     /**
      * Constructor for the subclass Product
      * @param name The Name of the product.

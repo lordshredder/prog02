@@ -9,6 +9,7 @@
 #include <sstream>
 #include <iomanip>
 #include "ProjectComponent.h"
+#include "ExceptionChecker.h"
 
 const string ProjectComponent::NAME_CANNOT_BE_EMPTY = "The name cannot be empty";
 const string ProjectComponent::NAME_SIZE_LIMIT_EXCEEDED = "The name cannot be longer than " + to_string(ProjectComponent::MAX_STRING_SIZE) + " letters.";
@@ -39,13 +40,13 @@ std::string ProjectComponent::getDescription() const {
 }
 
 void ProjectComponent::setDescription(const string &description) {
-    if (description.size() > MAX_STRING_SIZE) throw ProjectComponentException(DESCRIPTION_SIZE_LIMIT_EXCEEDED);
+    check<ProjectComponentException>(description.size() <= MAX_STRING_SIZE, DESCRIPTION_SIZE_LIMIT_EXCEEDED);
     this->description = description;
 }
 
 void ProjectComponent::setName(const std::string& name) {
-    if (name.empty()) throw ProjectComponentException(NAME_CANNOT_BE_EMPTY);
-    if (name.size() > MAX_STRING_SIZE) throw ProjectComponentException(NAME_SIZE_LIMIT_EXCEEDED);
+    check<ProjectComponentException>(!name.empty(), NAME_CANNOT_BE_EMPTY);
+    check<ProjectComponentException>(name.size() <= MAX_STRING_SIZE, NAME_SIZE_LIMIT_EXCEEDED);
     this->name = name;
 }
 

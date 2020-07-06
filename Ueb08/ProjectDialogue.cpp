@@ -10,6 +10,7 @@
 #include "Task.h"
 #include "Product.h"
 #include "MockInput.h"
+#include "ExceptionChecker.h"
 #include <string>
 #include <iomanip>
 
@@ -130,28 +131,26 @@ void ProjectDialogue::removeComponent() {
 }
 
 void ProjectDialogue::showProject() {
-    if (projects.find(currentProjectId) == projects.end()) throw ProjectDialogueException(PROJECT_NOT_READY);
+    check<ProjectDialogueException>(projects.find(currentProjectId) != projects.end(), PROJECT_NOT_READY);
     cout << "\nProject: " << projects[currentProjectId]->getName() << '\n'
          << *projects[currentProjectId] << endl;
 }
 
 void ProjectDialogue::showFullProject() {
-    if (currentProjectId == 0) throw ProjectDialogueException(PROJECT_NOT_READY);
+    check<ProjectDialogueException>(currentProjectId != 0, PROJECT_NOT_READY);
     int baseProject = projects.begin()->second->getId();
     cout << "\nProject: " << projects[baseProject]->getName() << '\n'
          << *projects[baseProject] << endl;
 }
 
 void ProjectDialogue::calculateCost() {
-    if (projects.find(currentProjectId) == projects.end())
-        throw ProjectDialogueException(PROJECT_NOT_READY);
+    check<ProjectDialogueException>(projects.find(currentProjectId) != projects.end(), PROJECT_NOT_READY);
     cout << "Project Cost: " << fixed << setprecision(2) << projects[currentProjectId]->getCost() << endl;
 }
 
 void ProjectDialogue::switchProject() {
     int projectId = readComponentId();
-    if (projects.find(projectId) == projects.end())
-        throw ProjectDialogueException(ID_DOES_NOT_EXIST);
+    check<ProjectDialogueException>(projects.find(projectId) != projects.end(), ID_DOES_NOT_EXIST);
     currentProjectId = projectId;
 }
 
@@ -164,7 +163,7 @@ int ProjectDialogue::readComponentId() {
 }
 
 void ProjectDialogue::createTask() {
-    if (currentProjectId == 0) throw ProjectDialogueException(PROJECT_NOT_READY);
+    check<ProjectDialogueException>(currentProjectId != 0, PROJECT_NOT_READY);
     cout << "\nPlease enter a name for the task, maximum 20 letters:" << endl;
     string name;
     string description;
@@ -181,7 +180,7 @@ void ProjectDialogue::createTask() {
 }
 
 void ProjectDialogue::createProduct() {
-    if (currentProjectId == 0) throw ProjectDialogueException(PROJECT_NOT_READY);
+    check<ProjectDialogueException>(currentProjectId != 0, PROJECT_NOT_READY);
     cout << "\nPlease enter a name for the product, maximum 20 letters:" << endl;
     string name;
     string description;

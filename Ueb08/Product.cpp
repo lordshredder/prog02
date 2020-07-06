@@ -6,10 +6,14 @@
  */
 
 #include "Product.h"
+#include "ExceptionChecker.h"
 #include <iostream>
 #include <sstream>
 
+
 using namespace std;
+
+const string Product::NEGATIVE_COST = "Hourly rate cannot be negative.";
 
 Product::Product(const std::string& name, const std::string& description, double productionCost)
     : ProjectComponent(name, description), productionCost(productionCost) {
@@ -25,6 +29,7 @@ double Product::getProductionCost() const {
 }
 
 void Product::setProductionCost(const double cost)  {
+    check<ProductException>(cost >= 0.0, NEGATIVE_COST);
     this->productionCost = cost;
 }
 

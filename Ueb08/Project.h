@@ -22,6 +22,7 @@ public:
  */
 class Project : public ProjectComponent, public std::enable_shared_from_this<Project> {
 public:
+    const static string NEGATIVE_HOURLY_RATE;
     /**
      * Constructor for the subclass Task.
      * @param name The name of the Task

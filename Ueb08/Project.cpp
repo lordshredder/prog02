@@ -9,7 +9,11 @@
 #include <sstream>
 #include <iomanip>
 #include "Project.h"
+#include "ExceptionChecker.h"
+
 using namespace std;
+
+const string Project::NEGATIVE_HOURLY_RATE = "Hourly rate cannot be negative or zero.";
 
 Project::Project(const string& name, const string& description, double hourlyRate)
         : ProjectComponent(name, description) {
@@ -57,7 +61,7 @@ double Project::getHourlyRate() const {
 }
 
 void Project::setHourlyRate(const double hourlyRate) {
-    if (hourlyRate < 0.0) throw
+    check<ProjectException>(hourlyRate > 0.0, NEGATIVE_HOURLY_RATE);
     this->hourlyRate = hourlyRate;
 }
 
