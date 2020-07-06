@@ -17,7 +17,7 @@ Product::Product(const std::string& name, const std::string& description, double
 }
 
 Product::~Product() {
-    cout << "DEBUG CHECK: Product destructor called." << endl;
+    cout << "DEBUG CHECK: Product destructor called, Name: " << this->getName() << endl;
 }
 
 double Product::getProductionCost() const {

@@ -13,7 +13,7 @@
  *  A subclass called Task, it inherits methods and attributes
  *  from the ProjectComponent class. It also has it's own attribute called hours.
  */
-class Project : public ProjectComponent {
+class Project : public ProjectComponent, public std::enable_shared_from_this<Project> {
 public:
     /**
      * Constructor for the subclass Task.
@@ -39,7 +39,7 @@ public:
     double getHourlyRate() const;
     void setHourlyRate(const double hourlyRate);
     virtual double getCost() const override;
-    std::vector<std::shared_ptr<ProjectComponent>> components;
 protected:
+    std::vector<std::shared_ptr<ProjectComponent>> components;
     double hourlyRate;
 };

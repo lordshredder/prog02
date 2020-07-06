@@ -26,31 +26,20 @@ int main() {
     } catch(...){
         std::cerr << "FATAL ERROR" << std::endl;
     }
+/*    weak_ptr<Project> w;
+    shared_ptr<Task> t = make_shared<Task>("ttt", "sdasd", 5);
+    {
+        shared_ptr<Task> tt = make_shared<Task>("test", "sdasd", 5);
+        shared_ptr<Project> p = make_shared<Project>("sdfsf", "sdasd", 10);
+        cout << "1DEBUG share_ptr count: " << p.use_count() << endl;
+        cout << "2DEBUG share_ptr count: " << p->weak_from_this().use_count() << endl;
+        p->add(t);
 
+        tt->setRoot(p);
+        t->setRoot(p);
+        w = p;
+    }*/
 
-
-/*    Project projectZero("p1", 100.0);
-    shared_ptr<ProjectComponent> c1 = make_shared<Task>("kfks", "satt", 5);
-    projectZero.add(c1);
-    for (int i = 0; i < 10; ++i) {
-        shared_ptr<Task> t = make_shared<Task>("sdfsf", "asfs", 2);
-        projectZero.add(t);
-    }
-    shared_ptr<ProjectComponent> t = make_shared<Task>("sf", "a77", 8);
-    shared_ptr<Product> p = make_shared<Product>("fs", "savvvt", 5.85);
-    shared_ptr<Project> c = make_shared<Project>("khks", "safff", 10.0);
-    c->add(p);
-    c->add(t);
-    projectZero.add(c);
-    Project copy = projectZero;
-    copy.components[3]->setName("copy");
-    cout << copy.components[3]->getName() <<  endl;
-    cout << projectZero.components[3]->getName() <<  endl;
-    std::cout << "Hello, World!" << std::endl;
-    cout << projectZero << endl;
-*//*    projectZero.remove(15);
-    cout << projectZero << endl;*//*
-    cout << "cost: " << fixed << setprecision(2) << projectZero.getCost() << endl;*/
 
     return 0;
 }

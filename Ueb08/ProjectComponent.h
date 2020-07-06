@@ -8,12 +8,28 @@
 #include <string>
 #include <memory>
 
+using namespace std;
+
+/**
+ * Exception class
+ */
+class ProjectComponentException : public logic_error {
+public:
+    ProjectComponentException(const string& msg = "") : logic_error(msg) {
+
+    }
+};
+
 /**
  *  A class called ProjectComponent, used to simulate project management by
  *  adding and removing tasks, products and projects.
  */
 class ProjectComponent {
 public:
+    const static int MAX_STRING_SIZE = 15;
+    const static string NAME_CANNOT_BE_EMPTY;
+    const static string NAME_SIZE_LIMIT_EXCEEDED;
+    const static string DESCRIPTION_SIZE_LIMIT_EXCEEDED;
     /**
      * Constructor for the class ProjectComponent.
      * @param name The name of the component.
@@ -36,8 +52,9 @@ public:
     std::string getName() const;
     std::string getDescription() const;
     void setName(const std::string& name);
+    void setDescription(const std::string& description);
     std::shared_ptr<ProjectComponent> getRoot() const;
-    void setProject(std::shared_ptr<ProjectComponent> project);
+    void setRoot(std::shared_ptr<ProjectComponent> project);
     virtual std::string toString() const;
     friend std::ostream& operator<<(std::ostream& stream, const ProjectComponent& component);
 
@@ -46,6 +63,6 @@ protected:
     std::string description;
     int uniqueId;
     static int uniqueIDCounter;
-    std::shared_ptr<ProjectComponent> root;
+    std::shared_ptr<ProjectComponent> root = nullptr;
 };
 

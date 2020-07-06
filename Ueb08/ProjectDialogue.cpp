@@ -9,7 +9,9 @@
 #include "safeRead.h"
 #include "Task.h"
 #include "Product.h"
+#include "MockInput.h"
 #include <string>
+#include <iomanip>
 
 using namespace std;
 
@@ -30,7 +32,6 @@ void ProjectDialogue::startDialogue() {
             clearUserInput();
             cout << "\nERROR: " << e << "\n";
         } catch (std::exception &e) {
-            clearUserInput();
             cout << "\nERROR: " << e.what() << std::endl;
         } catch (...) {
             clearUserInput();
@@ -47,9 +48,11 @@ void ProjectDialogue::readUserSelection() {
          << SELECT_CREATE_TASK << " : Create new task\n"
          << SELECT_CREATE_PRODUCT << " : Create new product\n"
          << SELECT_REMOVE_COMPONENT << " : Remove project component via ID\n"
-         << SELECT_SHOW_PROJECT << " : Show the current project\n"
-         << SELECT_CALCULATE_COST << " : Calculate current project cost\n"
+         << SELECT_SHOW_CURRENT_PROJECT << " : Show the current project\n"
+         << SELECT_SHOW_FULL_PROJECT << " : Show the full project\n"
+         << SELECT_CALCULATE_COST << " : Calculate cost of current project\n"
          << SELECT_SWITCH_ACTIVE_PROJECT << " : Switch to project ID\n"
+         << SELECT_CREATE_DUMMY_COMPONENTS << " : Create Dummy Components\n"
          << SELECT_QUIT << " : Quit\n";
     if (safeRead(cin, selection)) {
         currentSelection = static_cast<Select>(selection);
@@ -73,14 +76,20 @@ void ProjectDialogue::executeSelection(const Select& selection) {
         case SELECT_REMOVE_COMPONENT:
             removeComponent();
             break;
-        case SELECT_SHOW_PROJECT:
+        case SELECT_SHOW_CURRENT_PROJECT:
             showProject();
+            break;
+        case SELECT_SHOW_FULL_PROJECT:
+            showFullProject();
             break;
         case SELECT_CALCULATE_COST:
             calculateCost();
             break;
         case SELECT_SWITCH_ACTIVE_PROJECT:
             switchProject();
+            break;
+        case SELECT_CREATE_DUMMY_COMPONENTS:
+            createDummyProjects();
             break;
         default:
             throw ProjectDialogueException(BAD_USER_INPUT);
@@ -108,28 +117,42 @@ void ProjectDialogue::createProject() {
 
 void ProjectDialogue::removeComponent() {
     int uniqueId = readComponentId();
-    projects[currentProjectId]->remove(uniqueId);
+    if (projects.find(uniqueId) != projects.end()) {
+        projects.erase(uniqueId);
+        if (projects.begin()->second != nullptr) currentProjectId = projects.begin()->second->getId();
+        return;
+    }
+    if (currentProjectId != 0) {
+        currentProjectId = projects.begin()->second->getId();
+        shared_ptr<Project> p = projects[currentProjectId];
+        p->remove(uniqueId);
+    }
 }
 
 void ProjectDialogue::showProject() {
-    cout << "\nProject:\n"
+    if (projects.find(currentProjectId) == projects.end()) throw ProjectDialogueException(PROJECT_NOT_READY);
+    cout << "\nProject: " << projects[currentProjectId]->getName() << '\n'
          << *projects[currentProjectId] << endl;
 }
 
+void ProjectDialogue::showFullProject() {
+    if (currentProjectId == 0) throw ProjectDialogueException(PROJECT_NOT_READY);
+    int baseProject = projects.begin()->second->getId();
+    cout << "\nProject: " << projects[baseProject]->getName() << '\n'
+         << *projects[baseProject] << endl;
+}
+
 void ProjectDialogue::calculateCost() {
-    cout << "Project Cost: " << projects[currentProjectId]->getCost() << endl;
+    if (projects.find(currentProjectId) == projects.end())
+        throw ProjectDialogueException(PROJECT_NOT_READY);
+    cout << "Project Cost: " << fixed << setprecision(2) << projects[currentProjectId]->getCost() << endl;
 }
 
 void ProjectDialogue::switchProject() {
     int projectId = readComponentId();
-    try {
-        projects[projectId];
-        currentProjectId = projectId;
-    } catch (const std::out_of_range& e) {
+    if (projects.find(projectId) == projects.end())
         throw ProjectDialogueException(ID_DOES_NOT_EXIST);
-    } catch (...) {
-
-    }
+    currentProjectId = projectId;
 }
 
 int ProjectDialogue::readComponentId() {
@@ -174,34 +197,51 @@ void ProjectDialogue::createProduct() {
     cout << "\nNew product with ID: " << product->getId() << " created. Its name is: " << product->getName() << endl;
 }
 
+
 void ProjectDialogue::clearUserInput() {
     string temp;
     cin.clear();
     getline(cin, temp);
 }
 
-/*void ProjectDialogue::createDummyArticles() {
+void ProjectDialogue::createDummyProjects() {
     MockInput mock;
-    const int maxLetters = Article::MAX_ARTICLE_DESCRIPTION_SIZE;
-    int stock = 1;
-    int articleId = 1000 + storage->getArticleAmount();
-
-    for (int i = 0; i < AMOUNT_DUMMY_ARTICLES; ++i) {
-        int power = mock.RandomNumber(800, 10);
-        string size = mock.RandomString(3, 1);
-        string color = mock.RandomString(8, 5);
-        string articleDesc = mock.RandomString(maxLetters, 9);
+    const int maxLetters = ProjectComponent::MAX_STRING_SIZE;
+    if (currentProjectId == 0) {
+        string name = mock.RandomString(8, 5);
+        string desc = mock.RandomString(maxLetters, 9);
+        long double rate = mock.RandomNumber(250.0L, 10.5L);
+        float roundedPrice = (float)((int)(rate * 100 + 0.5f))/100;
+        shared_ptr<Project> p = make_shared<Project>(name, desc, roundedPrice);
+        projects.insert({p->getId(), p});
+        currentProjectId = p->getId();
+    }
+    for (int i = 0; i < AMOUNT_DUMMY_COMPONENTS; ++i) {
+        int hours = mock.RandomNumber(800, 10);
+        string name = mock.RandomString(maxLetters, 5);
+        string desc = mock.RandomString(maxLetters, 5);
         long double price = mock.RandomNumber(250.0L, 10.5L);
         float roundedPrice = (float)((int)(price * 100 + 0.5f))/100;
-        if (mock.RandomNumber(1,0) > 0){
-            storage->addArticle(make_shared<Clothing>(articleId, articleDesc, roundedPrice, size, color, stock));
-        } else{
-            storage->addArticle(make_shared<ElectronicDevice>(articleId, articleDesc, roundedPrice, power, stock));
+        shared_ptr<Project> p;
+        shared_ptr<ProjectComponent> pc;
+        switch(mock.RandomNumber(2,1)){
+            case 0:
+                p = make_shared<Project>(name, desc, roundedPrice);
+                projects.insert({p->getId(), p});
+                projects[currentProjectId]->add(p);
+                currentProjectId = p->getId();
+                break;
+            case 1:
+                pc = make_shared<Product>(name, desc, roundedPrice);
+                projects[currentProjectId]->add(pc);
+                break;
+            case 2:
+                pc = make_shared<Task>(name, desc, hours);
+                projects[currentProjectId]->add(pc);
+                break;
         }
-        articleId++;
     }
-    cout << AMOUNT_DUMMY_ARTICLES
-         << " articles with random values have been created and added to the storage "
-         << storage->getName()  << "." << endl;
-}*/
+    cout << AMOUNT_DUMMY_COMPONENTS
+         << " components with random values have been created." << endl;
+}
 

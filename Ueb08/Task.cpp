@@ -17,7 +17,7 @@ Task::Task(const string &name, const string &description, int hours)
 }
 
 Task::~Task() {
-    cout << "DEBUG CHECK: Task destructor called." << endl;
+    cout << "DEBUG CHECK: Task destructor called, Name: " << this->getName() << endl;
 }
 
 int Task::getHours() const {

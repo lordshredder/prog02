@@ -20,9 +20,11 @@ enum Select : unsigned char {
     SELECT_CREATE_TASK,
     SELECT_CREATE_PRODUCT,
     SELECT_REMOVE_COMPONENT,
-    SELECT_SHOW_PROJECT,
+    SELECT_SHOW_CURRENT_PROJECT,
+    SELECT_SHOW_FULL_PROJECT,
     SELECT_CALCULATE_COST,
     SELECT_SWITCH_ACTIVE_PROJECT,
+    SELECT_CREATE_DUMMY_COMPONENTS,
     SELECT_QUIT
 };
 
@@ -57,12 +59,11 @@ public:
     void startDialogue();
 
 private:
-    static const int AMOUNT_DUMMY_ARTICLES = 10;
+    static const int AMOUNT_DUMMY_COMPONENTS = 10;
     static const std::string PROJECT_NOT_READY;
     static const std::string BAD_USER_INPUT;
     static const std::string ID_DOES_NOT_EXIST;
     Select currentSelection = Select::SELECT_NONE;
-    vector<shared_ptr<ProjectComponent>> projectlessComponents;
     map<int, shared_ptr<Project>> projects;
     int currentProjectId = 0;
     /**
@@ -98,6 +99,7 @@ private:
      */
     void removeComponent();
     void showProject();
+    void showFullProject();
     void createProduct();
     void calculateCost();
     void switchProject();
@@ -107,7 +109,7 @@ private:
      * Creates completely random articles.
      * Makes testing easier.
      */
-    //void createDummyArticles();
+    void createDummyProjects();
 };
 
 

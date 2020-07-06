@@ -7,14 +7,23 @@
 
 #include <iostream>
 #include <sstream>
-#include <utility>
+#include <iomanip>
 #include "ProjectComponent.h"
 
+const string ProjectComponent::NAME_CANNOT_BE_EMPTY = "The name cannot be empty";
+const string ProjectComponent::NAME_SIZE_LIMIT_EXCEEDED = "The name cannot be longer than " + to_string(ProjectComponent::MAX_STRING_SIZE) + " letters.";
+const string ProjectComponent::DESCRIPTION_SIZE_LIMIT_EXCEEDED = "The name cannot be longer than " + to_string(ProjectComponent::MAX_STRING_SIZE) + " letters.";;
+
 int ProjectComponent::uniqueIDCounter;
-ProjectComponent::ProjectComponent(const std::string& name, const std::string& description)
-    : name(name), description(description) {
+ProjectComponent::ProjectComponent(const std::string& name, const std::string& description) {
+    setName(name);
+    setDescription(description);
     uniqueId = ++ProjectComponent::uniqueIDCounter;
     std::cout << "The Component " << name << " was created with the unique ID: " << uniqueId << std::endl;
+}
+
+ProjectComponent::ProjectComponent(const ProjectComponent &component) {
+    std::cout << "DEBUG: COPY CONSTRUCTOR ProjectComponent." << std::endl;
 }
 
 int ProjectComponent::getId() const {
@@ -29,17 +38,25 @@ std::string ProjectComponent::getDescription() const {
     return this->description;
 }
 
-void ProjectComponent::setName(const std::string &name) {
-    this->name = name;
+void ProjectComponent::setDescription(const string &description) {
+    if (description.size() > MAX_STRING_SIZE) throw ProjectComponentException(DESCRIPTION_SIZE_LIMIT_EXCEEDED);
+    this->description = description;
 }
 
-ProjectComponent::ProjectComponent(const ProjectComponent &component) {
-    std::cout << "DEBUG: COPY CONSTRUCTOR ProjectComponent." << std::endl;
+void ProjectComponent::setName(const std::string& name) {
+    if (name.empty()) throw ProjectComponentException(NAME_CANNOT_BE_EMPTY);
+    if (name.size() > MAX_STRING_SIZE) throw ProjectComponentException(NAME_SIZE_LIMIT_EXCEEDED);
+    this->name = name;
 }
 
 std::string ProjectComponent::toString() const {
     std::ostringstream ostr;
-    ostr << "Unique ID: " << uniqueId << "\tName: " << name << "\tDescription: " << description;
+    std::shared_ptr<ProjectComponent> temp = getRoot();
+    while(temp != nullptr){
+        ostr << "  --> ";
+        if(temp != nullptr) temp = temp->getRoot();
+    }
+    ostr << "ID: " << uniqueId << "\tName: " << std::setw(MAX_STRING_SIZE) << name << "\tDescription: " << std::setw(MAX_STRING_SIZE) << description;
     return ostr.str();
 }
 
@@ -51,8 +68,8 @@ void ProjectComponent::remove(int uniqueId) {
 
 }
 
-void ProjectComponent::setProject(std::shared_ptr<ProjectComponent> project) {
-    root = std::move(project);
+void ProjectComponent::setRoot(shared_ptr<ProjectComponent> project) {
+    root = project;
 }
 
 std::shared_ptr<ProjectComponent> ProjectComponent::getRoot() const {
