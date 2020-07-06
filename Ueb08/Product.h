@@ -9,6 +9,13 @@
 #include <string>
 #include "ProjectComponent.h"
 
+class ProductException : public ProjectComponentException {
+public:
+    ProductException(const string& msg = "") : ProjectComponentException(msg) {
+
+    }
+};
+
 /**
  *  A subclass called Product, it inherits methods and attributes
  *  from the ProjectComponent class. It also has it's own attribute called productionCost.

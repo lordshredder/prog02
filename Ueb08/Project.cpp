@@ -12,13 +12,13 @@
 using namespace std;
 
 Project::Project(const string& name, const string& description, double hourlyRate)
-        : ProjectComponent(name, description), hourlyRate(hourlyRate) {
-
+        : ProjectComponent(name, description) {
+    setHourlyRate(hourlyRate);
 }
 
 Project::Project(const string &name, double hourlyRate)
-        : ProjectComponent(name, ""), hourlyRate(hourlyRate) {
-
+        : ProjectComponent(name, "") {
+    setHourlyRate(hourlyRate);
 }
 
 Project::Project(const Project& project)
@@ -30,11 +30,8 @@ Project::Project(const Project& project)
 }
 
 void Project::add(shared_ptr<ProjectComponent> projectComponent) {
-    cout << "DEBUG share_ptr count: " << weak_from_this().use_count() << endl;
     projectComponent->setRoot(shared_from_this());
     this->components.push_back(projectComponent);
-    cout << "DEBUG share_ptr count: " << weak_from_this().use_count() << endl;
-    cout << "DEBUG share_ptr count: " << shared_from_this().use_count() << endl;
 }
 
 void Project::remove(int uniqueId) {
@@ -60,6 +57,7 @@ double Project::getHourlyRate() const {
 }
 
 void Project::setHourlyRate(const double hourlyRate) {
+    if (hourlyRate < 0.0) throw
     this->hourlyRate = hourlyRate;
 }
 

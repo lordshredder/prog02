@@ -9,6 +9,13 @@
 #include <vector>
 #include <string>
 
+class ProjectException : public ProjectComponentException {
+public:
+    ProjectException(const string& msg = "") : ProjectComponentException(msg) {
+
+    }
+};
+
 /**
  *  A subclass called Task, it inherits methods and attributes
  *  from the ProjectComponent class. It also has it's own attribute called hours.

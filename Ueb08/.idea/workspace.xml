@@ -12,19 +12,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74d6713a-798c-4d5e-b38f-647860960c4d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/MockInput.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MockInput.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Product.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product.h" beforeDir="false" afterPath="$PROJECT_DIR$/Product.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Project.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Project.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Project.h" beforeDir="false" afterPath="$PROJECT_DIR$/Project.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectComponent.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectDialogue.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectDialogue.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectDialogue.h" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectDialogue.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Task.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Task.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Task.h" beforeDir="false" afterPath="$PROJECT_DIR$/Task.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +71,7 @@
       <workItem from="1593888893867" duration="2161000" />
       <workItem from="1593940572302" duration="17938000" />
       <workItem from="1593968998995" duration="1879000" />
-      <workItem from="1594018669301" duration="20857000" />
+      <workItem from="1594018669301" duration="22031000" />
     </task>
     <task id="LOCAL-00001" summary="ERROR">
       <created>1593969219351</created>
@@ -92,7 +87,14 @@
       <option name="project" value="LOCAL" />
       <updated>1593986115017</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Inheritance Error fixed&#10;Remove is still bugged.">
+      <created>1594047062378</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1594047062378</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -101,17 +103,18 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="ERROR" />
     <MESSAGE value="Inheritance Error fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Inheritance Error fixed" />
+    <MESSAGE value="Inheritance Error fixed&#10;Remove is still bugged." />
+    <option name="LAST_COMMIT_MESSAGE" value="Inheritance Error fixed&#10;Remove is still bugged." />
   </component>
   <component name="WindowStateProjectService">
     <state x="765" y="236" key="#com.intellij.ide.util.MemberChooser" timestamp="1594043994540">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="765" y="236" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1920.0.1280.680/1920.0.1920.1040@0.0.1920.1040" timestamp="1594043994540" />
-    <state x="585" y="88" key="CommitChangelistDialog2" timestamp="1593986114690">
+    <state x="585" y="88" key="CommitChangelistDialog2" timestamp="1594047062008">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="585" y="88" key="CommitChangelistDialog2/0.0.1920.1040/-1920.0.1280.680/1920.0.1920.1040@0.0.1920.1040" timestamp="1593986114690" />
+    <state x="585" y="88" key="CommitChangelistDialog2/0.0.1920.1040/-1920.0.1280.680/1920.0.1920.1040@0.0.1920.1040" timestamp="1594047062008" />
     <state width="415" height="466" key="DebuggerActiveHint" timestamp="1594040396550">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -124,22 +127,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="628" y="253" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1593867209054" />
-    <state width="1877" height="297" key="GridCell.Tab.0.bottom" timestamp="1594046896860">
+    <state width="1877" height="410" key="GridCell.Tab.0.bottom" timestamp="1594047275518">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="297" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1280.680/1920.0.1920.1040@0.0.1920.1040" timestamp="1594046896860" />
-    <state width="1877" height="297" key="GridCell.Tab.0.center" timestamp="1594046896859">
+    <state width="1877" height="410" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1280.680/1920.0.1920.1040@0.0.1920.1040" timestamp="1594047275518" />
+    <state width="1877" height="410" key="GridCell.Tab.0.center" timestamp="1594047275518">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="297" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1280.680/1920.0.1920.1040@0.0.1920.1040" timestamp="1594046896859" />
-    <state width="1877" height="297" key="GridCell.Tab.0.left" timestamp="1594046896859">
+    <state width="1877" height="410" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1280.680/1920.0.1920.1040@0.0.1920.1040" timestamp="1594047275518" />
+    <state width="1877" height="410" key="GridCell.Tab.0.left" timestamp="1594047275518">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="297" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1280.680/1920.0.1920.1040@0.0.1920.1040" timestamp="1594046896859" />
-    <state width="1877" height="297" key="GridCell.Tab.0.right" timestamp="1594046896859">
+    <state width="1877" height="410" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1280.680/1920.0.1920.1040@0.0.1920.1040" timestamp="1594047275518" />
+    <state width="1877" height="410" key="GridCell.Tab.0.right" timestamp="1594047275518">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="297" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1280.680/1920.0.1920.1040@0.0.1920.1040" timestamp="1594046896859" />
+    <state width="1877" height="410" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1280.680/1920.0.1920.1040@0.0.1920.1040" timestamp="1594047275518" />
     <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1594040486014">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -174,7 +177,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/Task.cpp</url>
-          <line>31</line>
+          <line>35</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
