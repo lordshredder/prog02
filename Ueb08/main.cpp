@@ -6,16 +6,13 @@
  */
 
 #include <iostream>
-#include <iomanip>
-#include "ProjectComponent.h"
-#include "Task.h"
 #include "ProjectDialogue.h"
+#include "Task.h"
 
 using namespace std;
 
 
 int main() {
-
     try {
         ProjectDialogue dialogue;
         dialogue.startDialogue();
@@ -26,6 +23,5 @@ int main() {
     } catch(...){
         std::cerr << "FATAL ERROR" << std::endl;
     }
-
     return 0;
 }

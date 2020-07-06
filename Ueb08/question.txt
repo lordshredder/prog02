@@ -1,0 +1,9 @@
+4. Frage 
+Für welche Klassen und in welchem Fall können Kopierkonstruktor und Zuweisungsoperator entfallen? 
+Begründen Sie Ihre Aussage! 
+
+- ProjectComponent
+- Task
+- Product
+
+Begründung: Keine Attribute, die mit New allokiert wurden.

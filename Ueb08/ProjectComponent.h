@@ -37,11 +37,6 @@ public:
      */
     ProjectComponent(const std::string& name, const std::string& description);
     /**
-     * Copy Constructor
-     * @param project The project to copy.
-     */
-    ProjectComponent(const ProjectComponent& component);
-    /**
      * Returns a copy of itself.
      * @return Copy of this object.
      */

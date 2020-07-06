@@ -6,7 +6,7 @@ CXXFLAGS = -g -std=c++17 -pedantic -Wall -Wextra
 LD = g++	# Linker + Flags
 LDFLAGS =
 
-OBJECTS = main.o Project.o Product.o Task.o ProjectComponent.o ProjectDialogue.o
+OBJECTS = main.o Project.o Product.o Task.o ProjectComponent.o ProjectDialogue.o MockInput.o
 SRC = $(OBJECTS:%.o=%.cpp)
 DEPENDFILE = .depend	# Abhaengigkeitsdefinitionen
 LOESCHLISTE = *.o *.exe *stackdump

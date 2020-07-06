@@ -13,17 +13,13 @@
 
 const string ProjectComponent::NAME_CANNOT_BE_EMPTY = "The name cannot be empty";
 const string ProjectComponent::NAME_SIZE_LIMIT_EXCEEDED = "The name cannot be longer than " + to_string(ProjectComponent::MAX_STRING_SIZE) + " letters.";
-const string ProjectComponent::DESCRIPTION_SIZE_LIMIT_EXCEEDED = "The name cannot be longer than " + to_string(ProjectComponent::MAX_STRING_SIZE) + " letters.";;
+const string ProjectComponent::DESCRIPTION_SIZE_LIMIT_EXCEEDED = "The name cannot be longer than " + to_string(ProjectComponent::MAX_STRING_SIZE) + " letters.";
 
 int ProjectComponent::uniqueIDCounter;
 ProjectComponent::ProjectComponent(const std::string& name, const std::string& description) {
     setName(name);
     setDescription(description);
     uniqueId = ++ProjectComponent::uniqueIDCounter;
-}
-
-ProjectComponent::ProjectComponent(const ProjectComponent &component) {
-    std::cout << "DEBUG: COPY CONSTRUCTOR ProjectComponent." << std::endl;
 }
 
 int ProjectComponent::getId() const {
@@ -67,6 +63,7 @@ std::ostream &operator<<(std::ostream &stream, const ProjectComponent &component
 }
 
 void ProjectComponent::remove(int uniqueId) {
+    ++uniqueId;
 
 }
 

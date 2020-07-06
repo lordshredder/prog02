@@ -103,8 +103,6 @@ private:
     void createProduct();
     void calculateCost();
     void switchProject();
-
-
     /**
      * Creates completely random articles.
      * Makes testing easier.

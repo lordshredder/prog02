@@ -26,11 +26,16 @@ Project::Project(const string &name, double hourlyRate)
 }
 
 Project::Project(const Project& project)
-        :  ProjectComponent(project.name, project.description), hourlyRate(project.hourlyRate) {
+        :  ProjectComponent(project), hourlyRate(project.hourlyRate) {
     cout << "DEBUG CHECK: Project copy constructor called." << endl;
     for (const auto& comp : project.components) {
         this->components.push_back(comp->clone());
     }
+}
+
+Project::~Project() {
+    cout << "DEBUG CHECK: Project destructor called, Name: " << this->getName() << endl;
+    components.clear();
 }
 
 void Project::add(shared_ptr<ProjectComponent> projectComponent) {
@@ -49,11 +54,6 @@ void Project::remove(int uniqueId) {
             return;
         }
     }
-}
-
-Project::~Project() {
-    cout << "DEBUG CHECK: Project destructor called, Name: " << this->getName() << endl;
-    components.clear();
 }
 
 double Project::getHourlyRate() const {
@@ -93,4 +93,14 @@ string Project::toString() const {
         ostr << *comp;
     }
     return ostr.str();
+}
+
+Project &Project::operator=(const Project& project) {
+    int id = project.uniqueId;
+    Project temp = project;
+    ProjectComponent::operator=(temp);
+    uniqueId = id;
+    swap(hourlyRate, temp.hourlyRate);
+    swap(components, temp.components);
+    return *this;
 }

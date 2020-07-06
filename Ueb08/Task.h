@@ -40,8 +40,8 @@ public:
     virtual std::shared_ptr<ProjectComponent> clone() const override;
     virtual std::string toString() const override;
     int getHours() const;
-    void setHours(const int hours);
     virtual double getCost() const override;
+    void setHours(const int hours);
 protected:
     int hours;
 };

@@ -36,7 +36,16 @@ public:
      * Destructor.
      */
     virtual ~Project();
+    /**
+     * Removes a ProjectComponent by its unique ID.
+     * @param id of the component.
+     */
     void remove(int uniqueId);
+    /**
+     * Adds a project component. Pretty much.
+     * The project component will also have its root assigned to this project.
+     * @param projectComponent to be added.
+     */
     void add(std::shared_ptr<ProjectComponent> projectComponent);
     /**
      * Returns a copy of itself.
@@ -45,8 +54,9 @@ public:
     virtual std::shared_ptr<ProjectComponent> clone() const override;
     virtual std::string toString() const override;
     double getHourlyRate() const;
-    void setHourlyRate(const double hourlyRate);
     virtual double getCost() const override;
+    void setHourlyRate(const double hourlyRate);
+    Project& operator=(const Project& project);
 protected:
     std::vector<std::shared_ptr<ProjectComponent>> components;
     double hourlyRate;

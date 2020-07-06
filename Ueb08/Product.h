@@ -41,8 +41,8 @@ public:
     virtual std::shared_ptr<ProjectComponent> clone() const override;
     virtual std::string toString() const override;
     double getProductionCost() const;
-    void setProductionCost(const double cost);
     virtual double getCost() const override;
+    void setProductionCost(const double cost);
 private:
     double productionCost;
 };
