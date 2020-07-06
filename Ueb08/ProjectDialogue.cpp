@@ -99,13 +99,13 @@ void ProjectDialogue::executeSelection(const Select& selection) {
 }
 
 void ProjectDialogue::createProject() {
-    cout << "\nPlease enter a name for the project, maximum 20 letters:" << endl;
+    cout << "\nPlease enter a name for the project, maximum " << ProjectComponent::MAX_STRING_SIZE << " letters:" << endl;
     string name;
     string description;
     double hourlyRate = 0.0;
     clearUserInput();
     getline(cin, name);
-    cout << "\nPlease enter a description for the project, maximum 20 letters:" << endl;
+    cout << "\nPlease enter a description for the project, maximum " << ProjectComponent::MAX_STRING_SIZE << " letters:" << endl;
     getline(cin, description);
     cout << "\nPlease enter the hourly rate for the project:" << endl;
     cin >> hourlyRate;
@@ -116,11 +116,47 @@ void ProjectDialogue::createProject() {
     cout << "\nNew project with ID: " << project->getId() << " created. Its name is: " << project->getName() << endl;
 }
 
+void ProjectDialogue::createTask() {
+    check<ProjectDialogueException>(currentProjectId != 0, PROJECT_NOT_READY);
+    cout << "\nPlease enter a name for the task, maximum " << ProjectComponent::MAX_STRING_SIZE << " letters:" << endl;
+    string name;
+    string description;
+    int hours = 0;
+    clearUserInput();
+    getline(cin, name);
+    cout << "\nPlease enter a description for the task, maximum " << ProjectComponent::MAX_STRING_SIZE << " letters:" << endl;
+    getline(cin, description);
+    cout << "\nPlease enter the hours for the task:" << endl;
+    cin >> hours;
+    shared_ptr<Task> task = make_shared<Task>(name, description, hours);
+    projects[currentProjectId]->add(task);
+    cout << "\nNew task with ID: " << task->getId() << " created. Its name is: " << task->getName() << endl;
+}
+
+void ProjectDialogue::createProduct() {
+    check<ProjectDialogueException>(currentProjectId != 0, PROJECT_NOT_READY);
+    cout << "\nPlease enter a name for the product, maximum " << ProjectComponent::MAX_STRING_SIZE << " letters:" << endl;
+    string name;
+    string description;
+    double productionCost = 0;
+    clearUserInput();
+    getline(cin, name);
+    cout << "\nPlease enter a description for the product, maximum " << ProjectComponent::MAX_STRING_SIZE << " letters:" << endl;
+    getline(cin, description);
+    cout << "\nPlease enter the production cost for the product:" << endl;
+    cin >> productionCost;
+    shared_ptr<Product> product = make_shared<Product>(name, description, productionCost);
+    projects[currentProjectId]->add(product);
+    cout << "\nNew product with ID: " << product->getId() << " created. Its name is: " << product->getName() << endl;
+}
+
 void ProjectDialogue::removeComponent() {
+    check<ProjectDialogueException>(currentProjectId != 0, PROJECT_NOT_READY);
     int uniqueId = readComponentId();
     if (projects.find(uniqueId) != projects.end()) {
         projects.erase(uniqueId);
-        if (projects.begin()->second != nullptr) currentProjectId = projects.begin()->second->getId();
+        currentProjectId = 0;
+        if (!projects.empty()) currentProjectId = projects.begin()->second->getId();
         return;
     }
     if (currentProjectId != 0) {
@@ -145,7 +181,7 @@ void ProjectDialogue::showFullProject() {
 
 void ProjectDialogue::calculateCost() {
     check<ProjectDialogueException>(projects.find(currentProjectId) != projects.end(), PROJECT_NOT_READY);
-    cout << "Project Cost: " << fixed << setprecision(2) << projects[currentProjectId]->getCost() << endl;
+    cout << "Project " << projects[currentProjectId]->getName() <<  " cost: " << fixed << setprecision(2) << projects[currentProjectId]->getCost() << " EUR" << endl;
 }
 
 void ProjectDialogue::switchProject() {
@@ -160,40 +196,6 @@ int ProjectDialogue::readComponentId() {
     safeRead(cin, componentId);
     clearUserInput();
     return componentId;
-}
-
-void ProjectDialogue::createTask() {
-    check<ProjectDialogueException>(currentProjectId != 0, PROJECT_NOT_READY);
-    cout << "\nPlease enter a name for the task, maximum 20 letters:" << endl;
-    string name;
-    string description;
-    int hours = 0;
-    clearUserInput();
-    getline(cin, name);
-    cout << "\nPlease enter a description for the task, maximum 20 letters:" << endl;
-    getline(cin, description);
-    cout << "\nPlease enter the hours for the task:" << endl;
-    cin >> hours;
-    shared_ptr<Task> task = make_shared<Task>(name, description, hours);
-    projects[currentProjectId]->add(task);
-    cout << "\nNew task with ID: " << task->getId() << " created. Its name is: " << task->getName() << endl;
-}
-
-void ProjectDialogue::createProduct() {
-    check<ProjectDialogueException>(currentProjectId != 0, PROJECT_NOT_READY);
-    cout << "\nPlease enter a name for the product, maximum 20 letters:" << endl;
-    string name;
-    string description;
-    double productionCost = 0;
-    clearUserInput();
-    getline(cin, name);
-    cout << "\nPlease enter a description for the product, maximum 20 letters:" << endl;
-    getline(cin, description);
-    cout << "\nPlease enter the production cost for the product:" << endl;
-    cin >> productionCost;
-    shared_ptr<Product> product = make_shared<Product>(name, description, productionCost);
-    projects[currentProjectId]->add(product);
-    cout << "\nNew product with ID: " << product->getId() << " created. Its name is: " << product->getName() << endl;
 }
 
 

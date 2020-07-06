@@ -13,10 +13,11 @@
 
 using namespace std;
 
-const string Product::NEGATIVE_COST = "Hourly rate cannot be negative.";
+const string Product::NEGATIVE_COST = "Production cost cannot be negative.";
 
 Product::Product(const std::string& name, const std::string& description, double productionCost)
-    : ProjectComponent(name, description), productionCost(productionCost) {
+    : ProjectComponent(name, description) {
+    setProductionCost(productionCost);
 
 }
 

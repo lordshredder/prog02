@@ -20,7 +20,6 @@ ProjectComponent::ProjectComponent(const std::string& name, const std::string& d
     setName(name);
     setDescription(description);
     uniqueId = ++ProjectComponent::uniqueIDCounter;
-    std::cout << "The Component " << name << " was created with the unique ID: " << uniqueId << std::endl;
 }
 
 ProjectComponent::ProjectComponent(const ProjectComponent &component) {
@@ -57,7 +56,9 @@ std::string ProjectComponent::toString() const {
         ostr << "  --> ";
         if(temp != nullptr) temp = temp->getRoot();
     }
-    ostr << "ID: " << uniqueId << "\tName: " << std::setw(MAX_STRING_SIZE) << name << "\tDescription: " << std::setw(MAX_STRING_SIZE) << description;
+    ostr << "ID: " << uniqueId
+    << "\tName: " << std::setw(MAX_STRING_SIZE) << name
+    << "\tDescription: " << std::setw(MAX_STRING_SIZE) << description;
     return ostr.str();
 }
 

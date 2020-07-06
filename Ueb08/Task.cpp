@@ -25,7 +25,7 @@ Task::~Task() {
 }
 
 int Task::getHours() const {
-    return 0;
+    return hours;
 }
 
 void Task::setHours(const int hours) {
