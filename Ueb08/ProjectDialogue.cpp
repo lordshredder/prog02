@@ -153,23 +153,8 @@ void ProjectDialogue::createProduct() {
 void ProjectDialogue::removeComponent() {
     check<ProjectDialogueException>(currentProjectId != 0, PROJECT_NOT_READY);
     int uniqueId = readComponentId();
-    // Only works for one layer.
     if (projects.find(uniqueId) != projects.end()) {
-        vector<int> ids;
-        for (const auto& project : projects) {
-           shared_ptr<ProjectComponent> temp = project.second->getRoot();
-           if (temp != nullptr) {
-              int tempId = temp->getId();
-              if (tempId == uniqueId) ids.push_back(project.second->getId());
-           }
-        }
-        projects.erase(uniqueId);
-        for (auto id : ids) {
-            projects.erase(id);
-        }
-        currentProjectId = 0;
-        if (!projects.empty())
-            currentProjectId = projects.begin()->second->getId();
+        remove(uniqueId);
         return;
     }
     if (currentProjectId != 0) {
@@ -178,6 +163,25 @@ void ProjectDialogue::removeComponent() {
         p->remove(uniqueId);
     }
     cout << "The Component with the ID: " << uniqueId << " has been removed if it existed." << endl;
+}
+
+void ProjectDialogue::remove(int uniqueId) {
+    if (projects.find(uniqueId) != projects.end()) {
+        vector<int> ids;
+        for (const auto& project : projects) {
+           shared_ptr<ProjectComponent> temp = project.second->getRoot();
+            if (!(temp != nullptr)) continue;
+            int tempId = temp->getId();
+            if (tempId == uniqueId) ids.push_back(project.second->getId());
+        }
+        projects.erase(uniqueId);
+        for (auto id : ids) {
+            remove(id);
+        }
+        currentProjectId = 0;
+        if (!projects.empty())
+            currentProjectId = projects.begin()->second->getId();
+    }
 }
 
 void ProjectDialogue::showProject() {

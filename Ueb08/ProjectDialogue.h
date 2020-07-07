@@ -108,6 +108,8 @@ private:
      * Makes testing easier.
      */
     void createDummyProjects();
+
+    void remove(int uniqueId);
 };
 
 
