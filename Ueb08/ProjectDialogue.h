@@ -93,7 +93,11 @@ private:
      * @return The component ID that was provided by the user.
      */
     int readComponentId();
-
+    /**
+     * Recursively searches for a project to be removed in the dialogue's map
+     * @param uniqueId
+     */
+    void remove(int uniqueId);
     /**
      * All of these methods are just there to make the switch block a little cleaner and easier to read.
      */
@@ -103,13 +107,12 @@ private:
     void createProduct();
     void calculateCost();
     void switchProject();
+
     /**
      * Creates completely random articles.
      * Makes testing easier.
      */
     void createDummyProjects();
-
-    void remove(int uniqueId);
 };
 
 
