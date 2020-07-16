@@ -19,6 +19,7 @@ using namespace std;
 const string ProjectDialogue::PROJECT_NOT_READY = "Please initialize and select a project first.";
 const string ProjectDialogue::BAD_USER_INPUT = "Invalid input.";
 const string ProjectDialogue::ID_DOES_NOT_EXIST = "ID does not exist.";
+const string ProjectDialogue::ID_ALREADY_EXISTS = "Project already exists.";
 
 ProjectDialogue::ProjectDialogue() = default;
 
@@ -110,7 +111,7 @@ void ProjectDialogue::createProject() {
     cout << "\nPlease enter the hourly rate for the project:" << endl;
     cin >> hourlyRate;
     shared_ptr<Project> project = make_shared<Project>(name, description, hourlyRate);
-    projects.insert({project->getId(), project});
+    if (!projects.insert({project->getId(), project}).second) throw ProjectDialogueException(ID_ALREADY_EXISTS);
     if (currentProjectId != 0) projects[currentProjectId]->add(project);
     currentProjectId = project->getId();
     cout << "\nNew project with ID: " << project->getId() << " created. Its name is: " << project->getName() << endl;

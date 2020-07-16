@@ -63,6 +63,7 @@ private:
     static const std::string PROJECT_NOT_READY;
     static const std::string BAD_USER_INPUT;
     static const std::string ID_DOES_NOT_EXIST;
+    static const std::string ID_ALREADY_EXISTS;
     Select currentSelection = Select::SELECT_NONE;
     map<int, shared_ptr<Project>> projects;
     int currentProjectId = 0;

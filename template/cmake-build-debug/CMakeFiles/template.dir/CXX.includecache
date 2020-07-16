@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+F:/Git/Prog02/template/Array.cpp
+iostream
+-
+iomanip
+-
+stdexcept
+-
+Array.h
+F:/Git/Prog02/template/Array.h
+
+F:/Git/Prog02/template/Array.h
+iostream
+-
+
+F:/Git/Prog02/template/main.cpp
+iostream
+-
+Array.h
+F:/Git/Prog02/template/Array.h
+

@@ -20,19 +20,19 @@ string MockInput::RandomString(const int &maxLetters, const int& minLetters) {
     string str("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
     auto size = std::bind(std::uniform_int_distribution<int>(minLetters, maxLetters), generator);
     std::shuffle(str.begin(), str.end(), generator);
-    generator();
+    //generator();
     return str.substr(0, size());
 }
 
 int MockInput::RandomNumber(const int& maxNumber, const int& minNumber) {
+    //generator();
     auto number = std::bind(std::uniform_int_distribution<int>(minNumber, maxNumber), generator);
-    generator();
     return number();
 }
 
 long double MockInput::RandomNumber(const long double& maxNumber, const long double& minNumber) {
 
     auto number = std::bind(std::uniform_real_distribution<long double>(minNumber, maxNumber), generator);
-    generator();
+    //generator();
     return number();
 }

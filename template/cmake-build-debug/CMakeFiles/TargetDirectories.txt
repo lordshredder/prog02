@@ -1,0 +1,3 @@
+F:/Git/Prog02/template/cmake-build-debug/CMakeFiles/template.dir
+F:/Git/Prog02/template/cmake-build-debug/CMakeFiles/edit_cache.dir
+F:/Git/Prog02/template/cmake-build-debug/CMakeFiles/rebuild_cache.dir
