@@ -1,0 +1,73 @@
+<html>
+<head>
+<title>Evaluation.h</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #808080;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #bbb529;}
+.s3 { color: #6a8759;}
+.s4 { color: #cc7832;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Evaluation.h</font>
+</center></td></tr></table>
+<pre><span class="s0">/** 
+ * 
+ *  @file Evaluation.h 
+ *  @authors David Berres 
+ *  @date 10.07.2020 
+ */</span>
+<span class="s2">#pragma </span><span class="s1">once</span>
+
+
+<span class="s2">#include </span><span class="s3">&lt;string&gt;</span>
+<span class="s2">#include </span><span class="s3">&lt;vector&gt;</span>
+<span class="s2">#include </span><span class="s3">&lt;stdexcept&gt;</span>
+<span class="s2">#include </span><span class="s3">&lt;map&gt;</span>
+
+<span class="s0">/** 
+ * Exception class 
+ */</span>
+<span class="s4">class </span><span class="s1">EvaluationException : </span><span class="s4">public </span><span class="s1">std::logic_error {</span>
+<span class="s4">public</span><span class="s1">:</span>
+    <span class="s1">EvaluationException(</span><span class="s4">const </span><span class="s1">std::string&amp; msg = </span><span class="s3">&quot;&quot;</span><span class="s1">) : logic_error(msg) {</span>
+
+    <span class="s1">}</span>
+<span class="s1">}</span><span class="s4">;</span>
+
+<span class="s0">/** 
+ * Loads a file in a formatted structure. 
+ */</span>
+<span class="s4">class </span><span class="s1">Evaluation {</span>
+<span class="s4">public</span><span class="s1">:</span>
+    <span class="s4">static const </span><span class="s1">std::string FILE_COULD_NOT_BE_OPENED</span><span class="s4">;</span>
+    <span class="s0">/** 
+     * Loads and maps data from a file. 
+     * @param pathToFile The full path to the file to read. 
+     */</span>
+    <span class="s4">void </span><span class="s1">load(</span><span class="s4">const </span><span class="s1">std::string&amp; pathToFile)</span><span class="s4">;</span>
+    <span class="s0">/** 
+     * Formats the loaded data to show 
+     * the subjects and calculate the average grades. 
+     */</span>
+    <span class="s4">void </span><span class="s1">showSubjects()</span><span class="s4">;</span>
+    <span class="s0">/** 
+     * Formats the loaded data to show it 
+     * sorted by register. 
+     */</span>
+    <span class="s4">void </span><span class="s1">showRegister()</span><span class="s4">;</span>
+    <span class="s0">/** 
+     * Prints the total average of all grades. 
+     */</span>
+    <span class="s4">void </span><span class="s1">showAverage()</span><span class="s4">;</span>
+<span class="s4">private</span><span class="s1">:</span>
+    <span class="s1">std::map&lt;</span><span class="s4">int,</span><span class="s1">std::vector&lt;std::tuple&lt;std::string</span><span class="s4">, float, int</span><span class="s1">&gt;&gt;&gt; registerEntries</span><span class="s4">;</span>
+<span class="s1">}</span><span class="s4">;</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<html>
+<head>
+<title>make-regeln</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #a9b7c6;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+make-regeln</font>
+</center></td></tr></table>
+<pre><span class="s0">### Einfache Regeln fuer die C++-Programmierung</span>
+
+<span class="s0"># Regel, um aus .cpp-Dateien .o-Dateien zu erzeugen</span>
+<span class="s0"># $&lt; ist die erste Abhaengigkeit</span>
+<span class="s0">%.o: %.cpp</span>
+	<span class="s0">$(CXX) $(CXXFLAGS) $(CFLAGS) -c $&lt;</span>
+
+<span class="s0"># Regel, um aus .o-Dateien eine ausfuehrbare Datei zu erzeugen</span>
+<span class="s0"># $@ ist das zu erzeugende Ziel</span>
+<span class="s0"># $^ ist die Liste aller Abhaengigkeiten dieses Ziels</span>
+<span class="s0">%: %.o</span>
+	<span class="s0">$(LD) $(LDFLAGS) -o $@ $^</span>
+	
+<span class="s0"># Regel, um aus .cpp-Dateien eine ausfuehrbare Datei zu erzeugen</span>
+<span class="s0"># $@ ist das zu erzeugende Ziel</span>
+<span class="s0"># $^ ist die Liste aller Abhaengigkeiten dieses Ziels</span>
+<span class="s0">%: %.cpp</span>
+	<span class="s0">$(CXX) $(CXXFLAGS) $(CFLAGS) $(LDFLAGS) -o $@ $^</span>
+
+
+
+	</pre>
+</body>
+</html>

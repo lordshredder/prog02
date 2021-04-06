@@ -7,24 +7,29 @@
 
 #include "ListElement.h"
 
-ListElement::ListElement(const ContentType& content, ListElement* previousElement, ListElement* nextElement) {
+template<typename ContentType>
+ListElement<ContentType>::ListElement(const ContentType& content, ListElement<ContentType>* previousElement, ListElement<ContentType>* nextElement) {
     this->content = content;
     this->previousElement = previousElement;
     this->nextElement = nextElement;
 }
 
-ListElement::ListElement(const ListElement& element) : content(element.content) { }
+template<typename ContentType>
+ListElement<ContentType>::ListElement(const ListElement<ContentType>& element) : content(element.content) { }
 
-ListElement::~ListElement() {
+template<typename ContentType>
+ListElement<ContentType>::~ListElement() {
     previousElement = nullptr;
     nextElement = nullptr;
 }
 
-std::string ListElement::toString() const {
-    return content;
+template<typename ContentType>
+std::string ListElement<ContentType>::toString() const {
+    return std::to_string(content);
 }
 
-ListElement &ListElement::operator=(const ListElement& list) {
+template<typename ContentType>
+ListElement<ContentType> &ListElement<ContentType>::operator=(const ListElement<ContentType>& list) {
     if (this == &list) return *this;
     this->content = list.content;
     this->nextElement = list.nextElement;
@@ -32,6 +37,7 @@ ListElement &ListElement::operator=(const ListElement& list) {
     return *this;
 }
 
-ostream& operator<<(ostream& stream, const ListElement& element) {
+template<typename ContentType>
+ostream& operator<< <>(ostream& stream, const ListElement<ContentType>& element) {
     return stream << element.toString();
 }

@@ -1,0 +1,107 @@
+<html>
+<head>
+<title>Evaluation.cpp</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #808080;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #bbb529;}
+.s3 { color: #6a8759;}
+.s4 { color: #cc7832;}
+.s5 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Evaluation.cpp</font>
+</center></td></tr></table>
+<pre><span class="s0">/** 
+ * 
+ *  @file Evaluation.cpp 
+ *  @authors David Berres 
+ *  @date 10.07.2020 
+ */</span>
+<span class="s2">#include </span><span class="s3">&lt;iostream&gt;</span>
+<span class="s2">#include </span><span class="s3">&lt;fstream&gt;</span>
+<span class="s2">#include </span><span class="s3">&lt;iomanip&gt;</span>
+<span class="s2">#include </span><span class="s3">&quot;Evaluation.h&quot;</span>
+
+<span class="s4">const </span><span class="s1">std::string Evaluation::FILE_COULD_NOT_BE_OPENED = </span><span class="s3">&quot;File could not be opened&quot;</span><span class="s4">;</span>
+
+<span class="s4">void </span><span class="s1">Evaluation::load(</span><span class="s4">const </span><span class="s1">std::string&amp; pathToFile) {</span>
+<span class="s1">std::ifstream file</span><span class="s4">;</span>
+<span class="s1">file.open(pathToFile)</span><span class="s4">;</span>
+<span class="s4">if </span><span class="s1">(!file){</span>
+    <span class="s4">throw </span><span class="s1">EvaluationException(FILE_COULD_NOT_BE_OPENED)</span><span class="s4">;</span>
+<span class="s1">}</span>
+<span class="s4">while </span><span class="s1">(!file.eof()) {</span>
+    <span class="s4">int </span><span class="s1">id = </span><span class="s5">0</span><span class="s4">;</span>
+    <span class="s1">std::string regist</span><span class="s4">;</span>
+    <span class="s4">float </span><span class="s1">grade = </span><span class="s5">0.0f</span><span class="s4">;</span>
+    <span class="s4">int </span><span class="s1">ects = </span><span class="s5">0</span><span class="s4">;</span>
+    <span class="s1">file &gt;&gt; id</span><span class="s4">;</span>
+    <span class="s1">file &gt;&gt; regist</span><span class="s4">;</span>
+    <span class="s1">file &gt;&gt; grade</span><span class="s4">;</span>
+    <span class="s1">file &gt;&gt; ects</span><span class="s4">;</span>
+    <span class="s4">if </span><span class="s1">(!file.eof()) {</span>
+        <span class="s1">std::tuple&lt;std::string</span><span class="s4">, float, int</span><span class="s1">&gt; temp(regist</span><span class="s4">, </span><span class="s1">grade</span><span class="s4">, </span><span class="s1">ects)</span><span class="s4">;</span>
+        <span class="s1">registerEntries[id].push_back(temp)</span><span class="s4">;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+    <span class="s1">file.close()</span><span class="s4">;</span>
+<span class="s1">}</span>
+
+<span class="s4">void </span><span class="s1">Evaluation::showSubjects() {</span>
+    <span class="s1">std::map&lt;std::string</span><span class="s4">, </span><span class="s1">std::tuple&lt;</span><span class="s4">float,int</span><span class="s1">&gt;&gt; subjects</span><span class="s4">;</span>
+    <span class="s1">std::cout &lt;&lt; </span><span class="s3">&quot;Evaluation by subjects: &quot; </span><span class="s1">&lt;&lt; std::endl</span><span class="s4">;</span>
+    <span class="s1">std::cout &lt;&lt; </span><span class="s3">&quot;</span><span class="s4">\n</span><span class="s3">Subject</span><span class="s4">\t\t</span><span class="s3">Average</span><span class="s4">\t    </span><span class="s3">Participants&quot; </span><span class="s1">&lt;&lt; std::endl</span><span class="s4">;</span>
+    <span class="s4">for</span><span class="s1">(</span><span class="s4">const auto</span><span class="s1">&amp; entry : registerEntries) {</span>
+        <span class="s4">for </span><span class="s1">(</span><span class="s4">auto </span><span class="s1">tuple : entry.second) {</span>
+            <span class="s1">std::get&lt;</span><span class="s5">0</span><span class="s1">&gt;(subjects[std::get&lt;</span><span class="s5">0</span><span class="s1">&gt;(tuple)]) += std::get&lt;</span><span class="s5">1</span><span class="s1">&gt;(tuple)</span><span class="s4">;</span>
+            <span class="s1">std::get&lt;</span><span class="s5">1</span><span class="s1">&gt;(subjects[std::get&lt;</span><span class="s5">0</span><span class="s1">&gt;(tuple)]) += </span><span class="s5">1</span><span class="s4">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+    <span class="s4">for</span><span class="s1">(</span><span class="s4">const auto</span><span class="s1">&amp; subject : subjects)</span>
+    <span class="s1">{</span>
+        <span class="s4">float </span><span class="s1">avg = std::get&lt;</span><span class="s5">0</span><span class="s1">&gt;(subject.second) / std::get&lt;</span><span class="s5">1</span><span class="s1">&gt;(subject.second)</span><span class="s4">;</span>
+        <span class="s1">std::cout &lt;&lt; subject.first &lt;&lt; std::setw(</span><span class="s5">20</span><span class="s1">-subject.first.length())</span>
+            <span class="s1">&lt;&lt; std::fixed &lt;&lt; std::setprecision(</span><span class="s5">2</span><span class="s1">) &lt;&lt; avg</span>
+            <span class="s1">&lt;&lt;</span><span class="s3">&quot;</span><span class="s4">\t\t</span><span class="s3">&quot; </span><span class="s1">&lt;&lt; std::get&lt;</span><span class="s5">1</span><span class="s1">&gt;(subject.second) &lt;&lt; std::endl</span><span class="s4">;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+
+<span class="s4">void </span><span class="s1">Evaluation::showRegister() {</span>
+    <span class="s1">std::cout &lt;&lt; </span><span class="s3">&quot;</span><span class="s4">\n\n</span><span class="s3">Evaluation by register: &quot; </span><span class="s1">&lt;&lt; std::endl</span><span class="s4">;</span>
+    <span class="s1">std::cout &lt;&lt; </span><span class="s3">&quot;</span><span class="s4">\n</span><span class="s3">Register  ECTS  Average&quot; </span><span class="s1">&lt;&lt; std::endl</span><span class="s4">;</span>
+    <span class="s4">for</span><span class="s1">(</span><span class="s4">const auto</span><span class="s1">&amp; entry : registerEntries){</span>
+        <span class="s4">int </span><span class="s1">ects = </span><span class="s5">0</span><span class="s4">;</span>
+        <span class="s4">float </span><span class="s1">avg = </span><span class="s5">0.0f</span><span class="s4">;</span>
+        <span class="s4">int </span><span class="s1">amount = </span><span class="s5">0</span><span class="s4">;</span>
+        <span class="s4">for </span><span class="s1">(</span><span class="s4">auto </span><span class="s1">tuple : entry.second) {</span>
+            <span class="s1">ects += std::get&lt;</span><span class="s5">2</span><span class="s1">&gt;(tuple)</span><span class="s4">;</span>
+            <span class="s1">avg += std::get&lt;</span><span class="s5">1</span><span class="s1">&gt;(tuple)</span><span class="s4">;</span>
+            <span class="s1">amount++</span><span class="s4">;</span>
+        <span class="s1">}</span>
+        <span class="s4">if </span><span class="s1">(amount) avg /= amount</span><span class="s4">;</span>
+        <span class="s1">std::cout &lt;&lt; entry.first &lt;&lt; </span><span class="s3">&quot;    &quot;  </span><span class="s1">&lt;&lt; ects &lt;&lt; </span><span class="s3">&quot;</span><span class="s4">\t  </span><span class="s3">&quot; </span><span class="s1">&lt;&lt; std::fixed &lt;&lt; std::setprecision(</span><span class="s5">2</span><span class="s1">) &lt;&lt; avg &lt;&lt; std::endl</span><span class="s4">;</span>
+    <span class="s1">}</span>
+
+<span class="s1">}</span>
+
+<span class="s4">void </span><span class="s1">Evaluation::showAverage() {</span>
+    <span class="s4">float </span><span class="s1">avg = </span><span class="s5">0.0f</span><span class="s4">;</span>
+    <span class="s4">int </span><span class="s1">amount = </span><span class="s5">0</span><span class="s4">;</span>
+    <span class="s4">for </span><span class="s1">(</span><span class="s4">const auto</span><span class="s1">&amp; entry : registerEntries) {</span>
+        <span class="s4">for </span><span class="s1">(</span><span class="s4">const auto</span><span class="s1">&amp; tuple : entry.second) {</span>
+            <span class="s1">avg += std::get&lt;</span><span class="s5">1</span><span class="s1">&gt;(tuple)</span><span class="s4">;</span>
+            <span class="s1">++amount</span><span class="s4">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+    <span class="s1">avg /= amount</span><span class="s4">;</span>
+    <span class="s1">std::cout &lt;&lt; </span><span class="s3">&quot;</span><span class="s4">\n\n</span><span class="s3">Total average: &quot; </span><span class="s1">&lt;&lt; std::setprecision(</span><span class="s5">2</span><span class="s1">) &lt;&lt; std::fixed &lt;&lt; avg &lt;&lt; std::endl</span><span class="s4">;</span>
+<span class="s1">}</span>
+</pre>
+</body>
+</html>

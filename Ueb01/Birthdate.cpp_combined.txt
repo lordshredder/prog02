@@ -1,0 +1,261 @@
+------------------------------ Birthdate.cpp ------------------------------
+
+------------------------------ Birthdate.h ------------------------------
+/**
+ *
+ *  @file Birthdate.h
+ *  @authors David Berres, Nico Schorr
+ *  @date 23.04.2020
+ */
+#pragma once
+
+/**
+ * Simple Birthdate struct.
+ * The day, month and year are simply saved as integers.
+ * @attention No checks on validity of the data.
+ */
+struct Birthdate {
+    int day;
+    int month;
+    int year;
+};
+
+
+
+
+
+
+------------------------------ InputHandler.cpp ------------------------------
+/**
+ *
+ *  @file InputHandler.cpp
+ *  @authors David Berres, Nico Schorr
+ *  @date 23.04.2020
+ */
+#include <iostream>
+#include "Person.h"
+#include "InputHandler.h"
+using namespace std;
+
+int controlInput(Person personArray[], int arraySize) {
+    char selection = 0;
+    int position = 0;
+    Person person;
+
+    do {
+        readPerson(person);
+        personArray[position] = person;
+        position++;
+        if (position < arraySize) {
+            cout << "\nNochmal? nein=n, sonst beliebiges Zeichen\n";
+            while (getchar() != '\n');
+            cin >> selection;
+        }
+    } while (selection != 'n' && position < arraySize);
+    return position;
+}
+
+void readPerson(Person &person) {
+    cout << "\nBitte Vornamen eingeben: " << endl;
+    cin >> person.name;
+    cout << "Bitte Nachnamen eingeben: " << endl;
+    cin >> person.surname;
+    cout << "Bitte Geburtstag eingeben: " << endl;
+    cin >> person.birthdate.day;
+    cout << "Bitte Geburtsmonat eingeben: " << endl;
+    cin >> person.birthdate.month;
+    cout << "Bitte Geburtsjahr eingeben: " << endl;
+    cin >> person.birthdate.year;
+}
+
+------------------------------ InputHandler.h ------------------------------
+/**
+ *
+ *  @file InputHandler.h
+ *  @authors David Berres, Nico Schorr
+ *  @date 23.04.2020
+ */
+#pragma once
+#include <iostream>
+
+    /**
+     * A single person struct is filled with user input.
+     * @param person Struct to fill.
+     */
+    void readPerson(Person& person);
+
+    /**
+     *
+     * @param personArray The array that should get filled.
+     * @param arraySize The arraySize of the array.
+     * @return
+     */
+    int controlInput(Person personArray[], int arraySize);
+
+
+
+
+------------------------------ main.cpp ------------------------------
+/**
+ *  Main program to start.
+ *
+ *  @file main.cpp
+ *  @authors David Berres, Nico Schorr
+ *  @date 23.04.2020
+ */
+
+#include <iostream>
+#include "Person.h"
+#include "PersonStorage.h"
+#include "InputHandler.h"
+#include "OutputHandler.h"
+
+using std::cout;
+
+int main() {
+
+    const int arraySize = 100;
+    int readPeople = 0;
+    Person people[arraySize];
+    readPeople = controlInput(people, arraySize);
+    printAllPeople(people, readPeople);
+    cout << "\n\nSortiere Array..." << std::endl;
+    sortPerson(people, readPeople);
+    printAllPeople(people, readPeople);
+    cout << std::endl;
+    return 0;
+}
+
+
+
+------------------------------ OutputHandler.cpp ------------------------------
+/**
+ *
+ *  @file OutputHandler.cpp
+ *  @authors David Berres, Nico Schorr
+ *  @date 23.04.2020
+ */
+#include <iostream>
+#include <iomanip>
+#include "Person.h"
+#include "OutputHandler.h"
+
+using std::cout;
+using std::setw;
+
+
+void printAllPeople(Person *personArray, int arrayLength){
+    for (int i = 0; i < arrayLength; i++)
+    {
+        writePerson(personArray[i]);
+    }
+}
+
+void writePerson(Person &person) {
+    int space = 32;
+    cout << "\nName: " << person.surname;
+    cout << setw(space-person.surname.length()) << "Vorname: " << person.name;
+    cout << setw(space-person.name.length()) << "Geburtsdatum: " << person.birthdate.day << ".";
+    cout << person.birthdate.month << "." << person.birthdate.year;
+}
+
+------------------------------ OutputHandler.h ------------------------------
+/**
+ *
+ *  @file OutputHandler.h
+ *  @authors David Berres, Nico Schorr
+ *  @date 23.04.2020
+ */
+#pragma once
+#include <iostream>
+
+/**
+ * Prints all people in the array.
+ * @param personArray The array that should get filled.
+ * @param arrayLength The size of the array.
+ */
+void printAllPeople(Person *personArray, int arrayLength);
+
+/**
+ * Prints out the provided Person struct to the console.
+ * @param person Person to write.
+ */
+void writePerson(Person &person);
+
+------------------------------ Person.cpp ------------------------------
+
+------------------------------ Person.h ------------------------------
+/**
+ *
+ *  @file Person.h
+ *  @authors David Berres, Nico Schorr
+ *  @date 23.04.2020
+ */
+#pragma once
+#include <string>
+#include "Birthdate.h"
+using std::string;
+
+/**
+ * Simple Person struct.
+ * The Person struct contains the name and the surname of the Person
+ * as well as the Birthdate in the form of another struct consisting of
+ * three integers.
+ */
+struct Person {
+    string name;
+    string surname;
+    Birthdate birthdate;
+};
+------------------------------ PersonStorage.cpp ------------------------------
+/**
+ *
+ *  @file PersonStorage.cpp
+ *  @authors David Berres, Nico Schorr
+ *  @date 23.04.2020
+ */
+#include "PersonStorage.h"
+
+void sortPerson(Person *personArray, int arrayLength) {
+    int min;
+    for (int i = 0; i < arrayLength-1; ++i) {
+        min = i;
+        for (int j = i+1; j < arrayLength; ++j) {
+            if (personArray[j].surname.compare(personArray[min].surname) < 0) {
+                min = j;
+            }
+        }
+        swapPerson(personArray, min, i);
+    }
+
+    for (int i = 0; i < arrayLength-1; ++i) {
+        min = i;
+        for (int j = i+1; j < arrayLength; ++j) {
+            if (personArray[j].surname == personArray[min].surname
+            && personArray[j].name.compare(personArray[min].name) < 0) {
+                min = j;
+            }
+        }
+        swapPerson(personArray, min, i);
+    }
+
+}
+
+void swapPerson(Person *personArray, int positionOne, int positionTwo) {
+    Person temp;
+    temp = personArray[positionOne];
+    personArray[positionOne] = personArray[positionTwo];
+    personArray[positionTwo] = temp;
+}
+
+------------------------------ PersonStorage.h ------------------------------
+#pragma once
+
+#include "Person.h"
+
+    void sortPerson(Person *personArray, int arrayLength);
+    void swapPerson(Person *personArray, int positionOne, int positionTwo);
+
+
+
+

@@ -19,7 +19,6 @@ public:
 
     }
 };
-
 /**
  *  A class called ProjectComponent, used to simulate project management by
  *  adding and removing tasks, products and projects.

@@ -7,7 +7,7 @@
 #pragma once
 #include <string>
 using namespace std;
-typedef string ContentType;
+//typedef string ContentType;
 
 
 /**
@@ -17,14 +17,21 @@ typedef string ContentType;
  * @version
  * @date	20.05.2012
  */
+template<typename ContentType>
+class ListElement;
+
+template<typename  ContentType>
+std::ostream& operator<<(std::ostream& stream, const ListElement<ContentType>& element);
+
+template<typename ContentType>
 class ListElement {
 public:
-    explicit ListElement(const ContentType& type, ListElement* previousElement = nullptr, ListElement* nextElement = nullptr);
-    ListElement(const ListElement& element);
+    explicit ListElement(const ContentType& type, ListElement<ContentType>* previousElement = nullptr, ListElement<ContentType>* nextElement = nullptr);
+    ListElement(const ListElement<ContentType>& element);
     ~ListElement();
-    ListElement& operator=(const ListElement& list);
+    ListElement<ContentType>& operator=(const ListElement<ContentType>& list);
     std::string toString() const;
-    friend std::ostream& operator<<(std::ostream& stream, const ListElement& element);
+    friend std::ostream& operator<< <>(std::ostream& stream, const ListElement& element);
     friend class LinList;
 private:
     ContentType content;

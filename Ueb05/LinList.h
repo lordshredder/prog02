@@ -12,6 +12,7 @@
 /**
  * A doubly linked list that can add and remove elements at the start, end and middle of the list.
  */
+template<typename ContentType>
 class LinList {
 public:
     static const std::string INDEX_OUT_OF_BOUNDS;

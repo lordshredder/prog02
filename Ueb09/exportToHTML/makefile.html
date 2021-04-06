@@ -1,0 +1,60 @@
+<html>
+<head>
+<title>makefile</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #a9b7c6;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #808080;}
+.s3 { color: #6a8759;}
+.s4 { color: #cc7832;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+makefile</font>
+</center></td></tr></table>
+<pre>
+<span class="s1">CC = gcc    </span><span class="s2"># C-Compiler + Flags</span>
+<span class="s0">CXX = g++   </span><span class="s2"># C++-Compiler + Flags</span>
+<span class="s0">CFLAGS = -O -Wall -g 
+CXXFLAGS = -g -std=c++17 -pedantic -Wall -Wextra 
+LD = g++  </span><span class="s2"># Linker + Flags</span>
+<span class="s0">LDFLAGS = 
+</span>
+<span class="s1">OBJECTS = main.o Evaluation.o 
+SRC = </span><span class="s3">$(</span><span class="s1">OBJECTS:%.o=%.cpp</span><span class="s3">)</span>
+<span class="s1">DEPENDFILE = .depend  </span><span class="s2"># Abhaengigkeitsdefinitionen</span>
+<span class="s0">LOESCHLISTE = *.o *.exe *stackdump 
+RULES = make-regeln 
+</span>
+<span class="s2">### Ziele</span>
+<span class="s0">all: dep main</span>
+
+<span class="s2"># Bereinigung des Verzeichnisses</span>
+<span class="s2"># @ vor dem Kommando sorgt dafuer, dass das Kommando selbst nicht</span>
+<span class="s2">#   ausgegeben wird.</span>
+<span class="s0">clean:</span>
+		<span class="s0">@echo &quot;Folgende Dateien werden geloescht&quot; 
+		@echo </span><span class="s3">$(</span><span class="s1">LOESCHLISTE</span><span class="s3">)</span>
+		<span class="s0">rm -f </span><span class="s3">$(</span><span class="s1">LOESCHLISTE</span><span class="s3">)</span>
+
+<span class="s2">### Abhaengigkeiten</span>
+<span class="s0">main: </span><span class="s3">$(</span><span class="s1">OBJECTS</span><span class="s3">)</span>
+
+<span class="s2">### Anlegen der Abhängigkeitsdatei</span>
+<span class="s0">dep: </span><span class="s3">$(</span><span class="s1">SRC</span><span class="s3">)</span>
+	<span class="s3">$(</span><span class="s1">CXX</span><span class="s3">) </span><span class="s0">-MM </span><span class="s3">$(</span><span class="s1">SRC</span><span class="s3">) </span><span class="s0">&gt; </span><span class="s3">$(</span><span class="s1">DEPENDFILE</span><span class="s3">)</span>
+
+<span class="s2">### Inkludieren der Abhängigkeiten</span>
+<span class="s4">-include </span><span class="s3">$(</span><span class="s1">DEPENDFILE</span><span class="s3">)</span>
+
+<span class="s2">### Inkludieren der Regeln</span>
+<span class="s4">include </span><span class="s3">$(</span><span class="s1">RULES</span><span class="s3">)</span>
+
+
+</pre>
+</body>
+</html>

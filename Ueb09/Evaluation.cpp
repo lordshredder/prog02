@@ -12,8 +12,10 @@
 const std::string Evaluation::FILE_COULD_NOT_BE_OPENED = "File could not be opened";
 
 void Evaluation::load(const std::string& pathToFile) {
-std::ifstream file;
-file.open(pathToFile);
+/*std::ifstream file;
+file.open(pathToFile);*/
+
+std::ifstream file(pathToFile);
 if (!file){
     throw EvaluationException(FILE_COULD_NOT_BE_OPENED);
 }

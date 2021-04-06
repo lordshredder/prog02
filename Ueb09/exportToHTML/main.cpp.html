@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>main.cpp</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #808080;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #bbb529;}
+.s3 { color: #6a8759;}
+.s4 { color: #cc7832;}
+.s5 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+main.cpp</font>
+</center></td></tr></table>
+<pre><span class="s0">/** 
+ * 
+ *  @file main.cpp 
+ *  @authors David Berres 
+ *  @date 10.07.2020 
+ */</span>
+<span class="s2">#include </span><span class="s3">&lt;iostream&gt;</span>
+<span class="s2">#include </span><span class="s3">&quot;Evaluation.h&quot;</span>
+
+<span class="s4">int </span><span class="s1">main() {</span>
+    <span class="s1">Evaluation evaluation</span><span class="s4">;</span>
+    <span class="s4">try </span><span class="s1">{</span>
+        <span class="s1">evaluation.load(</span><span class="s3">&quot;Ergebnisse.txt&quot;</span><span class="s1">)</span><span class="s4">;</span>
+        <span class="s1">evaluation.showSubjects()</span><span class="s4">;</span>
+        <span class="s1">evaluation.showRegister()</span><span class="s4">;</span>
+        <span class="s1">evaluation.showAverage()</span><span class="s4">;</span>
+
+    <span class="s1">} </span><span class="s4">catch</span><span class="s1">(EvaluationException&amp; e){</span>
+        <span class="s1">std::cout &lt;&lt; e.what() &lt;&lt; std::endl</span><span class="s4">;</span>
+    <span class="s1">}</span>
+    <span class="s4">return </span><span class="s5">0</span><span class="s4">;</span>
+<span class="s1">}</span>
+</pre>
+</body>
+</html>
